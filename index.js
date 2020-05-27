@@ -7,8 +7,10 @@ client.commands = new Discord.Collection();
 
 const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js'));
 
+console.log("[INDEX] DEBUG: Crestoria Bot is Logging In");
 for (const file of commandFiles) {
 	const command = require(`./commands/${file}`);
+	console.log("[INDEX] DEBUG: Adding "+command.name+" to Commands List");
 	client.commands.set(command.name, command);
 }
 
@@ -61,3 +63,4 @@ client.on('message', message => {
 });
 
 client.login(token);
+console.log("[INDEX] DEBUG: Crestoria Bot is Logged In");
