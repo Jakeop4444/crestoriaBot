@@ -1,5 +1,6 @@
 const Canvas = require('canvas');
 const Discord = require('discord.js');
+const { profile_path } = require("../config.json");
 
 module.exports = {
 	name: 'card',
@@ -13,22 +14,22 @@ module.exports = {
 		//const background = await Canvas.loadImage('./images/wallpaper.jpg');	
 		console.log("[CARD] DEBUG: Getting Card Image Elements");
 		// Units
-		const fire_unit = await Canvas.loadImage('./images/profile_card_images/fire_units/'+args[0]+'.png');
-		const earth_unit = await Canvas.loadImage('./images/profile_card_images/earth_units/'+args[1]+'.png');
-		const wind_unit = await Canvas.loadImage('./images/profile_card_images/wind_units/'+args[2]+'.png');
-		const water_unit = await Canvas.loadImage('./images/profile_card_images/water_units/'+args[3]+'.png');
-		const light_unit = await Canvas.loadImage('./images/profile_card_images/light_units/'+args[4]+'.png');
-		const dark_unit = await Canvas.loadImage('./images/profile_card_images/dark_units/'+args[5]+'.png');
+		const fire_unit = await Canvas.loadImage(profile_path+'/fire_units/'+args[0]+'.png');
+		const earth_unit = await Canvas.loadImage(profile_path+'/earth_units/'+args[1]+'.png');
+		const wind_unit = await Canvas.loadImage(profile_path+'/wind_units/'+args[2]+'.png');
+		const water_unit = await Canvas.loadImage(profile_path+'/water_units/'+args[3]+'.png');
+		const light_unit = await Canvas.loadImage(profile_path+'/light_units/'+args[4]+'.png');
+		const dark_unit = await Canvas.loadImage(profile_path+'/dark_units/'+args[5]+'.png');
 
 		// Mystic Cut-in on the right side
-		const mystic = await Canvas.loadImage('./images/profile_card_images/mystic/'+args[6]+'.png');
+		const mystic = await Canvas.loadImage(profile_path+'/mystic/'+args[6]+'.png');
 
 		//The Basics
-		const sr_background = await Canvas.loadImage('./images/profile_card_images/sr_background.png');
-		const card_background = await Canvas.loadImage('./images/profile_card_images/background.png');
-		const elements = await Canvas.loadImage('./images/profile_card_images/elements.png');
-		const title = await Canvas.loadImage('./images/profile_card_images/title.png');
-		const border = await Canvas.loadImage('./images/profile_card_images/borders.png');
+		const sr_background = await Canvas.loadImage(profile_path+'/sr_background.png');
+		const card_background = await Canvas.loadImage(profile_path+'/background.png');
+		const elements = await Canvas.loadImage(profile_path+'/elements.png');
+		const title = await Canvas.loadImage(profile_path+'/title.png');
+		const border = await Canvas.loadImage(profile_path+'/borders.png');
 
 
 		console.log("[CARD] DEBUG: Drawing Card Image Elements");
