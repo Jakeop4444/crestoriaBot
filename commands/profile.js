@@ -39,7 +39,7 @@ module.exports = {
 
 		}
 		//Edit Profile
-		else if(args.length === 2 && args[0] === 'edit'){
+		else if(args.length >= 2 && args[0] === 'edit'){
 			if(!fs.existsSync(userinfo_path+'/'+message.author.id)){
 				message.reply("You don't have a profile created! Create a profile first!");
 				return;
@@ -82,6 +82,7 @@ module.exports = {
 						if(error) console.log(error);
 						console.log('[PROFILE] DEBUG: Profile Text edited sucessfully');
 					});
+					message.reply("Your Profile Name has been changed!");
 				}
 				//Edit ID
 				else if(args[1] === 'id'){
@@ -95,6 +96,7 @@ module.exports = {
 						if(error) console.log(error);
 						console.log('[PROFILE] DEBUG: Profile Text edited sucessfully');
 					});
+					message.reply("Your Profile ID has been changed!");
 				}
 				//Edit Guild
 				else if(args[1] === 'guild'){
@@ -110,10 +112,11 @@ module.exports = {
 					}else{
 						fs.appendFile(userinfo_path+'/'+message.author.id+'/profile_data.txt', '\nguild:'+args[2]);
 					}
+					message.reply("Your Profile Guild has been changed!");
+				}else{
+					message.reply("Invalid arguments for edit, valid arguments are [name] [id] [guild] [image]");
+					return;
 				}
-			}else{
-				message.reply("Invalid arguments for edit, valid arguments are [name] [id] [guild] [image]");
-				return;
 			}
 			
 
