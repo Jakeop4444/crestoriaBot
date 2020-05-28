@@ -16,5 +16,7 @@ module.exports = {
 			if (error) throw error;
 			console.log("Connected to db!");
 		});
+
+		connec.end();
 	},
 };
