@@ -16,7 +16,8 @@ module.exports = {
 				message.reply("You don't have a profile created! Create a profile first!");
 			}else{
 				console.log('[PROFILE] DEBUG: Displaying Information');
-				var text = fs.readFileSync(userinfo_path+'/'+message.author.id+'/profile_data.txt');
+				var text = fs.readFileSync(userinfo_path+'/'+message.author.id+'/profile_data.txt').toString('utf-8');
+				console.log(text);
 				var lines = text.split('\n');
 				var profile_name = lines[0].split(':');
 				var profile_id = lines[1].split(':');
@@ -44,7 +45,7 @@ module.exports = {
 				return;
 			}else{
 				var string = '';
-				var text = fs.readFileSync(userinfo_path+'/'+message.author.id+'/profile_data.txt');
+				var text = fs.readFileSync(userinfo_path+'/'+message.author.id+'/profile_data.txt').toString('utf-8');
 				var lines = text.split('\n');
 				//Edit Name
 				if(args[1] === 'name'){
