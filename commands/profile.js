@@ -39,42 +39,12 @@ module.exports = {
 
 		}
 		//Edit Profile
-		else if(args.length === 3 && args[0] === 'edit'){
+		else if(args.length === 2 && args[0] === 'edit'){
 			if(!fs.existsSync(userinfo_path+'/'+message.author.id)){
 				message.reply("You don't have a profile created! Create a profile first!");
 				return;
-			}else{
-				var string = '';
-				var text = fs.readFileSync(userinfo_path+'/'+message.author.id+'/profile_data.txt').toString('utf-8');
-				var lines = text.split('\n');
-				//Edit Name
-				if(args[1] === 'name'){
-					var edit = lines[0].split(':');
-					edit[1] = args[2];
-					string += edit[0]+':'+edit[1]+'\n'+lines[1];
-					if(lines[2]){
-						string+='\n'+lines[2];
-					}
-					fs.writeFile(userinfo_path+'/'+message.author.id+'/profile_data.txt', string, function(error){
-						if(error) console.log(error);
-						console.log('[PROFILE] DEBUG: Profile Text edited sucessfully')
-					});
-				}
-				//Edit ID
-				else if(args[1] === 'id'){
-					var edit = lines[1].split(':');
-					edit[1] = args[2];
-					string += lines[0]+'\n'+edit[0]+':'+edit[1];
-					if(lines[2]){
-						string+='\n'+lines[2];
-					}
-					fs.writeFile(userinfo_path+'/'+message.author.id+'/profile_data.txt', string, function(error){
-						if(error) console.log(error);
-						console.log('[PROFILE] DEBUG: Profile Text edited sucessfully')
-					});
-				}
-				//Edit Image
-				else if(args[1] === 'image'){
+			}else if(args.length === 2){
+				if(args[1] === 'image'){
 					if(message.attachments.first()){
 						var fileCheck = message.attachments.first().name.split('.');
 						if(fileCheck[1] === 'png'||
@@ -92,9 +62,39 @@ module.exports = {
 						}
 					}else{
 						message.reply("Image not attached to edit!");
+						return;
 					}
-					
-
+					message.reply("Your Profile Image has been changed!");
+				}
+			}else if(args.length === 3){
+				var string = '';
+				var text = fs.readFileSync(userinfo_path+'/'+message.author.id+'/profile_data.txt').toString('utf-8');
+				var lines = text.split('\n');
+				//Edit Name
+				if(args[1] === 'name'){
+					var edit = lines[0].split(':');
+					edit[1] = args[2];
+					string += edit[0]+':'+edit[1]+'\n'+lines[1];
+					if(lines[2]){
+						string+='\n'+lines[2];
+					}
+					fs.writeFile(userinfo_path+'/'+message.author.id+'/profile_data.txt', string, function(error){
+						if(error) console.log(error);
+						console.log('[PROFILE] DEBUG: Profile Text edited sucessfully');
+					});
+				}
+				//Edit ID
+				else if(args[1] === 'id'){
+					var edit = lines[1].split(':');
+					edit[1] = args[2];
+					string += lines[0]+'\n'+edit[0]+':'+edit[1];
+					if(lines[2]){
+						string+='\n'+lines[2];
+					}
+					fs.writeFile(userinfo_path+'/'+message.author.id+'/profile_data.txt', string, function(error){
+						if(error) console.log(error);
+						console.log('[PROFILE] DEBUG: Profile Text edited sucessfully');
+					});
 				}
 				//Edit Guild
 				else if(args[1] === 'guild'){
@@ -105,18 +105,18 @@ module.exports = {
 						string+='\n'+edit[0]+':'+edit[1];
 						fs.writeFile(userinfo_path+'/'+message.author.id+'/profile_data.txt', string, function(error){
 						if(error) console.log(error);
-							console.log('[PROFILE] DEBUG: Profile Text created sucessfully')
+							console.log('[PROFILE] DEBUG: Profile Text created sucessfully');
 						});
 					}else{
 						fs.appendFile(userinfo_path+'/'+message.author.id+'/profile_data.txt', '\nguild:'+args[2]);
 					}
 				}
-				else{
-					message.reply("Invalid arguments for edit, valid arguments are [name] [id] [guild] [image]");
-					return;
-				}
+			}else{
+				message.reply("Invalid arguments for edit, valid arguments are [name] [id] [guild] [image]");
+				return;
 			}
 			
+
 		}
 		//Create Profile
 		else if(args.length >=3 && args[0] === 'create'){
