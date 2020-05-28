@@ -1,3 +1,5 @@
+const { operator_id_one, operator_id_two } = require('../config.json');
+
 module.exports = {
 	name: 'reload',
 	description: 'Reloads a command',
