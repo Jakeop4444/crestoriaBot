@@ -75,24 +75,25 @@ module.exports = {
 				}
 				//Edit Image
 				else if(args[1] === 'image'){
-					if(!message.attachments.first()){
-						message.reply("Image not attached to edit!");
-						return;
-					}
-					var fileCheck = message.attachments.first().name.split('.');
-					if(fileCheck[1] === 'png'||
-						fileCheck[1] === 'jpeg'||
-						fileCheck[1] === 'jpg'){
-						console.log('[PROFILE] DEBUG: Downloading Image');
-						if(!fs.existsSync(userinfo_path+'/'+message.author.id)){
-							fs.mkdirSync(userinfo_path+'/'+message.author.id);
+					if(message.attachments.first()){
+						var fileCheck = message.attachments.first().name.split('.');
+						if(fileCheck[1] === 'png'||
+							fileCheck[1] === 'jpeg'||
+							fileCheck[1] === 'jpg'){
+							console.log('[PROFILE] DEBUG: Downloading Image');
+							if(!fs.existsSync(userinfo_path+'/'+message.author.id)){
+								fs.mkdirSync(userinfo_path+'/'+message.author.id);
+							}
+							//console.log('[PROFILE] DEBUG: File URL; '+message.attachments.first().url);
+							download(message.attachments.first().url, message.author.id);
+						}else{
+							message.reply("The file you attached is not a supported type. Please use a PNG, JPG, or JPEG.");
+							return;
 						}
-						//console.log('[PROFILE] DEBUG: File URL; '+message.attachments.first().url);
-						download(message.attachments.first().url, message.author.id);
 					}else{
-						message.reply("The file you attached is not a supported type. Please use a PNG, JPG, or JPEG.");
-						return;
+						message.reply("Image not attached to edit!");
 					}
+					
 
 				}
 				//Edit Guild
