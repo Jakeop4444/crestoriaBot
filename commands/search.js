@@ -57,12 +57,14 @@ module.exports = {
 			}
 			sql += " Type = '"+q_type+"'";
 		}
+
+		var output = ''
 		connec.query(sql, function (error, result, fields) {
 			if (error) console.log(error);
 			//console.log("Result:" + result);
 			//console.log("Fields:" + fields);
 			console.log(sql);
-			result.forEach(data => console.log(data.Title+" "+data.Name+" "+data.Element+" "+data.Rarity+" "+data.Type));
+			output += result.forEach(data => console.log(data.Title+" "+data.Name+" "+data.Element+" "+data.Rarity+" "+data.Type+"\n"));
 			//console.log(result[0].Name+" "+result[0].Title+" "+result[0].Element+" "+result[0].Rarity+" "+result[0].Type);
 		});
 		/*var sql = "SELECT Name, Title, Element, Rarity, Type FROM characters WHERE Name = "+q_name;//+"' AND Element = '"+q_element+"' AND Rarity = '"+q_rarity+"' AND Type = '"+q_type+"'";
@@ -73,6 +75,7 @@ module.exports = {
 			console.log("Result:" + result);
 		});*/
 		
+		message.channel.send(output);
 
 		connec.end();
 	},
