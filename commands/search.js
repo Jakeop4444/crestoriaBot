@@ -33,14 +33,9 @@ module.exports = {
 		}
 
 		var sql = 'SELECT * FROM ? WHERE Name = ? AND Element = ? AND Rarity = ? AND Type = ?';
-		connec.connect(function(error) {
+		connec.query(sql, [db_name, q_name, q_element, q_rarity, q_type], function (error, result) {
 			if (error) throw error;
-			console.log("Connected to db!");
-
-			connect.query(sql, [db_name, q_name, q_element, q_rarity, q_type], function (error, result) {
-				if (error) throw error;
-				console.log("Result:" + result);
-			})
+			console.log("Result:" + result);
 		});
 
 		connec.end();
