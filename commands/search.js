@@ -1,5 +1,5 @@
 var mysql = require('mysql');
-const { db_host, db_user, db_password, db_name } = require('../config.json');
+const { db_host, db_user, db_password, db_name, db_table } = require('../config.json');
 var q_name = '*', q_element = '*', q_rarity = '*', q_type = '*';
 
 module.exports = {
@@ -10,7 +10,8 @@ module.exports = {
 		var connec = mysql.createConnection({
 			host: db_host,
 			user: db_user,
-			password: db_password
+			password: db_password,
+			database: db_name
 		});
 
 		var counter = 0;
@@ -32,11 +33,18 @@ module.exports = {
 			counter += 2;
 		}
 
-		var sql = 'SELECT * FROM ? WHERE Name = ? AND Element = ? AND Rarity = ? AND Type = ?';
-		connec.query(sql, [db_name, q_name, q_element, q_rarity, q_type], function (error, result) {
-			if (error) throw error;
+		
+		/*var sql = "SELECT * FROM characters";
+		connec.query(sql, function (error, result) {
+			if (error) console.log(error);
+			console.log("Result:" + result);
+		});*/	
+		var sql = "SELECT '*' FROM characters WHERE Name = ? AND Element = ? AND Rarity = ? AND Type = ?";
+		connec.query(sql, [q_name, q_element, q_rarity, q_type], function (error, result) {
+			if (error) console.log(error);
 			console.log("Result:" + result);
 		});
+		
 
 		connec.end();
 	},
