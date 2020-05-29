@@ -64,7 +64,7 @@ module.exports = {
 			//console.log("Result:" + result);
 			//console.log("Fields:" + fields);
 			console.log(sql);
-			result.forEach(data => console.log(data.Title+" "+data.Name+" "+data.Element+" "+data.Rarity+" "+data.Type);
+			result.forEach(data => console.log(data.Title+" "+data.Name+" "+data.Element+" "+data.Rarity+" "+data.Type));
 			//console.log(result[0].Name+" "+result[0].Title+" "+result[0].Element+" "+result[0].Rarity+" "+result[0].Type);
 		});
 		
