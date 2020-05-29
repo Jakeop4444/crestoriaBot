@@ -34,16 +34,18 @@ module.exports = {
 		}
 
 		
-		/*var sql = "SELECT * FROM characters";
-		connec.query(sql, function (error, result) {
+		var sql = "SELECT Name, Element, Rarity, Type FROM characters WHERE Name = 'Sorey'";
+		connec.query(sql, function (error, result, fields) {
 			if (error) console.log(error);
 			console.log("Result:" + result);
-		});*/	
-		var sql = "SELECT '*' FROM characters WHERE Name = ? AND Element = ? AND Rarity = ? AND Type = ?";
+			console.log("Fields:" + fields);
+			console.log(result[0].Name+" "+result[0].Element+" "+result[0].Rarity+" "+result[0].Type);
+		});
+		/*var sql = "SELECT * FROM characters WHERE Name = ? AND Element = ? AND Rarity = ? AND Type = ?";
 		connec.query(sql, [q_name, q_element, q_rarity, q_type], function (error, result) {
 			if (error) console.log(error);
 			console.log("Result:" + result);
-		});
+		});*/
 		
 
 		connec.end();
