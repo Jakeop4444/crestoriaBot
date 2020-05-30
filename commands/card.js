@@ -93,7 +93,7 @@ module.exports = {
 				}
 			})
 			// Mystic Cut-in on the right side
-			fs.access((profile_path+'/mystic/'+args[6]+'.png', fs.F_OK, (err) => {
+			fs.access(profile_path+'/mystic/'+args[6]+'.png', fs.F_OK, (err) => {
 				if(err){
 					message.reply("That Character can't be found. Use ***!card characters*** to check if that character exists");
 					return;
