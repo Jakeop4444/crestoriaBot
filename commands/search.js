@@ -45,7 +45,7 @@ module.exports = {
 		}
 
 		
-		var sql = "SELECT Name, Title, Element, Rarity, Type FROM characters WHERE";
+		var sql = "SELECT Name, Image, Title, Element, Rarity, Type FROM characters WHERE";
 		if(q_name != '*'){
 			sql += " Name = '"+q_name+"'";
 		}
@@ -96,15 +96,16 @@ module.exports = {
 				message.channel.send('No entries were found!');
 			} else{
 				//Length is == 1, print the result in pretty fashion
+				console.log(result[0].Image);
 				const embed_single = {
 					"color": 13632027,
 					"image": {
-						"url": result.data.Image
+						"url": result[0].Image
 					},
 					"author": {
-						"name": result.data.Name
+						"name": result[0].Name
 					},
-					"description": result.data.Title + "\n" + "Rarity: " + result.data.Rarity + "\n" + "Element: " + result.data.Element + "\n" + "Weapon Type: " + result.data.Type,
+					"description": result[0].Title + "\n" + "Rarity: " + result[0].Rarity + "\n" + "Element: " + result[0].Element + "\n" + "Weapon Type: " + result[0].Type,
 					"footer": {
 					   "text": "https://www.tocdb.xyz/index.php"
 					}
