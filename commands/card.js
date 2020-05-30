@@ -41,7 +41,7 @@ module.exports = {
 			const canvas = Canvas.createCanvas(1900, 800);
 			const ctx = canvas.getContext('2d');
 
-			const fire_unit, earth_unit, wind_unit, water_unit, light_unit, dark_unit, mystic;
+			var fire_unit, earth_unit, wind_unit, water_unit, light_unit, dark_unit, mystic;
 
 			//const background = await Canvas.loadImage('./images/wallpaper.jpg');	
 			console.log("[CARD] DEBUG: Getting Card Image Elements");
