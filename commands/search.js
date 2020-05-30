@@ -1,3 +1,4 @@
+const { MessageEmbed } = require('discord.js');
 const mysql = require('mysql');
 const { db_host, db_user, db_password, db_name, db_table } = require('../config.json');
 
@@ -74,7 +75,7 @@ module.exports = {
 			if (error) console.log(error);
 			//console.log("Result:" + result);
 			//console.log("Fields:" + fields);
-			console.log(sql);
+			//console.log(sql);
 
 			//Check for result array length
 			if (result.length > 1){
@@ -94,10 +95,18 @@ module.exports = {
 				message.channel.send({embed});
 			} else if (result.length < 1){
 				message.channel.send('No entries were found!');
-			} else{
+			} else if (result.length === 1){
 				//Length is == 1, print the result in pretty fashion
 				console.log(result[0].Image);
-				const embed_single = {
+				console.log(result[0].Title + "\n" + "Rarity: " + result[0].Rarity + "\n" + "Element: " + result[0].Element + "\n" + "Weapon Type: " + result[0].Type);
+				const embed_single = new MessageEmbed()
+				.setTitle(result[0].Name)
+				.setColor(0xFF0000)
+				.setDescription(result[0].Title + "\n" + "Rarity: " + result[0].Rarity + "\n" + "Element: " + result[0].Element + "\n" + "Weapon Type: " + result[0].Type)
+				.setImage(result[0].Image)
+				.setFooter("https://www.tocdb.xyz/index.php");
+
+				/*const embed_single = {
 					"color": 13632027,
 					"image": {
 						"url": result[0].Image
@@ -109,9 +118,9 @@ module.exports = {
 					"footer": {
 					   "text": "https://www.tocdb.xyz/index.php"
 					}
-				}
+				}*/
 
-				message.channel.send({embed_single});
+				message.channel.send(embed_single);
 			}
 
 			result.forEach(data => console.log(data.Title+" "+data.Name+" "+data.Element+" "+data.Rarity+" "+data.Type));
