@@ -1,4 +1,4 @@
-var mysql = require('mysql');
+const mysql = require('mysql');
 const { db_host, db_user, db_password, db_name, db_table } = require('../config.json');
 
 
@@ -59,11 +59,50 @@ module.exports = {
 		}
 
 		//var output = ''
+		var many_names = "";
 		connec.query(sql, function (error, result, fields) {
 			if (error) console.log(error);
 			//console.log("Result:" + result);
 			//console.log("Fields:" + fields);
 			console.log(sql);
+
+			//Check for result array length
+			if (result.length > 1){
+				//Length > 1, means we found more than one unit following the user's guidelines
+				result.forEach(data => many_names += ("[" + data.Title + "] " + data.Name + " \n") );
+				const embed = {
+					"color": 13632027,
+					"author": {
+						"name": result.length + "entries were found!"
+					},
+					"description": many_names,
+					"footer": {
+					    "text": "https://www.tocdb.xyz/index.php"
+					}
+				}
+
+				message.channel.send({embed});
+			} else if (result.length < 1){
+				message.channel.send('No entries were found!');
+			} else{
+				//Length is == 1, print the result in pretty fashion
+				const embed_single = {
+					"color": 13632027,
+					"image": {
+						"url": result.data.Image
+					},
+					"author": {
+						"name": result.data.Name
+					},
+					"description": result.data.Title + "\n" + "Rarity: " + result.data.Rarity + "\n" + "Element: " + result.data.Element + "\n" + "Weapon Type: " + result.data.Type,
+					"footer": {
+					   "text": "https://www.tocdb.xyz/index.php"
+					}
+				}
+
+				message.channel.send({embed_single});
+			}
+
 			result.forEach(data => console.log(data.Title+" "+data.Name+" "+data.Element+" "+data.Rarity+" "+data.Type));
 			//console.log(result[0].Name+" "+result[0].Title+" "+result[0].Element+" "+result[0].Rarity+" "+result[0].Type);
 		});
