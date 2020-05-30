@@ -5,7 +5,7 @@ const { client } = require('../index.js');
 module.exports = {
 	name: 'reboot',
 	cooldown: 10,
-	description: 'Shut down and reboot the entire bot.',
+	description: 'Reboots VisionOrb, usable only by HERO and HellFyre.',
 	execute(message, args) {
 		if(message.author.id === operator_id_one || message.author.id === operator_id_two){
 			const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js'));

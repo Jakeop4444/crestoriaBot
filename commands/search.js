@@ -6,7 +6,7 @@ const { db_host, db_user, db_password, db_name, db_table } = require('../config.
 module.exports = {
 	name: 'search',
 	cooldown: 5,
-	description: 'Find and display a Unit!',
+	description: 'Search the database for a Unit! Usage: !search (name|element|rarity|type) input. Example Command: !search name Stahn',
 	execute(message, args) {
 		var q_name = '*', q_element = '*', q_rarity = '*', q_type = '*';
 		var connec = mysql.createConnection({

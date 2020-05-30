@@ -2,7 +2,7 @@ const { operator_id_one, operator_id_two } = require('../config.json');
 
 module.exports = {
 	name: 'reload',
-	description: 'Reloads a command',
+	description: 'Reloads a singular command, usable only by HERO and HellFyre.',
 	args: true,
 	execute(message, args) {
 		if(message.author.id === operator_id_one || message.author.id === operator_id_two){
