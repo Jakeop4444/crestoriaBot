@@ -80,7 +80,7 @@ module.exports = {
 			//Check for result array length
 			if (result.length > 1){
 				//Length > 1, means we found more than one unit following the user's guidelines
-				result.forEach(data => many_names += ("[[" + data.Title + "] " + data.Name + "](https://www.youtube.com/watch?v=dQw4w9WgXcQ) \n") );
+				result.forEach(data => many_names += ("[[" + data.Title + "] " + data.Name + "](https://www.tocdb.xyz/" + data.Rarity.toLowerCase() + "/" + data.Name + ".php) \n") );
 				const embed = {
 					"color": 13632027,
 					"author": {
@@ -101,24 +101,11 @@ module.exports = {
 				console.log(result[0].Title + "\n" + "Rarity: " + result[0].Rarity + "\n" + "Element: " + result[0].Element + "\n" + "Weapon Type: " + result[0].Type);
 				const embed_single = new MessageEmbed()
 				.setTitle(result[0].Name)
+				.setURL('https://www.tocdb.xyz/' + result[0].Rarity.toLowerCase() + '/' + result[0].Name + '.php')
 				.setColor(0xFF0000)
 				.setDescription(result[0].Title + "\n" + "Rarity: " + result[0].Rarity + "\n" + "Element: " + result[0].Element + "\n" + "Weapon Type: " + result[0].Type)
 				.setImage(result[0].Image)
 				.setFooter("https://www.tocdb.xyz/index.php");
-
-				/*const embed_single = {
-					"color": 13632027,
-					"image": {
-						"url": result[0].Image
-					},
-					"author": {
-						"name": result[0].Name
-					},
-					"description": result[0].Title + "\n" + "Rarity: " + result[0].Rarity + "\n" + "Element: " + result[0].Element + "\n" + "Weapon Type: " + result[0].Type,
-					"footer": {
-					   "text": "https://www.tocdb.xyz/index.php"
-					}
-				}*/
 
 				message.channel.send(embed_single);
 			}
