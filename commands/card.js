@@ -41,6 +41,8 @@ module.exports = {
 			const canvas = Canvas.createCanvas(1900, 800);
 			const ctx = canvas.getContext('2d');
 
+			const var fire_unit, earth_unit, wind_unit, water_unit, light_unit, dark_unit, mystic;
+
 			//const background = await Canvas.loadImage('./images/wallpaper.jpg');	
 			console.log("[CARD] DEBUG: Getting Card Image Elements");
 			// Units
@@ -49,7 +51,7 @@ module.exports = {
 					message.reply("That Fire Unit can't be found. Use ***!card units fire*** to check if that unit exists");
 					return;
 				}else{
-					const fire_unit = Canvas.loadImage(profile_path+'/fire_units/'+args[0]+'.png');
+					fire_unit = Canvas.loadImage(profile_path+'/fire_units/'+args[0]+'.png');
 				}
 			})
 			fs.access(profile_path+'/earth_units/'+args[1]+'.png', fs.F_OK, (err) => {
@@ -57,7 +59,7 @@ module.exports = {
 					message.reply("That Water Unit can't be found. Use ***!card units water*** to check if that unit exists");
 					return;
 				}else{
-					const earth_unit = Canvas.loadImage(profile_path+'/earth_units/'+args[1]+'.png');
+					earth_unit = Canvas.loadImage(profile_path+'/earth_units/'+args[1]+'.png');
 				}
 			})
 			fs.access(profile_path+'/wind_units/'+args[2]+'.png', fs.F_OK, (err) => {
@@ -65,7 +67,7 @@ module.exports = {
 					message.reply("That Wind Unit can't be found. Use ***!card units wind*** to check if that unit exists");
 					return;
 				}else{
-					const wind_unit = Canvas.loadImage(profile_path+'/wind_units/'+args[2]+'.png');
+					wind_unit = Canvas.loadImage(profile_path+'/wind_units/'+args[2]+'.png');
 				}
 			})
 			fs.access(profile_path+'/earth_units/'+args[3]+'.png', fs.F_OK, (err) => {
@@ -73,7 +75,7 @@ module.exports = {
 					message.reply("That Earth Unit can't be found. Use ***!card units earth*** to check if that unit exists");
 					return;
 				}else{
-					const water_unit = Canvas.loadImage(profile_path+'/water_units/'+args[3]+'.png');
+					water_unit = Canvas.loadImage(profile_path+'/water_units/'+args[3]+'.png');
 				}
 			})
 			fs.access(profile_path+'/light_units/'+args[4]+'.png', fs.F_OK, (err) => {
@@ -81,7 +83,7 @@ module.exports = {
 					message.reply("That Light Unit can't be found. Use ***!card units light*** to check if that unit exists");
 					return;
 				}else{
-					const light_unit = Canvas.loadImage(profile_path+'/light_units/'+args[4]+'.png');
+					light_unit = Canvas.loadImage(profile_path+'/light_units/'+args[4]+'.png');
 				}
 			})
 			fs.access(profile_path+'/dark_units/'+args[5]+'.png', fs.F_OK, (err) => {
@@ -89,7 +91,7 @@ module.exports = {
 					message.reply("That Dark Unit can't be found. Use ***!card units dark*** to check if that unit exists");
 					return;
 				}else{
-					const dark_unit = Canvas.loadImage(profile_path+'/dark_units/'+args[5]+'.png');
+					dark_unit = Canvas.loadImage(profile_path+'/dark_units/'+args[5]+'.png');
 				}
 			})
 			// Mystic Cut-in on the right side
@@ -98,7 +100,7 @@ module.exports = {
 					message.reply("That Character can't be found. Use ***!card characters*** to check if that character exists");
 					return;
 				}else{
-					const mystic = Canvas.loadImage(profile_path+'/mystic/'+args[6]+'.png');
+					mystic = Canvas.loadImage(profile_path+'/mystic/'+args[6]+'.png');
 				}
 			})
 			
