@@ -16,7 +16,25 @@ module.exports = {
 	async execute(message, args) {
 
 		if(args.length >= 1 && args.length < 3){
-			if(args[0] === && args[0] === 'units')
+			if(args[0] === 'units'){
+				if(args[1] === 'fire'){
+
+				}else if(args[1] === 'earth'){
+					
+				}else if(args[1] === 'wind'){
+					
+				}else if(args[1] === 'water'){
+					
+				}else if(args[1] === 'light'){
+					
+				}else if(args[1] === 'dark'){
+					
+				}else{
+					message.reply("Invalid Element");
+				}
+			}else if(args[0] === 'characters'){
+
+			}
 			//Either DM the command issuer all of the units and their shorthand names for the bot, 
 			//or display the information as pages, or show a example on how characters are named for the bot
 		}else if(args.length == 7){
