@@ -1,5 +1,6 @@
 const Canvas = require('canvas');
 const Discord = require('discord.js');
+const fs = require('fs');
 const { profile_path } = require("../config.json");
 
 module.exports = {
@@ -8,27 +9,81 @@ module.exports = {
 	description: 'Create a Profile Card for your Support Team. '+
 	'Some images may be from datamined assets, otherwise all units are as of '+
 	'current release in game',
+	usage: "!card [fire_unit] [earth_unit] [wind_unit] [water_unit] [light_unit] [dark_unit] [character]\n"+
+			"Unit names are inputer as [chara_title]. Titles are abbreviated to the first letter of each word in the title.\n"+
+			"EX: [Under a Azure Sky] Asbel will be inputed as asbel_uaas. You can display a list of units with their names by using !card units [element].\n"+
+			"[character] is a side image of your favorite character, all you just need is their name. You can display a list of charactesr by using !card characters.",
 	async execute(message, args) {
 
-		if(args.length === 1 && args[0] === 'units'){
+		if(args.length >= 1 && args.length < 3){
+			if(args[0] === && args[0] === 'units')
 			//Either DM the command issuer all of the units and their shorthand names for the bot, 
 			//or display the information as pages, or show a example on how characters are named for the bot
-		}else{
+		}else if(args.length == 7){
 			const canvas = Canvas.createCanvas(1900, 800);
 			const ctx = canvas.getContext('2d');
 
 			//const background = await Canvas.loadImage('./images/wallpaper.jpg');	
 			console.log("[CARD] DEBUG: Getting Card Image Elements");
 			// Units
-			const fire_unit = await Canvas.loadImage(profile_path+'/fire_units/'+args[0]+'.png');
-			const earth_unit = await Canvas.loadImage(profile_path+'/earth_units/'+args[1]+'.png');
-			const wind_unit = await Canvas.loadImage(profile_path+'/wind_units/'+args[2]+'.png');
-			const water_unit = await Canvas.loadImage(profile_path+'/water_units/'+args[3]+'.png');
-			const light_unit = await Canvas.loadImage(profile_path+'/light_units/'+args[4]+'.png');
-			const dark_unit = await Canvas.loadImage(profile_path+'/dark_units/'+args[5]+'.png');
-
+			fs.access(profile_path+'/fire_units/'+args[0]+'.png', fs.F_OK, (err) => {
+				if(err){
+					message.reply("That Fire Unit can't be found. Use ***!card units fire*** to check if that unit exists");
+					return;
+				}else{
+					const fire_unit = await Canvas.loadImage(profile_path+'/fire_units/'+args[0]+'.png');
+				}
+			})
+			fs.access(profile_path+'/earth_units/'+args[1]+'.png', fs.F_OK, (err) => {
+				if(err){
+					message.reply("That Water Unit can't be found. Use ***!card units water*** to check if that unit exists");
+					return;
+				}else{
+					const earth_unit = await Canvas.loadImage(profile_path+'/earth_units/'+args[1]+'.png');
+				}
+			})
+			fs.access(profile_path+'/wind_units/'+args[2]+'.png', fs.F_OK, (err) => {
+				if(err){
+					message.reply("That Wind Unit can't be found. Use ***!card units wind*** to check if that unit exists");
+					return;
+				}else{
+					const wind_unit = await Canvas.loadImage(profile_path+'/wind_units/'+args[2]+'.png');
+				}
+			})
+			fs.access(profile_path+'/earth_units/'+args[3]+'.png', fs.F_OK, (err) => {
+				if(err){
+					message.reply("That Earth Unit can't be found. Use ***!card units earth*** to check if that unit exists");
+					return;
+				}else{
+					const water_unit = await Canvas.loadImage(profile_path+'/water_units/'+args[3]+'.png');
+				}
+			})
+			fs.access(profile_path+'/light_units/'+args[4]+'.png', fs.F_OK, (err) => {
+				if(err){
+					message.reply("That Light Unit can't be found. Use ***!card units light*** to check if that unit exists");
+					return;
+				}else{
+					const light_unit = await Canvas.loadImage(profile_path+'/light_units/'+args[4]+'.png');
+				}
+			})
+			fs.access(profile_path+'/dark_units/'+args[5]+'.png', fs.F_OK, (err) => {
+				if(err){
+					message.reply("That Dark Unit can't be found. Use ***!card units dark*** to check if that unit exists");
+					return;
+				}else{
+					const dark_unit = await Canvas.loadImage(profile_path+'/dark_units/'+args[5]+'.png');
+				}
+			})
 			// Mystic Cut-in on the right side
-			const mystic = await Canvas.loadImage(profile_path+'/mystic/'+args[6]+'.png');
+			fs.access((profile_path+'/mystic/'+args[6]+'.png', fs.F_OK, (err) => {
+				if(err){
+					message.reply("That Character can't be found. Use ***!card characters*** to check if that character exists");
+					return;
+				}else{
+					const mystic = await Canvas.loadImage(profile_path+'/mystic/'+args[6]+'.png');
+				}
+			})
+			
 
 			//The Basics
 			const sr_background = await Canvas.loadImage(profile_path+'/sr_background.png');
@@ -57,6 +112,8 @@ module.exports = {
 			const attachment = new Discord.MessageAttachment(canvas.toBuffer(), 'profile_image.png');
 
 			message.channel.send(attachment);
+		}else{
+			message.reply("Invalid use of the command");
 		}
 
 	},
