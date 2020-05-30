@@ -15,23 +15,33 @@ module.exports = {
 			database: db_name
 		});
 
+		var var_set = false;
 		var counter = 0;
 		while(counter < args.length){
 			if (args[counter] === 'name'){
 				q_name = args[counter+1];
+				var_set = true;
 				console.log("Name set.");
 			} else if (args[counter] === 'element'){
 				q_element = args[counter+1];
+				var_set = true;
 				console.log("Element set.");
 			} else if (args[counter] === 'rarity'){
 				q_rarity = args[counter+1];
+				var_set = true;
 				console.log("Rarity set.");
 			} else if (args[counter] === 'type'){
 				q_type = args[counter+1];
+				var_set = true;
 				console.log("Type set.");
 			}
 
 			counter += 2;
+		}
+
+		if(var_set != true){
+			message.reply("Invalid Arguments");
+			return;
 		}
 
 		
@@ -73,7 +83,7 @@ module.exports = {
 				const embed = {
 					"color": 13632027,
 					"author": {
-						"name": result.length + "entries were found!"
+						"name": result.length + " entries were found!"
 					},
 					"description": many_names,
 					"footer": {
