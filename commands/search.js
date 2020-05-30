@@ -80,7 +80,7 @@ module.exports = {
 			//Check for result array length
 			if (result.length > 1){
 				//Length > 1, means we found more than one unit following the user's guidelines
-				result.forEach(data => many_names += ("[" + data.Title + "] " + data.Name + " \n") );
+				result.forEach(data => many_names += ("[[" + data.Title + "] " + data.Name + "](https://www.youtube.com/watch?v=dQw4w9WgXcQ) \n") );
 				const embed = {
 					"color": 13632027,
 					"author": {
