@@ -1,0 +1,22 @@
+{
+	//Basics
+	"background":"https://cdn.discordapp.com/attachments/716751455758975158/716752194401075240/background.png",
+	"borders": "https://cdn.discordapp.com/attachments/716751455758975158/716752200063254649/borders.png",
+	"elements":"https://cdn.discordapp.com/attachments/716751455758975158/716752202697277521/elements.png",
+	"sr_background":"https://cdn.discordapp.com/attachments/716751455758975158/716752205650067506/sr_background.png",
+	"title":"https://cdn.discordapp.com/attachments/716751455758975158/716752208162586634/title.png",
+	//Fire Units
+	"arche_sp":"https://cdn.discordapp.com/attachments/716751455758975158/716752849060626442/arche_sp.png",
+	//Earth Units
+	"rose_bm":"https://cdn.discordapp.com/attachments/716751455758975158/716752944456007710/rose_bm.png",
+	//Wind Units
+	"dezel_pitw":"https://cdn.discordapp.com/attachments/716751455758975158/716752984469536898/dezel_pitw.png",
+	//Water Units
+	"kanonno_gb":"https://cdn.discordapp.com/attachments/716751455758975158/716753032683192330/kanonno_gb.png",
+	//Light Units
+	"milla_nh":"https://cdn.discordapp.com/attachments/716751455758975158/716753086047191070/milla_nh.png",
+	//Dark Units
+	"vicious_swd":"https://cdn.discordapp.com/attachments/716751455758975158/716753112999788614/vicious_swd.png",
+	//Mystic
+	"yuna":"https://cdn.discordapp.com/attachments/716751455758975158/716753166573502656/yuna.png"
+}

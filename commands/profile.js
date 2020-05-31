@@ -1,6 +1,5 @@
 const { MessageEmbed } = require('discord.js');
 const mysql = require('mysql');
-const request = require('request');
 const fs = require ('fs');
 const { db_host, profile_user, profile_password, profile_db, profile_table, userinfo_path } = require('../config.json');
 
