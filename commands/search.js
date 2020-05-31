@@ -1,6 +1,7 @@
 const { MessageEmbed } = require('discord.js');
 const mysql = require('mysql');
 const { db_host, db_user, db_password, db_name, db_table } = require('../config.json');
+const emoji = require('../emoji.json');
 
 
 module.exports = {
@@ -103,7 +104,7 @@ module.exports = {
 				.setTitle(result[0].Name)
 				.setURL('https://www.tocdb.xyz/' + result[0].Rarity.toLowerCase() + '/' + result[0].Name + '.php')
 				.setColor(0xFF0000)
-				.setDescription(result[0].Title + "\n" + "Rarity: " + result[0].Rarity + "\n" + "Element: " + result[0].Element + "\n" + "Weapon Type: " + result[0].Type)
+				.setDescription(result[0].Title + "\n" + "Rarity: " + emoji[result[0].Rarity] + "\n" + "Element: " + emoji[result[0].Element] + "\n" + "Weapon Type: " + emoji[result[0].Type])
 				.setImage(result[0].Image)
 				.setFooter("https://www.tocdb.xyz/index.php");
 
