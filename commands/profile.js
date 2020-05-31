@@ -1,8 +1,8 @@
 const { MessageEmbed } = require('discord.js');
-const { userinfo_path } = require('../config.json');
+const mysql = require('mysql');
 const request = require('request');
 const fs = require ('fs');
-
+const { db_host, profile_user, profile_password, profile_db, profile_table, userinfo_path } = require('../config.json');
 
 module.exports = {
 	name: 'profile',
@@ -10,162 +10,154 @@ module.exports = {
 	usage: '[command name] [create] [your_name] [your_id] [*your_guild]',
 	description: 'Create a profile card for users to reference you across multiple servers',
 	execute(message, args){
+		var con = mysql.createConnection({
+			host: db_host,
+			user: profile_user,
+			password: profile_password,
+			database: profile_db,
+			multipleStatements: true
+		});
+		console.log("[PROFILE] DEBUG: connection to database established.");
 		//display profile data
 		if(args.length === 0){
-			if(!fs.existsSync(userinfo_path+'/'+message.author.id)){
-				message.reply("You don't have a profile created! Create a profile first!");
-			}else{
-				console.log('[PROFILE] DEBUG: Displaying Information');
-				var text = fs.readFileSync(userinfo_path+'/'+message.author.id+'/profile_data.txt').toString('utf-8');
-				console.log(text);
-				var lines = text.split('\n');
-				var profile_name = lines[0].split(':');
-				var profile_id = lines[1].split(':');
-				var description = profile_id[1];
-				if(lines[2]){
-					var profile_guild = lines[2].split(':');
-					description+='\n'+profile_guild[1];
+			console.log("[PROFILE] DEBUG: Displaying Profile Data");
+			var sql = "SELECT * FROM "+profile_table+" WHERE user_id = "+message.author.id;
+			con.query(sql, function (error, result, fields){
+				if(error) console.log(error);
+				if(result.length === 0){
+					message.reply("You don't have a profile created! Create a profile first!");
+				}else{
+					console.log('[PROFILE] DEBUG: Displaying Information');
+
+					const embed = new MessageEmbed()
+					.setTitle(result[0].profile_name)
+					.setColor(0xFFFFFF)
+					.setDescription("ID: "+result[0].profile_id+"\nGuild: "+result[0].profile_guild)
+					.setImage(result[0].profile_image.replace('CLN', ":").replace("DBLFWS", "//").replace("FWS/g", "/"));
+
+					message.channel.send(embed);
 				}
-				
-
-				const embed = new MessageEmbed()
-				.setTitle(profile_name[1])
-				.setColor(0xFFFFFF)
-				.setDescription(description)
-				.attachFiles(userinfo_path+'/'+message.author.id+'/profile_img.png')
-				.setImage('attachment://profile_img.png');
-				message.channel.send({embed});	
-			}
-
+			})
+			con.end();
 		}
 		//Edit Profile
 		else if(args.length >= 2 && args[0] === 'edit'){
-			if(!fs.existsSync(userinfo_path+'/'+message.author.id)){
-				message.reply("You don't have a profile created! Create a profile first!");
-				return;
-			}else if(args.length === 2){
-				if(args[1] === 'image'){
-					if(message.attachments.first()){
-						var fileCheck = message.attachments.first().name.split('.');
-						if(fileCheck[1] === 'png'||
-							fileCheck[1] === 'jpeg'||
-							fileCheck[1] === 'jpg'){
-							console.log('[PROFILE] DEBUG: Downloading Image');
-							if(!fs.existsSync(userinfo_path+'/'+message.author.id)){
-								fs.mkdirSync(userinfo_path+'/'+message.author.id);
-							}
-							//console.log('[PROFILE] DEBUG: File URL; '+message.attachments.first().url);
-							download(message.attachments.first().url, message.author.id);
-						}else{
-							message.reply("The file you attached is not a supported type. Please use a PNG, JPG, or JPEG.");
-							return;
-						}
-					}else{
-						message.reply("Image not attached to edit!");
-						return;
-					}
-					message.reply("Your Profile Image has been changed!");
-				}
-			}else if(args.length === 3){
-				var string = '';
-				var text = fs.readFileSync(userinfo_path+'/'+message.author.id+'/profile_data.txt').toString('utf-8');
-				var lines = text.split('\n');
-				//Edit Name
-				if(args[1] === 'name'){
-					var edit = lines[0].split(':');
-					edit[1] = args[2];
-					string += edit[0]+':'+edit[1]+'\n'+lines[1];
-					if(lines[2]){
-						string+='\n'+lines[2];
-					}
-					fs.writeFile(userinfo_path+'/'+message.author.id+'/profile_data.txt', string, function(error){
-						if(error) console.log(error);
-						console.log('[PROFILE] DEBUG: Profile Text edited sucessfully');
-					});
-					message.reply("Your Profile Name has been changed!");
-				}
-				//Edit ID
-				else if(args[1] === 'id'){
-					var edit = lines[1].split(':');
-					edit[1] = args[2];
-					string += lines[0]+'\n'+edit[0]+':'+edit[1];
-					if(lines[2]){
-						string+='\n'+lines[2];
-					}
-					fs.writeFile(userinfo_path+'/'+message.author.id+'/profile_data.txt', string, function(error){
-						if(error) console.log(error);
-						console.log('[PROFILE] DEBUG: Profile Text edited sucessfully');
-					});
-					message.reply("Your Profile ID has been changed!");
-				}
-				//Edit Guild
-				else if(args[1] === 'guild'){
-					if(lines[2]){
-						var edit = lines[2].split(':');
-						edit[1] = args[2];
-						string += lines[0]+'\n'+lines[1];
-						string+='\n'+edit[0]+':'+edit[1];
-						fs.writeFile(userinfo_path+'/'+message.author.id+'/profile_data.txt', string, function(error){
-						if(error) console.log(error);
-							console.log('[PROFILE] DEBUG: Profile Text created sucessfully');
-						});
-					}else{
-						fs.appendFile(userinfo_path+'/'+message.author.id+'/profile_data.txt', '\nguild:'+args[2]);
-					}
-					message.reply("Your Profile Guild has been changed!");
+			var sql = "SELECT * FROM "+profile_table+" WHERE user_id = "+message.author.id;
+			console.log("[PROFILE] DEBUG: Editing Profile");
+			con.query(sql, function(error, result, fields){
+				if(error) console.log(error);
+				if(result.length === 0){
+					message.reply("You don't have a profile created! Create a profile first!");
+					con.end();
 				}else{
-					message.reply("Invalid arguments for edit, valid arguments are [name] [id] [guild] [image]");
-					return;
+					if(args.length === 2){
+						if(args[1] === 'image'){
+							console.log("[PROFILE] DEBUG: Editing Profile Image");
+							if(message.attachments.first()){
+								var fileCheck = message.attachments.first().name.split('.');
+								if(fileCheck[1] === 'png'||fileCheck[1] === 'jpeg'||fileCheck[1] === 'jpg'){
+				                	console.log('[PROFILE] DEBUG: Changing Image');
+				                	sql = 'UPDATE '+profile_table+" SET profile_image = '"+message.attachments.first().url.replace(':', "CLN").replace("//", "DBLFWS")+"' WHERE user_id = "+message.author.id;
+				                    con.query(sql, function(error, result, fields){
+										if(error) console.log(error);
+										message.reply("Your Profile Image has been changed!")
+										con.end();
+										return;
+									})
+			                    }else{
+			                        message.reply("The file you attached is not a supported type. Please use a PNG, JPG, or JPEG.");
+			                        con.end();
+			                        return;
+			                    }
+							}else{
+								message.reply("Image Not Attached");
+								con.end();
+							}
+						}
+					}else if(args.length === 3){
+							if(args[1] === 'name'){
+								console.log("[PROFILE] DEBUG: Editing Profile Name");
+								sql = 'UPDATE '+profile_table+" SET profile_name = '"+args[2]+"' WHERE user_id = "+message.author.id;
+								con.query(sql, function(error, result, fields){
+									if(error) console.log(error);
+									message.reply("Your Profile Name has been updated!");
+								})
+								con.end();
+							}else if(args[1] === 'id'){
+								console.log("[PROFILE] DEBUG: Editing Profile ID");
+								sql = 'UPDATE '+profile_table+" SET profile_id = '"+args[2]+"' WHERE user_id = "+message.author.id;
+								con.query(sql, function(error, result, fields){
+									if(error) console.log(error);
+									message.reply("Your Profile ID has been updated!");
+								})
+								con.end();
+							}else if(args[1] === 'guild'){
+								console.log("[PROFILE] DEBUG: Editing Profile Guild");
+								sql = 'UPDATE '+profile_table+" SET profile_guild = '"+args[2]+"' WHERE user_id = "+message.author.id;
+								con.query(sql, function(error, result, fields){
+									if(error) console.log(error);
+									message.reply("Your Profile Guild has been updated!");
+								})
+								con.end();
+							}else{
+								message.reply("Invalid Arguments");
+								con.end();
+							}
+					}else{
+						message.reply("Invalid Arguments");
+						con.end();
+					}
 				}
-			}
-			
-
+			})
 		}
 		//Create Profile
-		else if(args.length >=3 && args[0] === 'create'){
-			if(fs.existsSync(userinfo_path+'/'+message.author.id)){
-				message.reply("You already have a profile created, use the edit command instead!");
-				return;
-			}
-
-
-			if(message.attachments.first()){
-				console.log('[PROFILE] DEBUG: Found Image');
-				console.log('[PROFILE] DEBUG: Filename; '+message.attachments.first().name);
-				var fileCheck = message.attachments.first().name.split('.');
-				if(fileCheck[1] === 'png'||
-					fileCheck[1] === 'jpeg'||
-					fileCheck[1] === 'jpg'){
-					console.log('[PROFILE] DEBUG: Downloading Image');
-					if(!fs.existsSync(userinfo_path+'/'+message.author.id)){
-						fs.mkdirSync(userinfo_path+'/'+message.author.id);
-					}
-					//console.log('[PROFILE] DEBUG: File URL; '+message.attachments.first().url);
-					download(message.attachments.first().url, message.author.id);
-				}else{
-					message.reply("The file you attached is not a supported type. Please use a PNG, JPG, or JPEG.");
-					return;
-				}
-			}else{
-				message.reply("Image not found to create a profile.");
-				return;
-			}
-			var content = 'name:'+args[1]+'\nid:'+args[2];
-			if(args[3]){
-				content+='\nguild:'+args[3];
-			}
-			fs.writeFile(userinfo_path+'/'+message.author.id+'/profile_data.txt', content, function(error){
+		else if(args.length >= 3 && args[0] === 'create'){
+			var sql = "SELECT * FROM "+profile_table+" WHERE user_id = "+message.author.id;
+			var create = false;
+			con.query(sql, function(error, result, fields){
 				if(error) console.log(error);
-				console.log('[PROFILE] DEBUG: Profile Text created sucessfully')
-			});
-
+				if(result.length === 1){
+					message.reply("You already have a profile! Use ***!edit*** to edit your information!");
+					con.end();
+					return;
+				}else{
+					console.log("Need to Create Profile");
+					create = true;
+					console.log("[PROFILE] DEBUG: Creating Profile");
+					sql = "INSERT INTO "+profile_table+" (user_id, profile_name, profile_id, profile_guild, profile_image) VALUES ("+message.author.id+", '"+args[1]+"', "+args[2];
+					if(args[3]){
+						sql += ", '"+args[3]+"', '";
+					}else{
+						sql += ", 'unknown', '";
+					}
+					if(message.attachments.first()){
+						var fileCheck = message.attachments.first().name.split('.');
+						if(fileCheck[1] === 'png'||fileCheck[1] === 'jpeg'||fileCheck[1] === 'jpg'){
+				       	console.log('[PROFILE] DEBUG: Changing Image');
+				       	sql += message.attachments.first().url.replace(':', "CLN").replace("//", "DBLFWS")+"')";
+				        console.log("[PROFILE] DEBUG: "+sql);
+						con.query(sql, function(error, result, fields){
+							if (error){
+								console.log(error);
+								message.reply("Error creating profile");
+								return;
+							}
+							message.reply("Profile Create Successfully, check it out with ***!profile***");
+						})
+			            }else{
+			                message.reply("The file you attached is not a supported type. Please use a PNG, JPG, or JPEG.");
+			                con.end();
+			                return;
+			            }
+					}else{
+						message.reply("Image Not Attached");
+						con.end();
+					}
+					con.end();
+				}
+			})
+		}else{
+			message.reply("Invalid Usage");
 		}
-		
 	},
 };
-
-function download(url, id){
-	request.get(url)
-	.on('error', console.error)
-	.pipe(fs.createWriteStream(userinfo_path+'/'+id+'/profile_img.png'));
-}
