@@ -1,33 +1,90 @@
 {
 
 	"fire_units": {
-		"arche_sp": "./images/profile_card_images/fire_units/arche_sp.png"
+		"arche_sp": "./images/profile_card_images/fire_units/arche_sp.png",
+		"bruiser_sm": "./images/profile_card_images/fire_units/bruiser_sm.png",
+		"gaius_up": "./images/profile_card_images/fire_units/gaius_up.png",
+		"lailah_wif": "./images/profile_card_images/fire_units/lailah_wif.png",
+		"luke_sitw": "./images/profile_card_images/fire_units/luke_sitw.png",
+		"misella_ffh": "./images/profile_card_images/fire_units/misella_ffh.png",
+		"misella_fmbf": "./images/profile_card_images/fire_units/misella_fmbf.png",
+		"presea_tra": "./images/profile_card_images/fire_units/presea_tra.png",
+		"reid_sh": "./images/profile_card_images/fire_units/reid_sh.png",
+		"ruca_tg": "./images/profile_card_images/fire_units/ruca_tg.png",
+		"senel_am": "./images/profile_card_images/fire_units/senel_am.png",
+		"stahn_es": "./images/profile_card_images/fire_units/stahn_es.png"
 	},
 
 	"earth_units":{
-		"rose_bm": "./images/profile_card_images/earth_units/rose_bm.png"
+		"anise_pp": "./images/profile_card_images/earth_units/anise_pp.png",
+		"cheria_hh": "./images/profile_card_images/earth_units/cheria_hh.png",
+		"cress_amp": "./images/profile_card_images/earth_units/cress_amp.png",
+		"farah_ub": "./images/profile_card_images/earth_units/farah_ub.png",
+		"leia_dss": "./images/profile_card_images/earth_units/leia_dss.png",
+		"malik_swaw": "./images/profile_card_images/earth_units/malik_swaw.png",
+		"rokurou_rp": "./images/profile_card_images/earth_units/rokurou_rp.png",
+		"rose_bm": "./images/profile_card_images/earth_units/rose_bm.png",
+		"yuri_ayw": "./images/profile_card_images/earth_units/yuri_ayw.png"
 	},
 
 	"wind_units":{
-		"dezel_pitw": "./images/profile_card_images/wind_units/dezel_pitw.png"
+		"dezel_pitw": "./images/profile_card_images/wind_units/dezel_pitw.png",
+		"elanor_ds": "./images/profile_card_images/wind_units/elanor_ds.png",
+		"jade_pc": "./images/profile_card_images/wind_units/jade_pc.png",
+		"kyle_is": "./images/profile_card_images/wind_units/kyle_is.png",
+		"norma_mob": "./images/profile_card_images/wind_units/norma_mob.png",
+		"qq_ks": "./images/profile_card_images/wind_units/qq_ks.png",
+		"sorey_tdg": "./images/profile_card_images/wind_units/sorey_tdg.png",
+		"velvet_tbv": "./images/profile_card_images/wind_units/velvet_tbv.png",
+		"zaveid_ditw": "./images/profile_card_images/wind_units/zaveid_ditw.png"
 	},
 
 	"water_units":{
-		"kanonno_gb": "./images/profile_card_images/water_units/kanonno_gb.png"
+		"aegis_totdk": "./images/profile_card_images/water_units/aegis_totdk.png",
+		"asbel_uaas": "./images/profile_card_images/water_units/asbel_uaas.png",
+		"caius_tb": "./images/profile_card_images/water_units/caius_tb.png",
+		"genis_kb": "./images/profile_card_images/water_units/genis_kb.png",
+		"kanonno_gb": "./images/profile_card_images/water_units/kanonno_gb.png",
+		"magilou_awb": "./images/profile_card_images/water_units/magilou_awb.png",
+		"repede_gc": "./images/profile_card_images/water_units/repede_gc.png",
+		"rutee_tim": "./images/profile_card_images/water_units/rutee_tim.png",
+		"veigue_vs": "./images/profile_card_images/water_units/veigue_vs.png"
 	},
 
 	"light_units":{
-		"milla_nh": "./images/profile_card_images/light_units/milla_nh.png"
+		"chronos_ppc": "./images/profile_card_images/light_units/chronos_ppc.png",
+		"kanata_bcas": "./images/profile_card_images/light_units/kanata_bcas.png",
+		"kanata_sswas": "./images/profile_card_images/light_units/kanata_sswas.png",
+		"kor_fs": "./images/profile_card_images/light_units/kor_fs.png",
+		"milla_nh": "./images/profile_card_images/light_units/milla_nh.png",
+		"philia_ds": "./images/profile_card_images/light_units/philia_ds.png"
 	},
 
 	"dark_units":{
+		"elize_na": "./images/profile_card_images/dark_units/elize_na.png",
+		"emil_botb": "./images/profile_card_images/dark_units/emil_botb.png",
+		"leon_dh": "./images/profile_card_images/dark_units/leon_dh.png",
+		"vicious_ap": "./images/profile_card_images/dark_units/vicious_ap.png",
 		"vicious_swd": "./images/profile_card_images/dark_units/vicious_swd.png"
 	},
 
 	"mystic":{
-		"yuna": "./images/profile_card_images/mystic/yuna.png"
+		"aegis": "./images/profile_card_images/mystic/aegis.png",
+		"asbel": "./images/profile_card_images/mystic/asbel.png",
+		"chronos": "./images/profile_card_images/mystic/chronos.png",
+		"cress": "./images/profile_card_images/mystic/cress.png",
+		"kanata": "./images/profile_card_images/mystic/kanata.png",
+		"kanonno": "./images/profile_card_images/mystic/kanonno.png",
+		"luke": "./images/profile_card_images/mystic/luke.png",
+		"misella": "./images/profile_card_images/mystic/misella.png",
+		"orville": "./images/profile_card_images/mystic/orville.png",
+		"sorey": "./images/profile_card_images/mystic/sorey.png",
+		"stahn": "./images/profile_card_images/mystic/stahn.png",
+		"velvet": "./images/profile_card_images/mystic/velvet.png",
+		"vicious": "./images/profile_card_images/mystic/vicious.png",
+		"yuri": "./images/profile_card_images/mystic/yuri.png"
 	},
-	
+
 	"background":"./images/profile_card_images/background.png",
 	"borders": "./images/profile_card_images/borders.png",
 	"elements":"./images/profile_card_images/elements.png",
