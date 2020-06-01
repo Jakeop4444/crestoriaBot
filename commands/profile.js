@@ -28,10 +28,11 @@ module.exports = {
 			console.log("[DEBUG] Profile: Displaying Profile");
 			
 			createProfileCard(con, message.author.id).then(async function(result){
+				
 				if(result.length === 0){
 					message.reply("You don't have a profile created! Create a profile using **!profile create** first!");
 				}else{
-					console.log("Hey Look, it worked?: "+result[0].user_id);
+					//console.log("Hey Look, it worked?: "+result[0].user_id);
 					if(result[0].profile_image != "NONE_SET"){
 						console.log("Here");
 						const _embed = new MessageEmbed()
@@ -56,7 +57,7 @@ module.exports = {
 							ctx.drawImage(mystic, 0, 0, canvas.width, canvas.height);
 						}
 						if(result[0].fire_unit != "NONE_SET"){
-							console.log(images.fire_units[result[0].fire_unit])
+							//console.log(images.fire_units[result[0].fire_unit])
 							const fire = await Canvas.loadImage(images.fire_units[result[0].fire_unit]);
 							ctx.drawImage(fire, 0, 0, canvas.width, canvas.height);
 						}
@@ -89,8 +90,6 @@ module.exports = {
 						const border = await Canvas.loadImage(images["borders"]);
 						ctx.drawImage(border, 0, 0, canvas.width, canvas.height);
 
-
-						console.log("Somehow made it this far?");
 						const _embed = new MessageEmbed()
 						.setTitle(result[0].profile_name)
 						.setColor(0xFFFFFF)
