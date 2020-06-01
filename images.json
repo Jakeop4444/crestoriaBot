@@ -1,11 +1,33 @@
 {
-	"arche_sp": "./images/profile_card_images/fire_units/arche_sp.png",
-	"rose_bm": "./images/profile_card_images/earth_units/rose_bm.png",
-	"dezel_pitw": "./images/profile_card_images/wind_units/dezel_pitw.png",
-	"kanonno_gb": "./images/profile_card_images/water_units/kanonno_gb.png",
-	"milla_nh": "./images/profile_card_images/light_units/milla_nh.png",
-	"vicious_swd": "./images/profile_card_images/dark_units/vicious_swd.png",
-	"yuna": "./images/profile_card_images/mystic/yuna.png",
+
+	"fire_units": {
+		"arche_sp": "./images/profile_card_images/fire_units/arche_sp.png"
+	},
+
+	"earth_units":{
+		"rose_bm": "./images/profile_card_images/earth_units/rose_bm.png"
+	},
+
+	"wind_units":{
+		"dezel_pitw": "./images/profile_card_images/wind_units/dezel_pitw.png"
+	},
+
+	"water_units":{
+		"kanonno_gb": "./images/profile_card_images/water_units/kanonno_gb.png"
+	},
+
+	"light_units":{
+		"milla_nh": "./images/profile_card_images/light_units/milla_nh.png"
+	},
+
+	"dark_units":{
+		"vicious_swd": "./images/profile_card_images/dark_units/vicious_swd.png"
+	},
+
+	"mystic":{
+		"yuna": "./images/profile_card_images/mystic/yuna.png"
+	},
+	
 	"background":"./images/profile_card_images/background.png",
 	"borders": "./images/profile_card_images/borders.png",
 	"elements":"./images/profile_card_images/elements.png",

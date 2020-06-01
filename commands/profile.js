@@ -12,7 +12,8 @@ module.exports = {
 	description: 'Create a Profile Card for your Support Team. '+
 	'Some images may be from datamined assets, otherwise all units are as of '+
 	'current release in game',
-	usage: 'To be determined',
+	usage: '**!profile** - Displays your profile information if you have one created\n'+
+			'**!profile (edit|**',
 	execute(message, args){
 		var con = mysql.createConnection({
 			host: db_host,
@@ -51,31 +52,32 @@ module.exports = {
 						ctx.drawImage(card_background, 0, 0, canvas.width, canvas.height);
 
 						if(result[0].flair != "NONE_SET"){
-							const mystic = await Canvas.loadImage(images[result[0].flair]);
+							const mystic = await Canvas.loadImage(images.mystic[result[0].flair]);
 							ctx.drawImage(mystic, 0, 0, canvas.width, canvas.height);
 						}
 						if(result[0].fire_unit != "NONE_SET"){
-							const fire = await Canvas.loadImage(images[result[0].fire_unit]);
+							console.log(images.fire_units[result[0].fire_unit])
+							const fire = await Canvas.loadImage(images.fire_units[result[0].fire_unit]);
 							ctx.drawImage(fire, 0, 0, canvas.width, canvas.height);
 						}
 						if(result[0].earth_unit != "NONE_SET"){
-							const earth = await Canvas.loadImage(images[result[0].earth_unit]);
+							const earth = await Canvas.loadImage(images.earth_units[result[0].earth_unit]);
 							ctx.drawImage(earth, 0, 0, canvas.width, canvas.height);
 						}
 						if(result[0].wind_unit != "NONE_SET"){
-							const wind = await Canvas.loadImage(images[result[0].wind_unit]);
+							const wind = await Canvas.loadImage(images.wind_units[result[0].wind_unit]);
 							ctx.drawImage(wind, 0, 0, canvas.width, canvas.height);
 						}
 						if(result[0].water_unit != "NONE_SET"){
-							const water = await Canvas.loadImage(images[result[0].water_unit]);
+							const water = await Canvas.loadImage(images.water_units[result[0].water_unit]);
 							ctx.drawImage(water, 0, 0, canvas.width, canvas.height);
 						}
 						if(result[0].light_unit != "NONE_SET"){
-							const light = await Canvas.loadImage(images[result[0].light_unit]);
+							const light = await Canvas.loadImage(images.light_units[result[0].light_unit]);
 							ctx.drawImage(light, 0, 0, canvas.width, canvas.height);
 						}
 						if(result[0].dark_unit != "NONE_SET"){
-							const dark = await Canvas.loadImage(images[result[0].dark_unit]);
+							const dark = await Canvas.loadImage(images.dark_units[result[0].dark_unit]);
 							ctx.drawImage(dark, 0, 0, canvas.width, canvas.height);
 						}
 						const elements = await Canvas.loadImage(images["elements"]);
@@ -104,7 +106,7 @@ module.exports = {
 		else if(args.length === 1){
 			if(args[0] === "characters"){
 				var names = '';
-				images.mystic.forEach(console.log(images.mystic));
+				//images.forEach(data => console.log(data.mystic));
 			}
 		}
 		else if(args.length >= 2){
@@ -118,7 +120,7 @@ module.exports = {
 					}else{
 						if(args[1] == "fire"){
 							console.log("[PROFILE] DEBUG: Editing Fire Unit");
-							if(images["fire_units"]){
+							if(images.fire_units[args[2]]){
 								sql = 'UPDATE '+profile_table+" SET fire_unit = '"+args[2]+"' WHERE user_id = "+message.author.id;
 								con.query(sql, function(error, result, fields){
 									if(error) console.log(error);
@@ -132,7 +134,7 @@ module.exports = {
 							}
 						}else if(args[1] == "earth"){
 							console.log("[PROFILE] DEBUG: Editing Earth Unit");
-							if(images[args[2]]){
+							if(images.earth_units[args[2]]){
 								sql = 'UPDATE '+profile_table+" SET earth_unit = '"+args[2]+"' WHERE user_id = "+message.author.id;
 								con.query(sql, function(error, result, fields){
 									if(error) console.log(error);
@@ -146,7 +148,7 @@ module.exports = {
 							}
 						}else if(args[1] == "wind"){
 							console.log("[PROFILE] DEBUG: Editing Wind Unit");
-							if(images[args[2]]){
+							if(images.wind_units[args[2]]){
 								sql = 'UPDATE '+profile_table+" SET wind_unit = '"+args[2]+"' WHERE user_id = "+message.author.id;
 								con.query(sql, function(error, result, fields){
 									if(error) console.log(error);
@@ -160,7 +162,7 @@ module.exports = {
 							}
 						}else if(args[1] == "water"){
 							console.log("[PROFILE] DEBUG: Editing Water Unit");
-							if(images[args[2]]){
+							if(images.water_units[args[2]]){
 								sql = 'UPDATE '+profile_table+" SET water_unit = '"+args[2]+"' WHERE user_id = "+message.author.id;
 								con.query(sql, function(error, result, fields){
 									if(error) console.log(error);
@@ -169,12 +171,12 @@ module.exports = {
 								con.end();
 							}
 							else{
-								message.reply("That fire unit does not exist. Use **!profile units fire** to see what units exist")
+								message.reply("That water unit does not exist. Use **!profile units water** to see what units exist")
 								con.end();
 							}
 						}else if(args[1] == "light"){
 							console.log("[PROFILE] DEBUG: Editing Light Unit");
-							if(images[args[2]]){
+							if(images.light_units[args[2]]){
 								sql = 'UPDATE '+profile_table+" SET light_unit = '"+args[2]+"' WHERE user_id = "+message.author.id;
 								con.query(sql, function(error, result, fields){
 									if(error) console.log(error);
@@ -188,7 +190,7 @@ module.exports = {
 							}
 						}else if(args[1] == "dark"){
 							console.log("[PROFILE] DEBUG: Editing Dark Unit");
-							if(images[args[2]]){
+							if(images.dark_units[args[2]]){
 								sql = 'UPDATE '+profile_table+" SET dark_unit = '"+args[2]+"' WHERE user_id = "+message.author.id;
 								con.query(sql, function(error, result, fields){
 									if(error) console.log(error);
@@ -202,7 +204,7 @@ module.exports = {
 							}
 						}else if(args[1] == "character"){
 							console.log("[PROFILE] DEBUG: Editing Fire Unit");
-							if(images[args[2]]){
+							if(images.mystic[args[2]]){
 								sql = 'UPDATE '+profile_table+" SET flair = '"+args[2]+"' WHERE user_id = "+message.author.id;
 								con.query(sql, function(error, result, fields){
 									if(error) console.log(error);
