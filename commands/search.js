@@ -70,7 +70,6 @@ module.exports = {
 			sql += " Type = '"+q_type+"'";
 		}
 
-		//var output = ''
 		var many_names = "";
 		connec.query(sql, function (error, result, fields) {
 			if (error) console.log(error);
@@ -81,8 +80,15 @@ module.exports = {
 			//Check for result array length
 			if (result.length > 1){
 				//Length > 1, means we found more than one unit following the user's guidelines
-				result.forEach(data => many_names += ("[[" + data.Title + "] " + data.Name + "](https://www.tocdb.xyz/" + data.Rarity.toLowerCase() + "/" + data.Name + ".php) \n") );
-				const embed = {
+					for (var i = 0; i < result.length; i++){
+						if(i < 15){
+							many_names += ("[[" + result[i].Title + "] " + result[i].Name + "](https://www.tocdb.xyz/" + result[i].Rarity.toLowerCase() + "/" + result[i].Name + ".php) \n");
+						}else{
+							many_names += "**And "+ (result.length - 15) + " more...**";
+							break;
+						}
+					}
+					const embed = {
 					"color": 13632027,
 					"author": {
 						"name": result.length + " entries were found!"
