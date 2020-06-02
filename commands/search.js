@@ -6,7 +6,10 @@ const emoji = require('../emoji.json');
 module.exports = {
 	name: 'search',
 	cooldown: 5,
-	description: 'Search the database for a Unit! Usage: !search (name|element|rarity|type) input. Example Command: !search name Stahn',
+	description: 'Search the database for a Unit. _Stone Lookup is TBD_',
+	usage: '\n\n!search (name | element | type | rarity) (search) - Looks up a unit with the arguments provied.\n\n**Examples\n**'+
+			'_!search name Stahn rarity SR_  - Searches up any units with Stahn in the name that is an SR rarity.\n'+
+			'_!search element a_ - Searches up any units with the character "a" in their element.',
 	execute(message, args) {
 		var q_name = '*', q_element = '*', q_rarity = '*', q_type = '*';
 		var connec = mysql.createConnection({
@@ -52,13 +55,13 @@ module.exports = {
 		//Instantiate SQL Query -- This may change, but for now we will leave this version.
 		var sql = "SELECT Name, Image, Title, Element, Rarity, Type FROM characters WHERE";
 		if(q_name != '*'){
-			sql += " Name = '"+q_name+"'";
+			sql += " Name LIKE '%"+q_name+"%'";
 		}
 		if(q_element != '*'){
 			if(q_name != '*'){
 				sql += " AND";
 			}
-			sql += " Element = '"+q_element+"'";	
+			sql += " Element LIKE '%"+q_element+"%'";	
 		}
 		if(q_rarity != '*'){
 			if(q_name != '*' || q_element != '*'){
@@ -70,7 +73,7 @@ module.exports = {
 			if(q_name != '*' || q_element != '*' || q_rarity != '*'){
 				sql += " AND";
 			}
-			sql += " Type = '"+q_type+"'";
+			sql += " Type LIKE '%"+q_type+"%'";
 		}
 
 		console.log("[SEARCH] DEBUG: Query assembled.");

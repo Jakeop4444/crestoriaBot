@@ -1,0 +1,13 @@
+**Vision Orb v0.1.0 BETA**
+_What's new in this update:_
+
+___Initial Testing of the bot commences! Updates to the bot will be provided here as they become available such as:___
+    - Command Additions/Updates
+    - Unit Additions to the !profile command
+    - And much, much, more!
+
+___The bot can also display data related to datamines that a user may click at their own discretion, such as:___
+	- ||Upcoming units||
+	- ||Expansions to stories||
+	- ||New Gacha / Events||
+	(Trust me, the above does not contain actual spoilers, they are just there for effect)

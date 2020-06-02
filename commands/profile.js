@@ -12,8 +12,22 @@ module.exports = {
 	description: 'Create a Profile Card for your Support Team. '+
 	'Some images may be from datamined assets, otherwise all units are as of '+
 	'current release in game',
-	usage: '**!profile** - Displays your profile information if you have one created\n'+
-			'**!profile (edit|**',
+	usage: '- Displays your profile information if you have one created\n\n***___EDIT COMMANDS___***\n'+
+			'_Note: Some edit commands will not display if you provided a custom image_\n'+
+			'!profile edit unit (element) (character) - Edits your support unit \n'+
+			'!profile edit character (character) - Edits the character to display on the side of your profile\n'+
+			'!profile edit name (Username) - Edits the username on your profile\n'+
+			'!profile edit id (ID Number) - Edits the ID number listed on your profile\n'+
+			'!profile edit guild (Guild Name) - Edits the Guild Name listed on your profile (please enter spaces in your guild name as "_")\n'+
+			'!profile edit image - Attach your own custom image to the profile. Image must be attached to the message that sends this command\n'+
+			'!profile edit clrimg - Clears your own custom image to use the self-generated one. **Does not clear anything set for the self-generated image**\n\n'+
+			'***___LOOKUP COMMANDS___***\n'+
+			'!profile units (element) - Displays a list of all the units that you can set for your card\n'+
+			'The name after the "=>" in the results is the name you use in the **!profile edit unit (element) (character) command\n'+
+			'!profile characters - Displays a list of all the characters that you can set on the side of your card\n\n'+
+			'***___CREATE COMMAND___***\n'+
+			'!profile create (Username) (ID Number) (Guild Name) - Creates a profile with the bot. Entering the Guild Name is optional.\n'+
+			'You can also attach an image to this command and set your own custom image.',
 	execute(message, args){
 		var con = mysql.createConnection({
 			host: db_host,
@@ -25,12 +39,12 @@ module.exports = {
 		//Base Profile Command
 		if(args.length === 0){
 			
-			console.log("[DEBUG] Profile: Displaying Profile");
+			console.log("[PROFILE] DEBUG: Displaying Profile");
 			
 			createProfileCard(con, message.author.id).then(async function(result){
 
 				if(result.length === 0){
-					message.reply("You don't have a profile created! Create a profile using **!profile create** first!");
+					message.reply("You don't have a profile created! Create a profile first using **!profile create [Username] [ID]**");
 				}else{
 					//console.log("Hey Look, it worked?: "+result[0].user_id);
 					// If an image is provided by a user in the database, send that player's profile image with their User Data
@@ -120,7 +134,25 @@ module.exports = {
 		else if(args.length === 1){
 			if(args[0] === "characters"){
 				var names = '';
+				Object.keys(images.mystic).forEach(function(k){
+					names += k.charAt(0).toUpperCase()+k.slice(1)+", ";
+				});
+				const embed = new MessageEmbed()
+				.setColor(0x000000)
+				.setTitle("Here are all the available characters for your Character Option!")
+				.setDescription("Use **!profile edit character [name]** to add the character to your profile image!\n_Only usable if we make the image for you_\n\n"+names.substring(0, names.length-2));
+
+				message.channel.send(embed);
+
 				//images.forEach(data => console.log(data.mystic));
+			}else if(args[0] === "create"){
+				message.reply("Invalid use of **!profile create** command.");
+			}else if(args[0] === "edit"){
+				message.reply("Invalid use of **!profile edit** command.");
+			}else if(args[0] === "units"){
+				message.reply("Invalid use of **!profile units** command.");
+			}else{
+				message.reply("Invalid use of command. Use **!help profile** to see how this command works!");
 			}
 		}
 		//Edit Profile Command
@@ -130,7 +162,7 @@ module.exports = {
 				con.query(sql, function(error, result, fields){
 					if(error) console.log(error);
 					if(result.length === 0){
-						message.reply("You don't have a profile created! Create a profile first!");
+						message.reply("You don't have a profile created! Create a profile first using **!profile create [Username] [ID]**");
 						con.end();
 						console.log("[PROFILE] DEBUG: Unhooked from database");
 					}else{
@@ -143,13 +175,9 @@ module.exports = {
 									if(error) console.log(error);
 									message.reply("Your Fire Support has been updated!");
 								})
-								con.end();
-								console.log("[PROFILE] DEBUG: Unhooked from database");
 							}
 							else{
-								message.reply("That fire unit does not exist. Use **!profile units fire** to see what units exist")
-								con.end();
-								console.log("[PROFILE] DEBUG: Unhooked from database");
+								message.reply("That fire unit does not exist. Use **!profile units fire** to see what units exist");
 							}
 						}
 						//Edits the earth unit
@@ -161,13 +189,9 @@ module.exports = {
 									if(error) console.log(error);
 									message.reply("Your Earth Support has been updated!");
 								})
-								con.end();
-								console.log("[PROFILE] DEBUG: Unhooked from database");
 							}
 							else{
-								message.reply("That earth unit does not exist. Use **!profile units earth** to see what units exist")
-								con.end();
-								console.log("[PROFILE] DEBUG: Unhooked from database");
+								message.reply("That earth unit does not exist. Use **!profile units earth** to see what units exist");
 							}
 						}
 						//Edits the wind unit
@@ -179,13 +203,9 @@ module.exports = {
 									if(error) console.log(error);
 									message.reply("Your Wind Support has been updated!");
 								})
-								con.end();
-								console.log("[PROFILE] DEBUG: Unhooked from database");
 							}
 							else{
-								message.reply("That wind unit does not exist. Use **!profile units wind** to see what units exist")
-								con.end();
-								console.log("[PROFILE] DEBUG: Unhooked from database");
+								message.reply("That wind unit does not exist. Use **!profile units wind** to see what units exist");
 							}
 						}
 						//Edits the water unit
@@ -201,9 +221,7 @@ module.exports = {
 								console.log("[PROFILE] DEBUG: Unhooked from database");
 							}
 							else{
-								message.reply("That water unit does not exist. Use **!profile units water** to see what units exist")
-								con.end();
-								console.log("[PROFILE] DEBUG: Unhooked from database");
+								message.reply("That water unit does not exist. Use **!profile units water** to see what units exist");
 							}
 						}
 						//Edits the light unit
@@ -219,9 +237,7 @@ module.exports = {
 								console.log("[PROFILE] DEBUG: Unhooked from database");
 							}
 							else{
-								message.reply("That light unit does not exist. Use **!profile units light** to see what units exist")
-								con.end();
-								console.log("[PROFILE] DEBUG: Unhooked from database");
+								message.reply("That light unit does not exist. Use **!profile units light** to see what units exist");
 							}
 						}
 						//Edits the dark unit
@@ -233,13 +249,9 @@ module.exports = {
 									if(error) console.log(error);
 									message.reply("Your Dark Support has been updated!");
 								})
-								con.end();
-								console.log("[PROFILE] DEBUG: Unhooked from database");
 							}
 							else{
-								message.reply("That dark unit does not exist. Use **!profile units dark** to see what units exist")
-								con.end();
-								console.log("[PROFILE] DEBUG: Unhooked from database");
+								message.reply("That dark unit does not exist. Use **!profile units dark** to see what units exist");
 							}
 						}
 						//Edits the character flair
@@ -251,13 +263,9 @@ module.exports = {
 									if(error) console.log(error);
 									message.reply("Your Flair has been updated!");
 								})
-								con.end();
-								console.log("[PROFILE] DEBUG: Unhooked from database");
 							}
 							else{
-								message.reply("That flair does not exist. Use **!profile characters** to see what you can set!")
-								con.end();
-								console.log("[PROFILE] DEBUG: Unhooked from database");
+								message.reply("That flair does not exist. Use **!profile characters** to see what you can set!");
 							}
 							console.log("[PROFILE] DEBUG: Done Editing Profile");
 						}
@@ -269,8 +277,6 @@ module.exports = {
 								if(error) console.log(error);
 								message.reply("Your Profile Name has been updated!");
 							})
-							con.end();
-							console.log("[PROFILE] DEBUG: Unhooked from database");
 							console.log("[PROFILE] DEBUG: Done Editing Profile");
 						}
 						//Edits the profile id
@@ -281,8 +287,6 @@ module.exports = {
 								if(error) console.log(error);
 								message.reply("Your Profile ID has been updated!");
 							})
-							con.end();
-							console.log("[PROFILE] DEBUG: Unhooked from database");
 							console.log("[PROFILE] DEBUG: Done Editing Profile");
 						}
 						//Edits the profile guild
@@ -293,8 +297,6 @@ module.exports = {
 								if(error) console.log(error);
 								message.reply("Your Profile Guild has been updated!");
 							})
-							con.end();
-							console.log("[PROFILE] DEBUG: Unhooked from database");
 							console.log("[PROFILE] DEBUG: Done Editing Profile");
 						}
 						//Edits the profile image to a user submitted image
@@ -309,19 +311,13 @@ module.exports = {
 				                    con.query(sql, function(error, result, fields){
 										if(error) console.log(error);
 										message.reply("Your Profile Image has been changed!");
-										con.end();
-										console.log("[PROFILE] DEBUG: Unhooked from database");
 									})
 			                    }else{
 			                        message.reply("The file you attached is not a supported type. Please use a PNG, JPG, or JPEG.");
-			                        con.end();
-									console.log("[PROFILE] DEBUG: Unhooked from database");
 			                    }
 			                    console.log("[PROFILE] DEBUG: Done Changing Profile Image to User Input");
 							}else{
 								message.reply("Image not attached to message");
-								con.end();
-								console.log("[PROFILE] DEBUG: Unhooked from database");
 							}
 						}
 						//Clears the user submitted image and returns to using a dynamic genreated image for the player
@@ -332,13 +328,13 @@ module.exports = {
 								if(error) console.log(error);
 								message.reply("Your Profile Image has been cleared!");
 							})
-							con.end();
-							console.log("[PROFILE] DEBUG: Unhooked from database");
 							console.log("[PROFILE] DEBUG: Done Clearing User Input Image");
 						}else{
 							message.reply("Invalid use of command.");
 						}
 					}
+					con.end();
+					console.log("[PROFILE] DEBUG: Unhooked from database");
 				})
 			}
 			//Displays all the units the bot has access to.
@@ -382,7 +378,7 @@ module.exports = {
 					if(error) console.log(error);
 					//Denies the creation of multiple profiles
 					if(result.length === 1){
-						message.reply("You already have a profile! Use ***!edit*** to edit your information!");
+						message.reply("You already have a profile! Use **!edit** to edit your information!");
 						con.end();
 						console.log("[PROFILE] DEBUG: Unhooked from database");
 						return;
@@ -421,7 +417,7 @@ module.exports = {
 								message.reply("Error creating profile");
 								return;
 							}
-							message.reply("Profile Create Successfully, check it out with ***!profile***");
+							message.reply("Profile Create Successfully, check it out with **!profile**");
 						})
 						con.end();
 						console.log("[PROFILE] DEBUG: Unhooked from database");
