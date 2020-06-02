@@ -28,6 +28,7 @@ client.on('message', message => {
 
 	if (!client.commands.has(commandName)) return;
 
+	console.log("[INDEX] DEBUG: Attempting to invoke Command: "+message.content);
 	const command = client.commands.get(commandName);
 
 	if (command.args && !args.length) {

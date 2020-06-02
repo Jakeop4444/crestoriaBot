@@ -40,7 +40,7 @@
 	},
 
 	"water_units":{
-		"aegis_totdk": "./images/profile_card_images/water_units/aegis_totdk.png",
+		"aegis_toftdk": "./images/profile_card_images/water_units/aegis_totdk.png",
 		"asbel_uaas": "./images/profile_card_images/water_units/asbel_uaas.png",
 		"caius_tb": "./images/profile_card_images/water_units/caius_tb.png",
 		"genis_kb": "./images/profile_card_images/water_units/genis_kb.png",
@@ -77,7 +77,7 @@
 		"kanonno": "./images/profile_card_images/mystic/kanonno.png",
 		"luke": "./images/profile_card_images/mystic/luke.png",
 		"misella": "./images/profile_card_images/mystic/misella.png",
-		"orville": "./images/profile_card_images/mystic/orville.png",
+		"orwin": "./images/profile_card_images/mystic/orwin.png",
 		"sorey": "./images/profile_card_images/mystic/sorey.png",
 		"stahn": "./images/profile_card_images/mystic/stahn.png",
 		"velvet": "./images/profile_card_images/mystic/velvet.png",
