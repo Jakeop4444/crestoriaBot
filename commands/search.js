@@ -7,9 +7,9 @@ module.exports = {
 	name: 'search',
 	cooldown: 5,
 	description: 'Search the database for a Unit. _Stone Lookup is TBD_',
-	usage: '\n\n!search (name | element | type | rarity) (search) - Looks up a unit with the arguments provied.\n\n**Examples\n**'+
-			'_!search name Stahn rarity SR_  - Searches up any units with Stahn in the name that is an SR rarity.\n'+
-			'_!search element a_ - Searches up any units with the character "a" in their element.',
+	usage: '\n\n~search (name | element | type | rarity) (search) - Looks up a unit with the arguments provied.\n\n**Examples\n**'+
+			'_~search name Stahn rarity SR_  - Searches up any units with Stahn in the name that is an SR rarity.\n'+
+			'_~search element a_ - Searches up any units with the character "a" in their element.',
 	execute(message, args) {
 		var q_name = '*', q_element = '*', q_rarity = '*', q_type = '*';
 		var connec = mysql.createConnection({
