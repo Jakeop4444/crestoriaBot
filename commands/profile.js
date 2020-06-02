@@ -58,7 +58,7 @@ module.exports = {
 						if(result[0].profile_guild != 'unknown'){
 							details += "Guild: "+result[0].profile_guild;
 						}
-						console.log("Here");
+						//console.log("Here");
 						const _embed = new MessageEmbed()
 						.setTitle(result[0].profile_name)
 						.setColor(0xFFFFFF)
@@ -125,14 +125,21 @@ module.exports = {
 						ctx.drawImage(border, 0, 0, canvas.width, canvas.height);
 
 						//Send Message
+						var details = '';
+						if(result[0].profile_id != 'unknown'){
+							details += "ID: "+result[0].profile_id+"\n";
+						}
+						if(result[0].profile_guild != 'unknown'){
+							details += "Guild: "+result[0].profile_guild;
+						}
 						const _embed = new MessageEmbed()
 						.setTitle(result[0].profile_name)
 						.setColor(0xFFFFFF)
-						.setDescription("ID: "+result[0].profile_id+"\nGuild: "+result[0].profile_guild)
+						.setDescription(details)
 						.setImage("attachment://profile_image.png");
 						console.log("[PROFILE] DEBUG: Sending Message");
 						message.channel.send({embed: _embed, files: [new Discord.MessageAttachment(canvas.toBuffer(), 'profile_image.png')]});
-						console.log("[PROFILE] DEBUG: Sending Message");
+						console.log("[PROFILE] DEBUG: Message Sent");
 					}
 				}
 			})
@@ -397,7 +404,7 @@ module.exports = {
 						if(args[2]){
 							sql += args[2];
 						}else{
-							sql += "unknown";
+							sql += 'unknown';
 						}
 						if(args[3]){
 							sql += ", '"+args[3]+"', '";

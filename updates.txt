@@ -1,13 +1,9 @@
-**Vision Orb v0.1.0 BETA**
+**Vision Orb v0.1.2 BETA**
+_Note: The bot may shut down frequently during testing, please check the #vision-orb channel to see when the bot is shutting down for updates_
 _What's new in this update:_
 
-___Initial Testing of the bot commences! Updates to the bot will be provided here as they become available such as:___
-    - Command Additions/Updates
-    - Unit Additions to the !profile command
-    - And much, much, more!
-
-___The bot can also display data related to datamines that a user may click at their own discretion, such as:___
-	- ||Upcoming units||
-	- ||Expansions to stories||
-	- ||New Gacha / Events||
-	(Trust me, the above does not contain actual spoilers, they are just there for effect)
+- Orwin no longer sells popcorn
+- Fixed Lowercase bug in Profile creation, use `~profile edit` commands to fix your information if this happened to you
+- ID is now optional when creating a new profile
+- Help DMs have been updated to be more friendly
+- Other small bugs squashed
