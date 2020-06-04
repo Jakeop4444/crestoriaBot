@@ -7,11 +7,9 @@ module.exports = {
 	name: 'search',
 	cooldown: 5,
 	description: 'Search the database for a Unit. _Stone Lookup is TBD_',
-	usage: '\n\n`~search (name | element | type | rarity) (search)` - Looks up a unit with the arguments provied.\n\n**Examples\n**'+
-			'`~search name Stahn rarity SR` - Searches up any units with Stahn in the name that is an SR rarity.\n'+
-			'`~search element a` - Searches up any units with the character "a" in their element.',
+	usage: '\n\n`~search (what to search)` - Type what you\'re looking for',
 	execute(message, args) {
-		var q_name = '*', q_element = '*', q_rarity = '*', q_type = '*';
+		
 		var connec = mysql.createConnection({
 			host: db_host,
 			user: db_user,
@@ -23,58 +21,76 @@ module.exports = {
 
 		var var_set = false;
 		var counter = 0;
+		var sql = "SELECT * FROM characters WHERE ";
 
 		//Loop through arguments to find the query user-inputs
-		while(counter < args.length){
-			if (args[counter] === 'name'){
-				q_name = args[counter+1];
-				var_set = true;
-				console.log("[SEARCH] DEBUG: Name set.");
-			} else if (args[counter] === 'element'){
-				q_element = args[counter+1];
-				var_set = true;
-				console.log("[SEARCH] DEBUG: Element set.");
-			} else if (args[counter] === 'rarity'){
-				q_rarity = args[counter+1];
-				var_set = true;
-				console.log("[SEARCH] DEBUG: Rarity set.");
-			} else if (args[counter] === 'type'){
-				q_type = args[counter+1];
-				var_set = true;
-				console.log("[SEARCH] DEBUG: Type set.");
-			}
-
-			counter += 2;
-		}
-
-		if(var_set != true){
-			message.reply("Invalid Arguments");
+		if(args.length === 0 ){
+			message.reply("Nothing to Search");
 			return;
+		}else{
+			sql += "Name LIKE '%";
+			for(i = 0; i<args.length; i++){
+				if(i != args.length-1){
+					sql+=args[i]+" ";
+				}else{
+					sql+=args[i];
+				}
+			}
+			sql += "%' UNION SELECT * FROM characters WHERE Title LIKE '%";
+			for(i = 0; i<args.length; i++){
+				if(i != args.length-1){
+					sql+=args[i]+" ";
+				}else{
+					sql+=args[i];
+				}
+			}
+			sql += "%' UNION SELECT * FROM characters WHERE Element LIKE '%";
+			for(i = 0; i<args.length; i++){
+				if(i != args.length-1){
+					sql+=args[i]+" ";
+				}else{
+					sql+=args[i];
+				}
+			}
+			sql += "%' UNION SELECT * FROM characters WHERE Type LIKE '%";
+			for(i = 0; i<args.length; i++){
+				if(i != args.length-1){
+					sql+=args[i]+" ";
+				}else{
+					sql+=args[i];
+				}
+			}
 		}
+		sql+="%'";
+		
+		
 
+		console.log(sql);
+		/*var q_name, q_element, q_rarity, q_type;
 		//Instantiate SQL Query -- This may change, but for now we will leave this version.
-		var sql = "SELECT Name, Image, Title, Element, Rarity, Type FROM characters WHERE";
-		if(q_name != '*'){
+		if(q_name != ''){
 			sql += " Name LIKE '%"+q_name+"%'";
 		}
 		if(q_element != '*'){
-			if(q_name != '*'){
+			if(q_name != ''){
 				sql += " AND";
 			}
 			sql += " Element LIKE '%"+q_element+"%'";	
 		}
-		if(q_rarity != '*'){
-			if(q_name != '*' || q_element != '*'){
+		if(q_rarity != ''){
+			if(q_name != '' || q_element != ''){
 				sql += " AND";	
 			}
 			sql += " Rarity = '"+q_rarity+"'";
 		}
-		if(q_type != '*'){
-			if(q_name != '*' || q_element != '*' || q_rarity != '*'){
+		if(q_type != ''){
+			if(q_name != '' || q_element != '' || q_rarity != ''){
 				sql += " AND";
 			}
 			sql += " Type LIKE '%"+q_type+"%'";
-		}
+		}*/
+
+		sql += " ORDER BY Name ASC"
 
 		console.log("[SEARCH] DEBUG: Query assembled.");
 
@@ -86,11 +102,11 @@ module.exports = {
 			if (result.length > 1){
 				//Length > 1, means we found more than one unit following the user's guidelines
 					for (var i = 0; i < result.length; i++){
-						if(i < 15){
+						if(i < 10){
 							//Only perform a maximum of 15 entries, Embeds can only hold 2048 characters
-							many_names += ("[[" + result[i].Title + "] " + result[i].Name + "](https://www.tocdb.xyz/" + result[i].Rarity.toLowerCase() + "/" + result[i].Name + ".php) \n");
+							many_names += (emoji[result[i].Rarity]+" "+emoji[result[i].Element]+" [[" + result[i].Title + "] " + result[i].Name + "](https://www.tocdb.xyz/" + result[i].Rarity.toLowerCase() + "/" + result[i].Name + ".php) \n");
 						}else{
-							many_names += "**And "+ (result.length - 15) + " more...**";
+							many_names += "**And "+ (result.length - 10) + " more...**";
 							break;
 						}
 					}
@@ -115,12 +131,39 @@ module.exports = {
 				//console.log(result[0].Image);
 				//console.log(result[0].Title + "\n" + "Rarity: " + result[0].Rarity + "\n" + "Element: " + result[0].Element + "\n" + "Weapon Type: " + result[0].Type);
 				const embed_single = new MessageEmbed()
-				.setTitle(result[0].Name)
+				.setTitle("["+result[0].Title+"] "+result[0].Name)
 				.setURL('https://www.tocdb.xyz/' + result[0].Rarity.toLowerCase() + '/' + result[0].Name + '.php') //Set the Title to link to our database site for more detailed info!
-				.setColor(0xFF0000)
-				.setDescription(result[0].Title + "\n" + "Rarity: " + emoji[result[0].Rarity] + "\n" + "Element: " + emoji[result[0].Element] + "\n" + "Weapon Type: " + emoji[result[0].Type])
+				.setColor(0x0000FF)
 				.setImage(result[0].Image)
-				.setFooter("https://www.tocdb.xyz/index.php"); //Default link to our site
+				.setDescription("**Rarity:** " + emoji[result[0].Rarity] + "\t" + "**Element:** " + emoji[result[0].Element] + "\t" + "**Weapon Type:** " + emoji[result[0].Type]+"\n_All Stats are as if they are Max Level/Ascension_")
+				.addField("**HP**", "```["+result[0].HP+"]```", true)
+				.addField("**ATK**", "```css\n["+result[0].Attack+"]```", true)
+				.addField("**DEF**", "```ini\n["+result[0].Defense+"]```", true);
+				if(result[0].p_name){
+					embed_single.addField("**Passive: "+result[0].p_name+"**", result[0].p1+"\n"+result[0].p2);
+				}
+
+				var arte_information = '';
+				arte_information = "**Hit Count:** "+result[0].a1_hit+"\n**Damage**: "+result[0].a1_dmg+"%\n**Cooldown:** "+result[0].a1_cd+" turns";
+				if(result[0].a1_ef){
+					arte_information+="\n**Effect:** "+result[0].a1_ef;
+				}
+				embed_single.addField("**Arte 1: "+result[0].a1_name+"**", arte_information);
+				arte_information = "**Hit Count:** "+result[0].a2_hit+"\n**Damage:** "+result[0].a2_dmg+"%\n**Cooldown:** "+result[0].a2_cd+" turns";
+				if(result[0].a2_ef){
+					arte_information+="\n**Effect:** "+result[0].a2_ef;
+				}
+				embed_single.addField("**Arte 2: "+result[0].a2_name+"**", arte_information);
+
+				if(result[0].ma_name != ""){
+					arte_information = "**Hit Count:** "+result[0].ma_hit+"\n**Damage:** "+result[0].ma_dmg+"%\n**Overlimit:** "+result[0].ma_ol+" OL";
+					if(result[0].ma_ef){
+						arte_information+="\n**Effect:** "+result[0].ma_ef;
+					}
+					embed_single.addField("**Mystic Arte: "+result[0].ma_name+"**", arte_information);
+				}
+
+				embed_single.setFooter("Click the Title to see more detailed information"); //Default link to our site
 
 				console.log("[SEARCH] DEBUG: Single-Embed created. Sending...");
 				message.channel.send(embed_single);
