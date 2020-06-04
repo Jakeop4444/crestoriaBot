@@ -29,7 +29,7 @@
 
 	"wind_units":{
 		"dezel_pitw": "./images/profile_card_images/wind_units/dezel_pitw.png",
-		"elanor_ds": "./images/profile_card_images/wind_units/elanor_ds.png",
+		"eleanor_ds": "./images/profile_card_images/wind_units/eleanor_ds.png",
 		"jade_pc": "./images/profile_card_images/wind_units/jade_pc.png",
 		"kyle_is": "./images/profile_card_images/wind_units/kyle_is.png",
 		"norma_mob": "./images/profile_card_images/wind_units/norma_mob.png",
@@ -75,6 +75,7 @@
 		"cress": "./images/profile_card_images/mystic/cress.png",
 		"kanata": "./images/profile_card_images/mystic/kanata.png",
 		"kanonno": "./images/profile_card_images/mystic/kanonno.png",
+		"leon": "./images/profile_card_images/mystic/leon.png",
 		"luke": "./images/profile_card_images/mystic/luke.png",
 		"misella": "./images/profile_card_images/mystic/misella.png",
 		"orwin": "./images/profile_card_images/mystic/orwin.png",

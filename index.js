@@ -19,8 +19,10 @@ client.once('ready', () => {
 });
 
 const cooldowns = new Discord.Collection();
+var currentTime = new Date();
 
 client.on('message', message => {
+	var currentTime = new Date();
 	if (!message.content.startsWith(prefix) || message.author.bot) return;
 
 	const args = message.content.slice(prefix.length).split(/ +/);
@@ -28,7 +30,27 @@ client.on('message', message => {
 
 	if (!client.commands.has(commandName)) return;
 
-	console.log("[INDEX] DEBUG: Attempting to invoke Command: "+message.content);
+	var hours;
+	var minutes;
+	var seconds;
+
+	if(currentTime.getHours() < 10){
+		hours = "0"+currentTime.getHours();
+	}else{
+		hours = currentTime.getHours();
+	}
+	if(currentTime.getMinutes() < 10){
+		minutes = "0"+currentTime.getMinutes();
+	}else{
+		minutes = currentTime.getMinutes();
+	}
+	if(currentTime.getSeconds() < 10){
+		seconds = "0"+currentTime.getSeconds();
+	}else{
+		seconds = currentTime.getSeconds();
+	}
+
+	console.log("["+hours+":"+minutes+":"+seconds+"] [INDEX] DEBUG: Attempting to invoke Command: "+message.content);
 	const command = client.commands.get(commandName);
 
 	if (command.args && !args.length) {

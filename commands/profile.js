@@ -14,17 +14,17 @@ module.exports = {
 	'current release in game',
 	usage: '- Displays your profile information if you have one created\n\n***___EDIT COMMANDS___***\n'+
 			'_Note: Some edit commands will not display if you provided a custom image_\n'+
-			'_You also don\'t need to use brackets when entering commands, those are just to show what you enter as the command user.'+
+			'_You also don\'t need to use brackets when entering commands, those are just to show what you enter as the command user.\n'+
 			'`~profile edit (element) (character)` - Edits your support unit \n'+
 			'`~profile edit character (character)` - Edits the character to display on the side of your profile\n'+
 			'`~profile edit name (Username)` - Edits the username on your profile\n'+
 			'`~profile edit id (ID Number)` - Edits the ID number listed on your profile\n'+
-			'`~profile edit guild (Guild Name)` - Edits the Guild Name listed on your profile (please enter spaces in your guild name as "_")\n'+
+			'`~profile edit guild (Guild Name)` - Edits the Guild Name listed on your profile\n'+
 			'`~profile edit image` - Attach your own custom image to the profile. Image must be attached to the message that sends this command\n'+
 			'`~profile edit clrimg` - Clears your own custom image to use the self-generated one. **Does not clear anything set for the self-generated image**\n\n'+
 			'***___LOOKUP COMMANDS___***\n'+
 			'`~profile units (element)` - Displays a list of all the units that you can set for your card\n'+
-			'the name after the "=>" in the results is the name you use in the **`~profile edit unit (element) (character) command`\n'+
+			'the name after the "=>" in the results is the name you use in the `~profile edit unit (element) (character)` command\n'+
 			'`~profile characters` - Displays a list of all the characters that you can set on the side of your card\n\n'+
 			'***___CREATE COMMAND___***\n'+
 			'`~profile create (Username) (ID Number) (Guild Name)` - Creates a profile with the bot. Entering the ID and Guild Name is optional.\n'+
@@ -45,7 +45,7 @@ module.exports = {
 			createProfileCard(con, message.author.id).then(async function(result){
 
 				if(result.length === 0){
-					message.reply("You don't have a profile created! Create a profile first using `~profile create (Username) (ID])`");
+					message.reply("You don't have a profile created! Create a profile first using `~profile create (Username)`");
 				}else{
 					//console.log("Hey Look, it worked?: "+result[0].user_id);
 					// If an image is provided by a user in the database, send that player's profile image with their User Data
@@ -168,7 +168,7 @@ module.exports = {
 			}else if(args[0] === "units"){
 				message.reply("Invalid use of `~profile units` command.");
 			}else{
-				message.reply("Invalid use of command. Use `~help profile` to see how this command works!");
+				message.reply("Invalid use of command. Use `~help profile` to see how to use the command!");
 			}
 			con.end();
 		}
@@ -184,8 +184,8 @@ module.exports = {
 						//Edits the fire unit
 						if(args[1].toLowerCase() === "fire"){
 							console.log("[PROFILE] DEBUG: Editing Fire Unit");
-							if(images.fire_units[args[2]]){
-								sql = 'UPDATE '+profile_table+" SET fire_unit = '"+args[2]+"' WHERE user_id = "+message.author.id;
+							if(images.fire_units[args[2].toLowerCase()]){
+								sql = 'UPDATE '+profile_table+" SET fire_unit = '"+args[2].toLowerCase()+"' WHERE user_id = "+message.author.id;
 								con.query(sql, function(error, result, fields){
 									if(error) console.log(error);
 									message.reply("Your Fire Support has been updated!");
@@ -198,8 +198,8 @@ module.exports = {
 						//Edits the earth unit
 						else if(args[1].toLowerCase() === "earth"){
 							console.log("[PROFILE] DEBUG: Editing Earth Unit");
-							if(images.earth_units[args[2]]){
-								sql = 'UPDATE '+profile_table+" SET earth_unit = '"+args[2]+"' WHERE user_id = "+message.author.id;
+							if(images.earth_units[args[2].toLowerCase()]){
+								sql = 'UPDATE '+profile_table+" SET earth_unit = '"+args[2].toLowerCase()+"' WHERE user_id = "+message.author.id;
 								con.query(sql, function(error, result, fields){
 									if(error) console.log(error);
 									message.reply("Your Earth Support has been updated!");
@@ -212,8 +212,8 @@ module.exports = {
 						//Edits the wind unit
 						else if(args[1].toLowerCase() === "wind"){
 							console.log("[PROFILE] DEBUG: Editing Wind Unit");
-							if(images.wind_units[args[2]]){
-								sql = 'UPDATE '+profile_table+" SET wind_unit = '"+args[2]+"' WHERE user_id = "+message.author.id;
+							if(images.wind_units[args[2].toLowerCase()]){
+								sql = 'UPDATE '+profile_table+" SET wind_unit = '"+args[2].toLowerCase()+"' WHERE user_id = "+message.author.id;
 								con.query(sql, function(error, result, fields){
 									if(error) console.log(error);
 									message.reply("Your Wind Support has been updated!");
@@ -226,8 +226,8 @@ module.exports = {
 						//Edits the water unit
 						else if(args[1].toLowerCase() === "water"){
 							console.log("[PROFILE] DEBUG: Editing Water Unit");
-							if(images.water_units[args[2]]){
-								sql = 'UPDATE '+profile_table+" SET water_unit = '"+args[2]+"' WHERE user_id = "+message.author.id;
+							if(images.water_units[args[2].toLowerCase()]){
+								sql = 'UPDATE '+profile_table+" SET water_unit = '"+args[2].toLowerCase()+"' WHERE user_id = "+message.author.id;
 								con.query(sql, function(error, result, fields){
 									if(error) console.log(error);
 									message.reply("Your Water has been updated!");
@@ -240,8 +240,8 @@ module.exports = {
 						//Edits the light unit
 						else if(args[1].toLowerCase() === "light"){
 							console.log("[PROFILE] DEBUG: Editing Light Unit");
-							if(images.light_units[args[2]]){
-								sql = 'UPDATE '+profile_table+" SET light_unit = '"+args[2]+"' WHERE user_id = "+message.author.id;
+							if(images.light_units[args[2].toLowerCase()]){
+								sql = 'UPDATE '+profile_table+" SET light_unit = '"+args[2].toLowerCase()+"' WHERE user_id = "+message.author.id;
 								con.query(sql, function(error, result, fields){
 									if(error) console.log(error);
 									message.reply("Your Light Support has been updated!");
@@ -254,8 +254,8 @@ module.exports = {
 						//Edits the dark unit
 						else if(args[1] == "dark"){
 							console.log("[PROFILE] DEBUG: Editing Dark Unit");
-							if(images.dark_units[args[2]]){
-								sql = 'UPDATE '+profile_table+" SET dark_unit = '"+args[2]+"' WHERE user_id = "+message.author.id;
+							if(images.dark_units[args[2].toLowerCase()]){
+								sql = 'UPDATE '+profile_table+" SET dark_unit = '"+args[2].toLowerCase()+"' WHERE user_id = "+message.author.id;
 								con.query(sql, function(error, result, fields){
 									if(error) console.log(error);
 									message.reply("Your Dark Support has been updated!");
@@ -268,15 +268,15 @@ module.exports = {
 						//Edits the character flair
 						else if(args[1].toLowerCase() === "character"){
 							console.log("[PROFILE] DEBUG: Editing Flair");
-							if(images.mystic[args[2]]){
-								sql = 'UPDATE '+profile_table+" SET flair = '"+args[2]+"' WHERE user_id = "+message.author.id;
+							if(images.mystic[args[2].toLowerCase()]){
+								sql = 'UPDATE '+profile_table+" SET flair = '"+args[2].toLowerCase()+"' WHERE user_id = "+message.author.id;
 								con.query(sql, function(error, result, fields){
 									if(error) console.log(error);
-									message.reply("Your Flair has been updated!");
+									message.reply("Your Character has been updated!");
 								})
 							}
 							else{
-								message.reply("That flair does not exist. Use `~profile characters` to see what you can set!");
+								message.reply("That character does not exist. Use `~profile characters` to see what you can set!");
 							}
 							console.log("[PROFILE] DEBUG: Done Editing Profile");
 						}
@@ -303,7 +303,11 @@ module.exports = {
 						//Edits the profile guild
 						else if(args[1].toLowerCase() === "guild"){
 							console.log("[PROFILE] DEBUG: Editing Profile Guild");
-							sql = 'UPDATE '+profile_table+" SET profile_guild = '"+args[2]+"' WHERE user_id = "+message.author.id;
+							var guildname = '';
+							for(i = 2; i < args.length; i++){
+								guildname += args[i]+" ";
+							}
+							sql = 'UPDATE '+profile_table+" SET profile_guild = '"+guildname.substring(0, guildname.length-1)+"' WHERE user_id = "+message.author.id;
 							con.query(sql, function(error, result, fields){
 								if(error) console.log(error);
 								message.reply("Your Profile Guild has been updated!");
@@ -341,7 +345,7 @@ module.exports = {
 							})
 							console.log("[PROFILE] DEBUG: Done Clearing User Input Image");
 						}else{
-							message.reply("Invalid use of command.");
+							message.reply("Invalid use of command. Use `~help profile` to see how to use the command!");
 						}
 					}
 					con.end();
@@ -368,7 +372,7 @@ module.exports = {
 						//result.forEach(p => console.log(p.Title));
 						result.forEach(data => resultText += ("["+data.Title+"] "+data.Name+" => **"+data.Bot+"**\n"));
 						const embed = new MessageEmbed()
-						.setTitle("Here are all the "+args[1]+" units!")
+						.setTitle("Here are all the "+args[1]+" units!\nTo set a character to your profile, use the name after the '=>' in the results!")
 						.setColor(0x000000)
 						.setDescription(resultText);
 
@@ -404,7 +408,7 @@ module.exports = {
 						if(args[2]){
 							sql += args[2];
 						}else{
-							sql += 'unknown';
+							sql += "'unknown'";
 						}
 						if(args[3]){
 							sql += ", '"+args[3]+"', '";
@@ -444,7 +448,7 @@ module.exports = {
 				console.log("[PROFILE] DEBUG: Done Creating Profile");
 			}
 			else{
-				message.reply("Invalid use of the command");
+				message.reply("Invalid use of command. Use `~help profile` to see how to use the command!");
 			}
 		}else{
 			message.reply("Invalid Usage");
