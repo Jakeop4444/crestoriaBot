@@ -1,10 +1,8 @@
-**Vision Orb v0.1.3 BETA**
+**Vision Orb v0.2.1 BETA**
 _Note: Vision Orb may shut down frequently during testing, please check the `~update` command to see when the bot is shutting down for updates_
 
 **MAINTENANCE NOTICE** Vision Orb may experience a period of inactivity today while the `~search` command gets some updates
 
 _What's new in this update:_
 
-- More bug extermination
-- Added Leon to available characters for profile images
-- Guild names can now take spaces
+- Gacha! You can roll form the general gacha pool or the arena gacha pool, use `~gacha` or `~gacha general` for the general pool and `~gacha arena` for the arena gacha
