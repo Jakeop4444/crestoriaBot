@@ -1,6 +1,6 @@
 const fs = require('fs');
 const { token, operator_id_one, operator_id_two } = require('../config.json');
-const { client } = require('../index.js');
+//const { client } = require('../index.js');
 
 module.exports = {
 	name: 'reboot',
