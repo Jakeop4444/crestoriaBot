@@ -3,7 +3,8 @@
 		"Rates":{
 			"SSR":5,
 			"SR":20,
-			"R":75
+			"R":75,
+			"Bonus":true
 		},
 		"SSR":[
 			"[Teruyari of the Dark Night] Aegis",
@@ -150,18 +151,17 @@
 			"[Wind-Strewn Beauty] Zelos"
 		]
 	},
-	"arena":{
 
+	"arena":{
 		"Rates":{
 			"SSR":3,
 			"SR":21,
-			"R":76
+			"R":76,
+			"Bonus":false
 		},
-
 		"SSR":[
 			"[Power Past Comprehension] Chronos"
 		],
-
 		"SR":[
 			"[Precocious Puppeteer] Anise",
 			"[Sorceress Prodigy] Arche",
@@ -289,5 +289,4 @@
 			"[Wind-Strewn Beauty] Zelos"
 		]
 	}
-	
 }

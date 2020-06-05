@@ -181,88 +181,21 @@ module.exports = {
 					if(result.length === 0){
 						message.reply("You don't have a profile created! Create a profile first using `~profile create (Username) (ID)`**");
 					}else{
-						//Edits the fire unit
-						if(args[1].toLowerCase() === "fire"){
-							console.log("[PROFILE] DEBUG: Editing Fire Unit");
-							if(images.fire_units[args[2].toLowerCase()]){
-								sql = 'UPDATE '+profile_table+" SET fire_unit = '"+args[2].toLowerCase()+"' WHERE user_id = "+message.author.id;
+						//Edits any unit
+						if(args[1].toLowerCase() === 'fire' || args[1].toLowerCase() === 'earth' || 
+							args[1].toLowerCase() === 'wind' || args[1].toLowerCase() === 'water' || 
+							args[1].toLowerCase() === 'light' || args[1].toLowerCase() === 'dark'){
+							var leftString = args[1].toLowerCase()+"_units";
+							var rightString = args[2].toLowerCase();
+							if(images[leftString][rightString]){
+								console.log("[PROFILE] DEBUG: Editing "+args[1].toLowerCase().charAt(0).toUpperCase()+args[1].slice(1).toLowerCase()+" Unit");
+								sql = 'UPDATE '+profile_table+" SET "+args[1].toLowerCase()+"_unit = '"+args[2].toLowerCase()+"' WHERE user_id = "+message.author.id;
 								con.query(sql, function(error, result, fields){
 									if(error) console.log(error);
-									message.reply("Your Fire Support has been updated!");
+									message.reply("Your "+args[1].toLowerCase().charAt(0).toUpperCase()+args[1].slice(1).toLowerCase()+" Support has been updated!");
 								})
-							}
-							else{
-								message.reply("That fire unit does not exist. Use `~profile units fire` to see what units exist");
-							}
-						}
-						//Edits the earth unit
-						else if(args[1].toLowerCase() === "earth"){
-							console.log("[PROFILE] DEBUG: Editing Earth Unit");
-							if(images.earth_units[args[2].toLowerCase()]){
-								sql = 'UPDATE '+profile_table+" SET earth_unit = '"+args[2].toLowerCase()+"' WHERE user_id = "+message.author.id;
-								con.query(sql, function(error, result, fields){
-									if(error) console.log(error);
-									message.reply("Your Earth Support has been updated!");
-								})
-							}
-							else{
-								message.reply("That earth unit does not exist. Use `~profile units earth` to see what units exist");
-							}
-						}
-						//Edits the wind unit
-						else if(args[1].toLowerCase() === "wind"){
-							console.log("[PROFILE] DEBUG: Editing Wind Unit");
-							if(images.wind_units[args[2].toLowerCase()]){
-								sql = 'UPDATE '+profile_table+" SET wind_unit = '"+args[2].toLowerCase()+"' WHERE user_id = "+message.author.id;
-								con.query(sql, function(error, result, fields){
-									if(error) console.log(error);
-									message.reply("Your Wind Support has been updated!");
-								})
-							}
-							else{
-								message.reply("That wind unit does not exist. Use `~profile units wind` to see what units exist");
-							}
-						}
-						//Edits the water unit
-						else if(args[1].toLowerCase() === "water"){
-							console.log("[PROFILE] DEBUG: Editing Water Unit");
-							if(images.water_units[args[2].toLowerCase()]){
-								sql = 'UPDATE '+profile_table+" SET water_unit = '"+args[2].toLowerCase()+"' WHERE user_id = "+message.author.id;
-								con.query(sql, function(error, result, fields){
-									if(error) console.log(error);
-									message.reply("Your Water has been updated!");
-								})
-							}
-							else{
-								message.reply("That water unit does not exist. Use `~profile units water` to see what units exist");
-							}
-						}
-						//Edits the light unit
-						else if(args[1].toLowerCase() === "light"){
-							console.log("[PROFILE] DEBUG: Editing Light Unit");
-							if(images.light_units[args[2].toLowerCase()]){
-								sql = 'UPDATE '+profile_table+" SET light_unit = '"+args[2].toLowerCase()+"' WHERE user_id = "+message.author.id;
-								con.query(sql, function(error, result, fields){
-									if(error) console.log(error);
-									message.reply("Your Light Support has been updated!");
-								})
-							}
-							else{
-								message.reply("That light unit does not exist. Use `~profile units light` to see what units exist");
-							}
-						}
-						//Edits the dark unit
-						else if(args[1] == "dark"){
-							console.log("[PROFILE] DEBUG: Editing Dark Unit");
-							if(images.dark_units[args[2].toLowerCase()]){
-								sql = 'UPDATE '+profile_table+" SET dark_unit = '"+args[2].toLowerCase()+"' WHERE user_id = "+message.author.id;
-								con.query(sql, function(error, result, fields){
-									if(error) console.log(error);
-									message.reply("Your Dark Support has been updated!");
-								})
-							}
-							else{
-								message.reply("That dark unit does not exist. Use `~profile units dark` to see what units exist");
+							}else{
+								message.reply("That "+args[1].toLowerCase()+" unit does not exist. Use `~profile units "+args[1].toLowerCase()+"` to see what units exist");
 							}
 						}
 						//Edits the character flair

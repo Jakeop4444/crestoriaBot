@@ -1,8 +1,8 @@
-**Vision Orb v0.3.2 BETA**
+**Vision Orb v0.5.1 BETA**
 _Note: Vision Orb may shut down frequently during testing, please check the `~update` command to see when the bot is shutting down for updates_
 
 _What's new in this update:_
 
-- `~search` command got an overhaul! Now you can just type a search phrase to get what you're looking for, with a ton of new fancy features! Check it out
-- Small fixes to Gacha command
-- More bugs squished
+- ~~Speleng~~ Spelling ~~erurs~~ errors with titles in the gacha fixed
+- Small optimizations to various commands
+- Extermination of more bugs.
