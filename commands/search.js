@@ -94,15 +94,15 @@ module.exports = {
 						.setElementsPerPage(10)
 						.setPage(1)
 						.setPageIndicator(true)
-						.formatField('Query Results', i => emoji[i.Rarity] + " " + emoji[i.Element] + " [[" + i.Title + "] " + i.Name + "](https://www.tocdb.xyz/" + i.Rarity.toLowerCase() + "/" + i.Name + ".php)\n")
+						.formatField('Query Results', i => emoji[i.Rarity] + " [[" + i.Title + "] " + i.Name + "](https://www.tocdb.xyz/" + i.Rarity.toLowerCase() + "/" + i.Name + ".php)")
 						.setDeleteOnTimeout(false);
 
 					FieldsEmbed.embed
 						.setColor(0xFF00AE)
-						.setDescription('# of Entries Found');
+						.setDescription('**'+result.length+' Total Entries Found**');
 
 					FieldsEmbed.build();
-				}
+				
 				/*console.log("[SEARCH] DEBUG: Multi-Embed created. Sending...");
 				message.channel.send({embed});
 				console.log("[SEARCH] DEBUG: Embed sent!");*/
