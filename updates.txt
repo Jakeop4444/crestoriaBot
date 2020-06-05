@@ -1,8 +1,8 @@
-**Vision Orb v0.2.1 BETA**
+**Vision Orb v0.3.2 BETA**
 _Note: Vision Orb may shut down frequently during testing, please check the `~update` command to see when the bot is shutting down for updates_
-
-**MAINTENANCE NOTICE** Vision Orb may experience a period of inactivity today while the `~search` command gets some updates
 
 _What's new in this update:_
 
-- Gacha! You can roll form the general gacha pool or the arena gacha pool, use `~gacha` or `~gacha general` for the general pool and `~gacha arena` for the arena gacha
+- `~search` command got an overhaul! Now you can just type a search phrase to get what you're looking for, with a ton of new fancy features! Check it out
+- Small fixes to Gacha command
+- More bugs squished
