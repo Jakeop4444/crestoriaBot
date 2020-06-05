@@ -2,6 +2,7 @@ const { MessageEmbed } = require('discord.js');
 const mysql = require('mysql');
 const { db_host, db_user, db_password, db_name, db_table } = require('../config.json');
 const emoji = require('../emoji.json');
+const Pagination = require('discord-paginationembed');
 
 module.exports = {
 	name: 'search',
@@ -63,32 +64,7 @@ module.exports = {
 		}
 		sql+="%'";
 		
-		
-
 		console.log(sql);
-		/*var q_name, q_element, q_rarity, q_type;
-		//Instantiate SQL Query -- This may change, but for now we will leave this version.
-		if(q_name != ''){
-			sql += " Name LIKE '%"+q_name+"%'";
-		}
-		if(q_element != '*'){
-			if(q_name != ''){
-				sql += " AND";
-			}
-			sql += " Element LIKE '%"+q_element+"%'";	
-		}
-		if(q_rarity != ''){
-			if(q_name != '' || q_element != ''){
-				sql += " AND";	
-			}
-			sql += " Rarity = '"+q_rarity+"'";
-		}
-		if(q_type != ''){
-			if(q_name != '' || q_element != '' || q_rarity != ''){
-				sql += " AND";
-			}
-			sql += " Type LIKE '%"+q_type+"%'";
-		}*/
 
 		sql += " ORDER BY Name ASC"
 
@@ -101,7 +77,7 @@ module.exports = {
 			//Check for result array length
 			if (result.length > 1){
 				//Length > 1, means we found more than one unit following the user's guidelines
-					for (var i = 0; i < result.length; i++){
+					/*for (var i = 0; i < result.length; i++){
 						if(i < 10){
 							//Only perform a maximum of 15 entries, Embeds can only hold 2048 characters
 							many_names += (emoji[result[i].Rarity]+" "+emoji[result[i].Element]+" [[" + result[i].Title + "] " + result[i].Name + "](https://www.tocdb.xyz/" + result[i].Rarity.toLowerCase() + "/" + result[i].Name + ".php) \n");
@@ -109,20 +85,27 @@ module.exports = {
 							many_names += "**And "+ (result.length - 10) + " more...**";
 							break;
 						}
-					}
-					const embed = {
-					"color": 13632027,
-					"author": {
-						"name": result.length + " entries were found!"
-					},
-					"description": many_names,
-					"footer": {
-					    "text": "https://www.tocdb.xyz/index.php"
-					}
+					}*/
+					
+					const FieldsEmbed = new Pagination.FieldsEmbed()
+						.setArray(result)
+						.setAuthorizedUsers([message.author.id])
+						.setChannel(message.channel)
+						.setElementsPerPage(10)
+						.setPage(1)
+						.setPageIndicator(true)
+						.formatField('Query Results', i => emoji[i.Rarity] + " " + emoji[i.Element] + " [[" + i.Title + "] " + i.Name + "](https://www.tocdb.xyz/" + i.Rarity.toLowerCase() + "/" + i.Name + ".php)\n")
+						.setDeleteOnTimeout(false);
+
+					FieldsEmbed.embed
+						.setColor(0xFF00AE)
+						.setDescription('# of Entries Found');
+
+					FieldsEmbed.build();
 				}
-				console.log("[SEARCH] DEBUG: Multi-Embed created. Sending...");
+				/*console.log("[SEARCH] DEBUG: Multi-Embed created. Sending...");
 				message.channel.send({embed});
-				console.log("[SEARCH] DEBUG: Embed sent!");
+				console.log("[SEARCH] DEBUG: Embed sent!");*/
 
 			} else if (result.length < 1){
 				message.channel.send('No entries were found!');
