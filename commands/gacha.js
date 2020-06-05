@@ -6,7 +6,7 @@ module.exports = {
 	name: 'gacha',
 	cooldown: 5,
 	description: 'Gacha Rolls!',
-	usage: " - pulls from the general gacha\n`~gacha arena` pulls from the arena gacha"
+	usage: " - pulls from the general gacha\n`~gacha arena` pulls from the arena gacha",
 	execute(message, args) {
 		var results = "";
 		if(args.length === 0 || args[0].toLowerCase() === "general"){
