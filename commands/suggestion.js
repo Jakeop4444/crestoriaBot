@@ -13,6 +13,7 @@ module.exports = {
 		string+="\n\n";
 		fs.appendFile("./suggestions/suggestions.txt", string, function (err) {
 			if (err) throw err;
+			message.delete();
 			message.reply("Your suggestion has been submitted!");
 		});
 	},
