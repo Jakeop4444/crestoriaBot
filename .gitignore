@@ -2,4 +2,5 @@
 config.json
 *.png
 test_commands
+suggestions
 AddToIndexLater
