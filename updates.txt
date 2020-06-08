@@ -1,7 +1,7 @@
-**Vision Orb v0.6.2 BETA**
+**Vision Orb v0.7.5 BETA**
 _Note: Vision Orb may shut down frequently during testing, please check the `~update` command to see when the bot is shutting down for updates_
 
 _What's new in this update:_
 
-- `~suggestion` command! Now you can submit suggestions to us through the bot, just use the command and type out what you would like to see come to the bot! 
-- Bugs? What bugs? They're gone. Well...at least more of them
+- Small updates to `~gacha` command, now has option for single ticket pulls. Use `~gacha list` to see a list of what gacha are available to pull from
+- Bug Spray applied

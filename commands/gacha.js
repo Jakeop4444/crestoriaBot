@@ -10,9 +10,7 @@ module.exports = {
 	execute(message, args) {
 		var results = "";
 		var gacha = ""
-		if(args.length === 0){
-			gacha = "general";
-		}else if(args[0].toLowerCase() === "list"){
+		if(args.length > 0 && args[0].toLowerCase() === "list"){
 			var names = "";
 			Object.keys(gacha_pool).forEach(function(k){
 				names += "**"+gacha_pool[k].Name+"** => "+k+"\n";
@@ -23,9 +21,11 @@ module.exports = {
 			.setDescription(names);
 			message.reply(embed);
 		}else{
-			gacha = args[0].toLowerCase();
-		}
-		if(args[0].toLowerCase() != "list"){
+			if(args.length === 0){
+				gacha = "general"
+			}else{
+				gacha = args[0].toLowerCase();
+			}
 			if(gacha_pool[gacha]){
 				for(i = 0; i<gacha_pool[gacha].Rolls; i++){
 					var pull = Math.floor(Math.random() * 100) + 1;
@@ -63,6 +63,6 @@ module.exports = {
 			}else{
 				message.reply("You can't pull from a gacha that doesn't exist <:murdestelle:714863544415551599>");
 			}
-		}
+		}	
 	},
 };

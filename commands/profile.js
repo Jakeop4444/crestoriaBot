@@ -40,7 +40,7 @@ module.exports = {
 		//Base Profile Command
 		if(args.length === 0){
 			
-			console.log("[PROFILE] DEBUG: Displaying Profile");
+			//console.log("[PROFILE] DEBUG: Displaying Profile");
 			
 			createProfileCard(con, message.author.id).then(async function(result){
 
@@ -69,7 +69,7 @@ module.exports = {
 					}//If an image isn't provided, create a dynamic profile image for display.
 					else{
 						//Create the canvas and set the context to 2D image
-						console.log("[PROFILE] DEBUG: Creating Canvas");
+						//console.log("[PROFILE] DEBUG: Creating Canvas");
 						const canvas = Canvas.createCanvas(1900, 800);
 						const ctx = canvas.getContext('2d');
 
@@ -78,7 +78,7 @@ module.exports = {
 						const sr_background = await Canvas.loadImage(images["sr_background"]);
 						const card_background = await Canvas.loadImage(images["background"]);
 
-						console.log("[PROFILE] DEBUG: Setting Unit Images");
+						//console.log("[PROFILE] DEBUG: Setting Unit Images");
 
 						ctx.drawImage(sr_background, 0, 0, canvas.width, canvas.height);
 						ctx.drawImage(card_background, 0, 0, canvas.width, canvas.height);
@@ -114,7 +114,7 @@ module.exports = {
 						}
 
 						//Load the rest of the elements to the canvas
-						console.log("[PROFILE] DEBUG: Units Set");
+						//console.log("[PROFILE] DEBUG: Units Set");
 						const elements = await Canvas.loadImage(images["elements"]);
 						ctx.drawImage(elements, 0, 0, canvas.width, canvas.height);
 						
@@ -137,9 +137,9 @@ module.exports = {
 						.setColor(0xFFFFFF)
 						.setDescription(details)
 						.setImage("attachment://profile_image.png");
-						console.log("[PROFILE] DEBUG: Sending Message");
+						//console.log("[PROFILE] DEBUG: Sending Message");
 						message.channel.send({embed: _embed, files: [new Discord.MessageAttachment(canvas.toBuffer(), 'profile_image.png')]});
-						console.log("[PROFILE] DEBUG: Message Sent");
+						//console.log("[PROFILE] DEBUG: Message Sent");
 					}
 				}
 			})
@@ -188,7 +188,7 @@ module.exports = {
 							var leftString = args[1].toLowerCase()+"_units";
 							var rightString = args[2].toLowerCase();
 							if(images[leftString][rightString]){
-								console.log("[PROFILE] DEBUG: Editing "+args[1].toLowerCase().charAt(0).toUpperCase()+args[1].slice(1).toLowerCase()+" Unit");
+								//console.log("[PROFILE] DEBUG: Editing "+args[1].toLowerCase().charAt(0).toUpperCase()+args[1].slice(1).toLowerCase()+" Unit");
 								sql = 'UPDATE '+profile_table+" SET "+args[1].toLowerCase()+"_unit = '"+args[2].toLowerCase()+"' WHERE user_id = "+message.author.id;
 								con.query(sql, function(error, result, fields){
 									if(error) console.log(error);
@@ -200,7 +200,7 @@ module.exports = {
 						}
 						//Edits the character flair
 						else if(args[1].toLowerCase() === "character"){
-							console.log("[PROFILE] DEBUG: Editing Flair");
+							//console.log("[PROFILE] DEBUG: Editing Flair");
 							if(images.mystic[args[2].toLowerCase()]){
 								sql = 'UPDATE '+profile_table+" SET flair = '"+args[2].toLowerCase()+"' WHERE user_id = "+message.author.id;
 								con.query(sql, function(error, result, fields){
@@ -215,7 +215,7 @@ module.exports = {
 						}
 						//Edits the profile name
 						else if(args[1].toLowerCase() === "name"){
-							console.log("[PROFILE] DEBUG: Editing Profile Name");
+							//console.log("[PROFILE] DEBUG: Editing Profile Name");
 							sql = 'UPDATE '+profile_table+" SET profile_name = '"+args[2]+"' WHERE user_id = "+message.author.id;
 							con.query(sql, function(error, result, fields){
 								if(error) console.log(error);
@@ -225,7 +225,7 @@ module.exports = {
 						}
 						//Edits the profile id
 						else if(args[1].toLowerCase() === "id"){
-							console.log("[PROFILE] DEBUG: Editing Profile ID");
+							//console.log("[PROFILE] DEBUG: Editing Profile ID");
 							sql = 'UPDATE '+profile_table+" SET profile_id = '"+args[2]+"' WHERE user_id = "+message.author.id;
 							con.query(sql, function(error, result, fields){
 								if(error) console.log(error);
@@ -235,7 +235,7 @@ module.exports = {
 						}
 						//Edits the profile guild
 						else if(args[1].toLowerCase() === "guild"){
-							console.log("[PROFILE] DEBUG: Editing Profile Guild");
+							//console.log("[PROFILE] DEBUG: Editing Profile Guild");
 							var guildname = '';
 							for(i = 2; i < args.length; i++){
 								guildname += args[i]+" ";
@@ -245,16 +245,16 @@ module.exports = {
 								if(error) console.log(error);
 								message.reply("Your Profile Guild has been updated!");
 							})
-							console.log("[PROFILE] DEBUG: Done Editing Profile");
+							//console.log("[PROFILE] DEBUG: Done Editing Profile");
 						}
 						//Edits the profile image to a user submitted image
 						//Needs to have an supported image type attached to the message otherwise will error
 						else if(args[1].toLowerCase() === "image"){
-							console.log("[PROFILE] DEBUG: Editing Profile Image");
+							//console.log("[PROFILE] DEBUG: Editing Profile Image");
 							if(message.attachments.first()){
 								var fileCheck = message.attachments.first().name.split('.');
 								if(fileCheck[1] === 'png'||fileCheck[1] === 'jpeg'||fileCheck[1] === 'jpg'){
-				                	console.log('[PROFILE] DEBUG: Changing Image');
+				                	//console.log('[PROFILE] DEBUG: Changing Image');
 				                	sql = 'UPDATE '+profile_table+" SET profile_image = '"+message.attachments.first().url.replace(':', "CLN").replace("//", "DBLFWS")+"' WHERE user_id = "+message.author.id;
 				                    con.query(sql, function(error, result, fields){
 										if(error) console.log(error);
@@ -263,26 +263,26 @@ module.exports = {
 			                    }else{
 			                        message.reply("The file you attached is not a supported type. Please use a PNG, JPG, or JPEG.");
 			                    }
-			                    console.log("[PROFILE] DEBUG: Done Changing Profile Image to User Input");
+			                    //console.log("[PROFILE] DEBUG: Done Changing Profile Image to User Input");
 							}else{
 								message.reply("Image not attached to message");
 							}
 						}
 						//Clears the user submitted image and returns to using a dynamic genreated image for the player
 						else if(args[1].toLowerCase() === "clrimg"){
-							console.log("[PROFILE] DEBUG: Clearing Image");
+							//console.log("[PROFILE] DEBUG: Clearing Image");
 							sql = 'UPDATE '+profile_table+" SET profile_image = 'NONE_SET' WHERE user_id = "+message.author.id;
 							con.query(sql, function(error, result, fields){
 								if(error) console.log(error);
 								message.reply("Your Profile Image has been cleared!");
 							})
-							console.log("[PROFILE] DEBUG: Done Clearing User Input Image");
+							//console.log("[PROFILE] DEBUG: Done Clearing User Input Image");
 						}else{
 							message.reply("Invalid use of command. Use `~help profile` to see how to use the command!");
 						}
 					}
 					con.end();
-					console.log("[PROFILE] DEBUG: Unhooked from database");
+					//console.log("[PROFILE] DEBUG: Unhooked from database");
 				})
 			}
 			//Displays all the units the bot has access to.
@@ -316,7 +316,7 @@ module.exports = {
 					}					
 				});
 				con2.end();
-				console.log("[PROFILE] DEBUG: Done Displaying Character Info For Profile");
+				//console.log("[PROFILE] DEBUG: Done Displaying Character Info For Profile");
 			}
 			//Creates a profile should the user not have one.
 			//Will return an error message if the user already has a profile.
@@ -329,13 +329,13 @@ module.exports = {
 					if(result.length === 1){
 						message.reply("You already have a profile! Use the `~edit` commands to edit your information!");
 						con.end();
-						console.log("[PROFILE] DEBUG: Unhooked from database");
+						//console.log("[PROFILE] DEBUG: Unhooked from database");
 						return;
 					}
 					//Creates a profile if one doesn't exist
 					else{
 						create = true;
-						console.log("[PROFILE] DEBUG: Creating Profile");
+						//console.log("[PROFILE] DEBUG: Creating Profile");
 						sql = "INSERT INTO "+profile_table+" (user_id, profile_name, profile_id, profile_guild, fire_unit, earth_unit, wind_unit, water_unit, "+
 								"light_unit, dark_unit, flair, profile_image) VALUES ("+message.author.id+", '"+args[1]+"', ";
 						if(args[2]){
@@ -353,12 +353,12 @@ module.exports = {
 						if(message.attachments.first()){
 							var fileCheck = message.attachments.first().name.split('.');
 							if(fileCheck[1] === 'png'||fileCheck[1] === 'jpeg'||fileCheck[1] === 'jpg'){
-						       	console.log('[PROFILE] DEBUG: Changing Image');
+						       //	console.log('[PROFILE] DEBUG: Changing Image');
 						       	sql += message.attachments.first().url.replace(':', "CLN").replace("//", "DBLFWS")+"')";
 				            }else{
 				                message.reply("The file you attached is not a supported type. Please use a PNG, JPG, or JPEG.");
 				                con.end();
-								console.log("[PROFILE] DEBUG: Unhooked from database");
+								//console.log("[PROFILE] DEBUG: Unhooked from database");
 				                return;
 				            }
 						}else{
@@ -375,10 +375,10 @@ module.exports = {
 							message.reply("Profile Create Successfully, check it out with **~profile**");
 						})
 						con.end();
-						console.log("[PROFILE] DEBUG: Unhooked from database");
+						//console.log("[PROFILE] DEBUG: Unhooked from database");
 					}
 				})
-				console.log("[PROFILE] DEBUG: Done Creating Profile");
+				//console.log("[PROFILE] DEBUG: Done Creating Profile");
 			}
 			else{
 				message.reply("Invalid use of command. Use `~help profile` to see how to use the command!");

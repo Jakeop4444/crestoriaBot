@@ -18,7 +18,7 @@ module.exports = {
 			database: db_name
 		});
 
-		console.log("[SEARCH] DEBUG: Bot has connected to database.");
+		//console.log("[SEARCH] DEBUG: Bot has connected to database.");
 
 		var var_set = false;
 		var counter = 0;
@@ -64,11 +64,11 @@ module.exports = {
 		}
 		sql+="%'";
 		
-		console.log(sql);
+		//console.log(sql);
 
 		sql += " ORDER BY Name ASC"
 
-		console.log("[SEARCH] DEBUG: Query assembled.");
+		//console.log("[SEARCH] DEBUG: Query assembled.");
 
 		var many_names = "";
 		connec.query(sql, function (error, result, fields) {
@@ -94,7 +94,7 @@ module.exports = {
 						.setElementsPerPage(10)
 						.setPage(1)
 						.setPageIndicator(true)
-						.formatField('Query Results', i => emoji[i.Rarity] + " [[" + i.Title + "] " + i.Name.replace("&nbsp;", " ") + "](https://www.tocdb.xyz/" + i.Rarity.toLowerCase() + "/" + i.Name.replace("&nbsp;", "_") + ".php)")
+						.formatField('Query Results', i => emoji[i.Rarity] + " [[" + i.Title + "] " + i.Name.replace("_", " ") + "](https://www.tocdb.xyz/" + i.Rarity.toLowerCase() + "/" + i.Name + ".php)")
 						.setDeleteOnTimeout(false);
 
 					FieldsEmbed.embed
@@ -114,8 +114,8 @@ module.exports = {
 				//console.log(result[0].Image);
 				//console.log(result[0].Title + "\n" + "Rarity: " + result[0].Rarity + "\n" + "Element: " + result[0].Element + "\n" + "Weapon Type: " + result[0].Type);
 				const embed_single = new MessageEmbed()
-				.setTitle("["+result[0].Title+"] "+result[0].Name.replace("&nbsp;", " "))
-				.setURL('https://www.tocdb.xyz/' + result[0].Rarity.toLowerCase() + '/' + result[0].Name.replace("&nbsp;", "_") + '.php') //Set the Title to link to our database site for more detailed info!
+				.setTitle("["+result[0].Title+"] "+result[0].Name.replace("_", " "))
+				.setURL('https://www.tocdb.xyz/' + result[0].Rarity.toLowerCase() + '/' + result[0].Name + '.php') //Set the Title to link to our database site for more detailed info!
 				.setColor(0x0000FF)
 				.setImage(result[0].Image)
 				.setDescription("**Rarity:** " + emoji[result[0].Rarity] + "\t" + "**Element:** " + emoji[result[0].Element] + "\t" + "**Weapon Type:** " + emoji[result[0].Type]+"\n_All Stats are as if they are Max Level/Ascension_")
@@ -146,11 +146,14 @@ module.exports = {
 					embed_single.addField("**Mystic Arte: "+result[0].ma_name+"**", arte_information);
 				}
 
+				arte_information = "**Hit Count:** "+result[0].n_hit+"\n**Damage:** "+result[0].n_dmg+"%\n**Targets:** "+result[0].n_targ+"";
+				embed_single.addField("**Basic Attack**", arte_information);
+
 				embed_single.setFooter("Click the Title to see more detailed information"); //Default link to our site
 
-				console.log("[SEARCH] DEBUG: Single-Embed created. Sending...");
+				//console.log("[SEARCH] DEBUG: Single-Embed created. Sending...");
 				message.channel.send(embed_single);
-				console.log("[SEARCH] DEBUG: Embed sent!");
+				//console.log("[SEARCH] DEBUG: Embed sent!");
 
 			}
 		});
