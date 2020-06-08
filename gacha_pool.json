@@ -1,5 +1,7 @@
 {
 	"general":{
+		"Name":"General",
+		"Rolls":10,
 		"Rates":{
 			"SSR":5,
 			"SR":20,
@@ -153,10 +155,12 @@
 	},
 
 	"arena":{
+		"Name":"Arena",
+		"Rolls":10,
 		"Rates":{
 			"SSR":3,
-			"SR":21,
-			"R":76,
+			"SR":7,
+			"R":90,
 			"Bonus":false
 		},
 		"SSR":[
@@ -287,6 +291,91 @@
 			"[Hammer Swinger] Will",
 			"[Black Ambitions] Wingul",
 			"[Wind-Strewn Beauty] Zelos"
+		]
+	},
+
+	"sr_ticket":{
+		"Name":"SR Ticket",
+		"Rolls":1,
+		"Rates":{
+			"SSR":5,
+			"SR":95,
+			"Bonus":false
+		},
+		"SSR":[
+			"[Teruyari of the Dark Night] Aegis",
+			"[Under an Azure Sky] Asbel",
+			"[A Moment's Peace] Cress",
+			"[Sword Shi Wearing a Sin] Kanata",
+			"[Greatsword Brandisher] Kanonno E.",
+			"[Defiant Heart] Leon",
+			"[Shaken in the Wagon] Luke",
+			"[Noble Hearted] Milla",
+			"[Fire Mercy Become Flower] Misella",
+			"[Serene Huntsman] Reid",
+			"[The Dawn's Guidance] Sorey",
+			"[Energetic Soul] Stahn",
+			"[Tainted by Vengance] Velvet",
+			"[Shooting Wild Dance] Vicious",
+			"[At Yesteryear's Window] Yuri"
+		],
+		"SR":[
+			"[Precocious Puppeteer] Anise",
+			"[Sorceress Prodigy] Arche",
+			"[Strapping Muscleman] Bruiser",
+			"[True-Hearted Beast] Caius",
+			"[Healing Hands] Cheria",
+			"[Peddler in the Wind] Dezel",
+			"[Diligent Spearwoman] Eleanor",
+			"[Never Apart] Elize",
+			"[Bearer of the Beast] Emil",
+			"[Upbeat Battler] Farah",
+			"[Unassailable Pride] Gaius",
+			"[Kendama Battler] Genis",
+			"[Perspicacious Colonel] Jade",
+			"[Fledgling Somatic] Kor",
+			"[Innocent Swordsman] Kyle",
+			"[Wrapped in Falme] Lailah",
+			"[Devoted Staff Striker] Leia",
+			"[A Witch's Beckoning] Magilou",
+			"[Speaks Without a Word] Malik",
+			"[Mistress of Bubbles] Norma",
+			"[Devoted Sage] Philia",
+			"[The Reticent Axe] Presea",
+			"[Keen Spearwoman] QQ",
+			"[Galiant Canine] Repede",
+			"[Rangetsu Practicioneer] Rokurou",
+			"[Bright-Eyed Merchant] Rose",
+			"[Timid Greatswordsman] Ruca",
+			"[Time is Money] Rutee",
+			"[Alliance Marine] Senel",
+			"[Virile Swordsman] Veigue",
+			"[Drifter in the Wind] Zaveid"
+		]
+	},
+	"ssr_ticket":{
+		"Name":"SSR Ticket",
+		"Rolls":1,
+		"Rates":{
+			"SSR":100,
+			"Bonus":false
+		},
+		"SSR":[
+			"[Teruyari of the Dark Night] Aegis",
+			"[Under an Azure Sky] Asbel",
+			"[A Moment's Peace] Cress",
+			"[Sword Shi Wearing a Sin] Kanata",
+			"[Greatsword Brandisher] Kanonno E.",
+			"[Defiant Heart] Leon",
+			"[Shaken in the Wagon] Luke",
+			"[Noble Hearted] Milla",
+			"[Fire Mercy Become Flower] Misella",
+			"[Serene Huntsman] Reid",
+			"[The Dawn's Guidance] Sorey",
+			"[Energetic Soul] Stahn",
+			"[Tainted by Vengance] Velvet",
+			"[Shooting Wild Dance] Vicious",
+			"[At Yesteryear's Window] Yuri"
 		]
 	}
 }
