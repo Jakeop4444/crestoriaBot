@@ -1,7 +1,7 @@
-**Vision Orb v0.7.5 BETA**
+**Vision Orb v0.8.1 BETA**
 _Note: Vision Orb may shut down frequently during testing, please check the `~update` command to see when the bot is shutting down for updates_
 
 _What's new in this update:_
 
-- Small updates to `~gacha` command, now has option for single ticket pulls. Use `~gacha list` to see a list of what gacha are available to pull from
-- Bug Spray applied
+- `~search` got a small make over. Now some search requrests that didn't display results in the past should now return results.
+- Bug Exterminator made their rounds, more bugs exterminated.

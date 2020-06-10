@@ -15,64 +15,89 @@ module.exports = {
 			host: db_host,
 			user: db_user,
 			password: db_password,
-			database: db_name
+			database: db_name,
+			multipleStatements: true
 		});
 
 		//console.log("[SEARCH] DEBUG: Bot has connected to database.");
 
-		var var_set = false;
-		var counter = 0;
-		var sql = "SELECT * FROM characters WHERE ";
+		var _tempSql1 = "SELECT * FROM characters WHERE ";
+		var _tempSql2 = "SELECT * FROM ((SELECT * FROM characters WHERE ";
 
 		//Loop through arguments to find the query user-inputs
 		if(args.length === 0 ){
 			message.reply("Nothing to Search");
 			return;
 		}else{
-			sql += "Name LIKE '%";
+			_tempSql1 += "Name LIKE '%";
+			_tempSql2 += "Name IN ('";
 			for(i = 0; i<args.length; i++){
 				if(i != args.length-1){
-					sql+=args[i]+" ";
+					_tempSql1+=args[i]+" ";
+					_tempSql2+=args[i]+"', '";
 				}else{
-					sql+=args[i];
+					_tempSql1+=args[i];
+					_tempSql2+=args[i];
 				}
 			}
-			sql += "%' UNION SELECT * FROM characters WHERE Title LIKE '%";
+			_tempSql1 += "%' UNION SELECT * FROM characters WHERE Title LIKE '%";
+			_tempSql2 += "')) UNION ALL(SELECT * FROM characters WHERE Title IN ('";
 			for(i = 0; i<args.length; i++){
 				if(i != args.length-1){
-					sql+=args[i]+" ";
+					_tempSql1+=args[i]+" ";
+					_tempSql2+=args[i]+"', '";
 				}else{
-					sql+=args[i];
+					_tempSql1+=args[i];
+					_tempSql2+=args[i];
 				}
 			}
-			sql += "%' UNION SELECT * FROM characters WHERE Element LIKE '%";
+			_tempSql1 += "%' UNION SELECT * FROM characters WHERE Element LIKE '%";
+			_tempSql2 += "')) UNION ALL(SELECT * FROM characters WHERE Element IN ('";
 			for(i = 0; i<args.length; i++){
 				if(i != args.length-1){
-					sql+=args[i]+" ";
+					_tempSql1+=args[i]+" ";
+					_tempSql2+=args[i]+"', '";
 				}else{
-					sql+=args[i];
+					_tempSql1+=args[i];
+					_tempSql2+=args[i];
 				}
 			}
-			sql += "%' UNION SELECT * FROM characters WHERE Type LIKE '%";
+			_tempSql1 += "%' UNION SELECT * FROM characters WHERE Type LIKE '%";
+			_tempSql2 += "')) UNION ALL(SELECT * FROM characters WHERE Type IN ('";
 			for(i = 0; i<args.length; i++){
 				if(i != args.length-1){
-					sql+=args[i]+" ";
+					_tempSql1+=args[i]+" ";
+					_tempSql2+=args[i]+"', '";
 				}else{
-					sql+=args[i];
+					_tempSql1+=args[i];
+					_tempSql2+=args[i];
+				}
+			}
+			_tempSql1 += "%' UNION SELECT * FROM characters WHERE Rarity LIKE '%";
+			_tempSql2 += "')) UNION ALL(SELECT * FROM characters WHERE Rarity IN ('";
+			for(i = 0; i<args.length; i++){
+				if(i != args.length-1){
+					_tempSql1+=args[i]+" ";
+					_tempSql2+=args[i]+"', '";
+				}else{
+					_tempSql1+=args[i];
+					_tempSql2+=args[i];
 				}
 			}
 		}
-		sql+="%'";
+		_tempSql1+="%'";
+		_tempSql2+="')))c GROUP BY Title HAVING COUNT(*) > 1";
 		
 		//console.log(sql);
 
-		sql += " ORDER BY Name ASC"
+		_tempSql1 += " ORDER BY Name ASC"
+		_tempSql2 += " ORDER BY Name ASC"
 
 		//console.log("[SEARCH] DEBUG: Query assembled.");
 
-		var many_names = "";
-		connec.query(sql, function (error, result, fields) {
-			if (error) console.log(error);
+		doubleQuery(connec, _tempSql1, _tempSql2).then(function(result){
+			//console.log("[DEBUG] Displaying Results");
+			//if (error) console.log(error);
 
 			//Check for result array length
 			if (result.length > 1){
@@ -156,10 +181,32 @@ module.exports = {
 				//console.log("[SEARCH] DEBUG: Embed sent!");
 
 			}
-		});
-
+			connec.end();
+		})
 		//Staying connected to the database auto-kicks the connection which shuts down the bot.
-		connec.end();
 		console.log("[SEARCH] DEBUG: Unhooked from database.");
 	},
 };
+
+function doubleQuery(connection, sqlQuery1, sqlQuery2){
+	return new Promise(function(resolve, reject){
+		connection.query(sqlQuery1, function(error, result, fields){
+			//console.log("[DEBUG] Invoking Query 1");
+			if(error){
+				return reject(error);
+			}
+			if(result.length === 0){
+				//console.log(sqlQuery2);
+				//console.log("[DEBUG] No Results Found. Invoking Query 2");
+				connection.query(sqlQuery2, function(error, result, fields){
+					if(error){
+						return reject(error);
+					}
+					resolve(result);
+				});
+			}else{
+				resolve(result);
+			}
+		});
+	});
+}

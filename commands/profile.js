@@ -179,7 +179,7 @@ module.exports = {
 				con.query(sql, function(error, result, fields){
 					if(error) console.log(error);
 					if(result.length === 0){
-						message.reply("You don't have a profile created! Create a profile first using `~profile create (Username) (ID)`**");
+						message.reply("You don't have a profile created! Create a profile first using `~profile create (Username)`**");
 					}else{
 						//Edits any unit
 						if(args[1].toLowerCase() === 'fire' || args[1].toLowerCase() === 'earth' || 
