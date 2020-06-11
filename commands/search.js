@@ -119,7 +119,7 @@ module.exports = {
 						.setElementsPerPage(10)
 						.setPage(1)
 						.setPageIndicator(true)
-						.formatField('Query Results', i => emoji[i.Rarity] + " [[" + i.Title + "] " + i.Name.replace("_", " ") + "](https://www.tocdb.xyz/" + i.Rarity.toLowerCase() + "/" + i.Name + ".php)")
+						.formatField('Query Results', i => emoji[i.Rarity] + " [[" + i.Title + "] " + i.Name.replace("_", " ") + "](https://www.tocdb.xyz/db/" + i.Rarity.toLowerCase() + "/" + i.Name + ")")
 						.setDeleteOnTimeout(false);
 
 					FieldsEmbed.embed
@@ -140,7 +140,7 @@ module.exports = {
 				//console.log(result[0].Title + "\n" + "Rarity: " + result[0].Rarity + "\n" + "Element: " + result[0].Element + "\n" + "Weapon Type: " + result[0].Type);
 				const embed_single = new MessageEmbed()
 				.setTitle("["+result[0].Title+"] "+result[0].Name.replace("_", " "))
-				.setURL('https://www.tocdb.xyz/' + result[0].Rarity.toLowerCase() + '/' + result[0].Name + '.php') //Set the Title to link to our database site for more detailed info!
+				.setURL('https://www.tocdb.xyz/db/' + result[0].Rarity.toLowerCase() + '/' + result[0].Name) //Set the Title to link to our database site for more detailed info!
 				.setColor(0x0000FF)
 				.setImage(result[0].Image)
 				.setDescription("**Rarity:** " + emoji[result[0].Rarity] + "\t" + "**Element:** " + emoji[result[0].Element] + "\t" + "**Weapon Type:** " + emoji[result[0].Type]+"\n_All Stats are as if they are Max Level/Ascension_")

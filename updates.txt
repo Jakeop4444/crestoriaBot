@@ -1,4 +1,4 @@
-**Vision Orb v0.8.1 BETA**
+**Vision Orb v0.8.2 BETA**
 _Note: Vision Orb may shut down frequently during testing, please check the `~update` command to see when the bot is shutting down for updates_
 
 _What's new in this update:_
