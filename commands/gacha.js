@@ -32,15 +32,33 @@ module.exports = {
 					if(i < gacha_pool[gacha].Rolls-1 || gacha_pool[gacha].Rates.Bonus === false){
 						if(pull <= gacha_pool[gacha].Rates.SSR){
 							pull = Math.floor(Math.random() * gacha_pool[gacha].SSR.length);
-							results+=emotes["SSR"]+" "+gacha_pool[gacha].SSR[pull]+"\n";
+							var e;
+							if(emotes.Materials[gacha_pool[gacha].SSR[pull]]){
+								e = emotes.Materials[gacha_pool[gacha].SSR[pull]];
+							}else{
+								e = emotes["SSR"];
+							}
+							results+=e+" "+gacha_pool[gacha].SSR[pull]+"\n";
 							//console.log("SSR");
 						}else if(pull > gacha_pool[gacha].Rates.SSR && pull <= (gacha_pool[gacha].Rates.SSR + gacha_pool[gacha].Rates.SR)){
 							pull = Math.floor(Math.random() * gacha_pool[gacha].SR.length);
-							results+=emotes["SR"]+" "+gacha_pool[gacha].SR[pull]+"\n";
+							var e;
+							if(emotes.Materials[gacha_pool[gacha].SR[pull]]){
+								e = emotes.Materials[gacha_pool[gacha].SR[pull]];
+							}else{
+								e = emotes["SR"];
+							}
+							results+=e+" "+gacha_pool[gacha].SR[pull]+"\n";
 							//console.log("SR");
 						}else{
 							pull = Math.floor(Math.random() * gacha_pool[gacha].R.length);
-							results+=emotes["R"]+" "+gacha_pool[gacha].R[pull]+"\n";
+							var e;
+							if(emotes.Materials[gacha_pool[gacha].R[pull]]){
+								e = emotes.Materials[gacha_pool[gacha].R[pull]];
+							}else{
+								e = emotes["R"];
+							}
+							results+=e+" "+gacha_pool[gacha].R[pull]+"\n";
 							//console.log("R");
 						}
 					}else{

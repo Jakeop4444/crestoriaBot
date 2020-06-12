@@ -1,7 +1,23 @@
-**Vision Orb v0.8.2 BETA**
+**Vision Orb v0.10.1 BETA**
 _Note: Vision Orb may shut down frequently during testing, please check the `~update` command to see when the bot is shutting down for updates_
 
 _What's new in this update:_
 
-- `~search` got a small make over. Now some search requrests that didn't display results in the past should now return results.
-- Bug Exterminator made their rounds, more bugs exterminated.
+- HUGE update and we really mean HUGE update to the `~profile` command. Not only did the profile cards get a new style, there are also new functions and customization options added! Now you can change the background, display your favorite Tales Title or PVP Ranking as Flair, and showcase the Ascension Level of all your support units on your support list!
+_Please remember that some of these commands will not affect your profile image if you supplied a custom one to use._
+New Profile Commands added are:
+`~profile edit bg (background_name)` - Edits the background image on your profile photo
+`~profile edit flair (flair_name)` - Edits the flair image on your profile photo.
+`~profile backgrounds` - Displays a list of all the names of background images you can use
+`~profile flair` - Displays a list of all the flair you can use. These range from PVP Ranks to Tales Titles
+Also added, but currently disabled are;
+`~profile edit fire_asc (number from 0 to 5)` - Edits the ascension level displayed on your fire unit
+`~profile edit earth_asc (number from 0 to 5)` - Edits the ascension level displayed on your earth unit
+`~profile edit wind_asc (number from 0 to 5)` - Edits the ascension level displayed on your wind unit
+`~profile edit water_asc (number from 0 to 5)` - Edits the ascension level displayed on your water unit
+`~profile edit light_asc (number from 0 to 5)` - Edits the ascension level displayed on your light unit
+`~profile edit dark_asc (number from 0 to 5)` - Edits the ascension level displayed on your dark unit
+
+- `~gacha guild` and `~gacha friend` have been added to the gacha command.
+
+- Pest Control had fun in this update. Bugs found and exterminated in the hardest to reach places

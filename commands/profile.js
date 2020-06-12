@@ -5,6 +5,7 @@ const fs = require ('fs');
 const images = require('../images.json');
 const Canvas = require('canvas');
 const { db_host, profile_user, profile_password, profile_db, profile_table, db_user, db_password, db_name, db_table} = require('../config.json');
+const Pagination = require('discord-paginationembed');
 
 module.exports = {
 	name: 'profile',
@@ -21,11 +22,15 @@ module.exports = {
 			'`~profile edit id (ID Number)` - Edits the ID number listed on your profile\n'+
 			'`~profile edit guild (Guild Name)` - Edits the Guild Name listed on your profile\n'+
 			'`~profile edit image` - Attach your own custom image to the profile. Image must be attached to the message that sends this command\n'+
+			'`~profile edit flair` - Attach your own custom image to the profile. Image must be attached to the message that sends this command\n'+
+			'`~profile edit bg` - Attach your own custom image to the profile. Image must be attached to the message that sends this command\n'+
 			'`~profile edit clrimg` - Clears your own custom image to use the self-generated one. **Does not clear anything set for the self-generated image**\n\n'+
 			'***___LOOKUP COMMANDS___***\n'+
 			'`~profile units (element)` - Displays a list of all the units that you can set for your card\n'+
 			'the name after the "=>" in the results is the name you use in the `~profile edit unit (element) (character)` command\n'+
-			'`~profile characters` - Displays a list of all the characters that you can set on the side of your card\n\n'+
+			'`~profile characters` - Displays a list of all the characters that you can set on the side of your card\n'+
+			'`~profile flair` - Displays a list of all the characters that you can set on the side of your card\n'+
+			'`~profile backgrounds` - Displays a list of all the characters that you can set on the side of your card\n\n'+
 			'***___CREATE COMMAND___***\n'+
 			'`~profile create (Username) (ID Number) (Guild Name)` - Creates a profile with the bot. Entering the ID and Guild Name is optional.\n'+
 			'You can also attach an image to this command and set your own custom image.',
@@ -50,7 +55,6 @@ module.exports = {
 					//console.log("Hey Look, it worked?: "+result[0].user_id);
 					// If an image is provided by a user in the database, send that player's profile image with their User Data
 					if(result[0].profile_image != "NONE_SET"){
-
 						var details = '';
 						if(result[0].profile_id != 'unknown'){
 							details += "ID: "+result[0].profile_id+"\n";
@@ -65,29 +69,38 @@ module.exports = {
 						.setDescription(details)
 						.setImage(result[0].profile_image.replace("CLN", ":").replace("DBLFWS", "//"));
 						message.channel.send(_embed);
-
 					}//If an image isn't provided, create a dynamic profile image for display.
 					else{
 						//Create the canvas and set the context to 2D image
 						//console.log("[PROFILE] DEBUG: Creating Canvas");
-						const canvas = Canvas.createCanvas(1900, 800);
+						// Image loads as follows:
+						// Background
+						// Mystic
+						// Flair
+						// SR Background
+						// Units
+						// Elements
+						// Name Bar
+						// Ascension BG
+						// Unit Ascension
+						// Borders
+						const canvas = Canvas.createCanvas(1624, 916);
 						const ctx = canvas.getContext('2d');
 
 						//Asynchronous check if the image exists within the bot.
 						//Will hang/error if the image does not exist in the context.
-						const sr_background = await Canvas.loadImage(images["sr_background"]);
-						const card_background = await Canvas.loadImage(images["background"]);
-
+						const background = await Canvas.loadImage(images.background[result[0].background]);
+						ctx.drawImage(background, 0, 0, canvas.width, canvas.height);
 						//console.log("[PROFILE] DEBUG: Setting Unit Images");
-
-						ctx.drawImage(sr_background, 0, 0, canvas.width, canvas.height);
-						ctx.drawImage(card_background, 0, 0, canvas.width, canvas.height);
-
 						//If none of these images are set, do not draw image, otherwise draw
 						if(result[0].flair != "NONE_SET"){
 							const mystic = await Canvas.loadImage(images.mystic[result[0].flair]);
 							ctx.drawImage(mystic, 0, 0, canvas.width, canvas.height);
 						}
+						const flair = await Canvas.loadImage(images.flair[result[0].pvp_rank]);
+						ctx.drawImage(flair, 0, 0, canvas.width, canvas.height);
+						const sr_background = await Canvas.loadImage(images["sr_background"]);
+						ctx.drawImage(sr_background, 0, 0, canvas.width, canvas.height);
 						if(result[0].fire_unit != "NONE_SET"){
 							const fire = await Canvas.loadImage(images.fire_units[result[0].fire_unit]);
 							ctx.drawImage(fire, 0, 0, canvas.width, canvas.height);
@@ -112,15 +125,49 @@ module.exports = {
 							const dark = await Canvas.loadImage(images.dark_units[result[0].dark_unit]);
 							ctx.drawImage(dark, 0, 0, canvas.width, canvas.height);
 						}
-
-						//Load the rest of the elements to the canvas
-						//console.log("[PROFILE] DEBUG: Units Set");
 						const elements = await Canvas.loadImage(images["elements"]);
 						ctx.drawImage(elements, 0, 0, canvas.width, canvas.height);
-						
-						const title = await Canvas.loadImage(images["title"]);
-						ctx.drawImage(title, 0, 0, canvas.width, canvas.height);
-					
+						const name_bar = await Canvas.loadImage(images["name_bar"]);
+						ctx.drawImage(name_bar, 0, 0, canvas.width, canvas.height);
+						const ascension_bg = await Canvas.loadImage(images["ascension_bg"]);
+						ctx.drawImage(ascension_bg, 0, 0, canvas.width, canvas.height);
+						if(result[0].fire_asc > 0){
+							const fire_asc = await Canvas.loadImage("./images/profile_card_images/fire_ascension/fire_asc_"+result[0].fire_asc+".png");
+							ctx.drawImage(fire_asc, 0, 0, canvas.width, canvas.height);
+						}
+						if(result[0].earth_asc > 0){
+							const earth_asc = await Canvas.loadImage("./images/profile_card_images/earth_ascension/earth_asc_"+result[0].earth_asc+".png");
+							ctx.drawImage(earth_asc, 0, 0, canvas.width, canvas.height);
+						}
+						if(result[0].wind_asc > 0){
+							const wind_asc = await Canvas.loadImage("./images/profile_card_images/wind_ascension/wind_asc_"+result[0].wind_asc+".png");
+							ctx.drawImage(wind_asc, 0, 0, canvas.width, canvas.height);
+						}
+						if(result[0].water_asc > 0){
+							const water_asc = await Canvas.loadImage("./images/profile_card_images/water_ascension/water_asc_"+result[0].water_asc+".png");
+							ctx.drawImage(water_asc, 0, 0, canvas.width, canvas.height);
+						}
+						if(result[0].light_asc > 0){
+							const light_asc = await Canvas.loadImage("./images/profile_card_images/light_ascension/light_asc_"+result[0].light_asc+".png");
+							ctx.drawImage(light_asc, 0, 0, canvas.width, canvas.height);
+						}
+						if(result[0].dark_asc > 0){
+							const dark_asc = await Canvas.loadImage("./images/profile_card_images/dark_ascension/dark_asc_"+result[0].dark_asc+".png");
+							ctx.drawImage(dark_asc, 0, 0, canvas.width, canvas.height);
+						}
+						//Load the rest of the elements to the canvas
+						//console.log("[PROFILE] DEBUG: Units Set");
+						// Image loads as follows:
+						// Background
+						// Mystic (flair)
+						// Flair (pvp_rank)
+						// SR Background
+						// Units
+						// Elements
+						// Name Bar
+						// Ascension BG
+						// Unit Ascension
+						// Borders
 						const border = await Canvas.loadImage(images["borders"]);
 						ctx.drawImage(border, 0, 0, canvas.width, canvas.height);
 
@@ -148,6 +195,13 @@ module.exports = {
 		}
 		//Display Characters you can set as flair for your profile
 		else if(args.length === 1){
+			/*if(args[0].toLowerCase() === "setup"){
+				var sql = "UPDATE "+profile_table+" SET background = \"cosmos\", pvp_rank = \"crestoria\", fire_asc = 0, earth_asc = 0, wind_asc = 0, water_asc = 0, light_asc = 0, dark_asc = 0";
+				con.query(sql, function(error, result, fields){
+					if(error) console.log(error);
+					console.log("Records Updated");
+				})
+			}*/
 			if(args[0].toLowerCase() === "characters"){
 				var names = '';
 				Object.keys(images.mystic).forEach(function(k){
@@ -161,6 +215,38 @@ module.exports = {
 				message.channel.send(embed);
 
 				//images.forEach(data => console.log(data.mystic));
+			}else if(args[0].toLowerCase() === "flair"){
+				const FieldsEmbed = new Pagination.FieldsEmbed()
+				.setArray(Object.keys(images.flair))
+				.setAuthorizedUsers([message.author.id])
+				.setChannel(message.channel)
+				.setElementsPerPage(15)
+				.setPage(1)
+				.setPageIndicator(true)
+				.formatField("Results", i => i)
+				.setDeleteOnTimeout(false);
+
+				FieldsEmbed.embed
+				.setColor(0xFF00AE)
+				.setDescription("Here is a list of Flair you can assign to your profile.")
+
+				FieldsEmbed.build();
+			}else if(args[0].toLowerCase() === "backgrounds"){
+				const FieldsEmbed = new Pagination.FieldsEmbed()
+				.setArray(Object.keys(images.background))
+				.setAuthorizedUsers([message.author.id])
+				.setChannel(message.channel)
+				.setElementsPerPage(15)
+				.setPage(1)
+				.setPageInicator(true)
+				.formatField("Results", i => i)
+				.setDeleteOnTimeout(false);
+
+				FieldsEmbed.embed
+				.setColor(0xFF00AE)
+				.setDescription("Here is a list of Backgrounds you can assign to your profile.")
+
+				FieldsEmbed.build();
 			}else if(args[0] === "create"){
 				message.reply("Invalid use of `~profile create` command.");
 			}else if(args[0] === "edit"){
@@ -203,6 +289,36 @@ module.exports = {
 							//console.log("[PROFILE] DEBUG: Editing Flair");
 							if(images.mystic[args[2].toLowerCase()]){
 								sql = 'UPDATE '+profile_table+" SET flair = '"+args[2].toLowerCase()+"' WHERE user_id = "+message.author.id;
+								con.query(sql, function(error, result, fields){
+									if(error) console.log(error);
+									message.reply("Your Character has been updated!");
+								})
+							}
+							else{
+								message.reply("That character does not exist. Use `~profile characters` to see what you can set!");
+							}
+							console.log("[PROFILE] DEBUG: Done Editing Profile");
+						}
+						//Edits the character flair
+						else if(args[1].toLowerCase() === "bg"){
+							//console.log("[PROFILE] DEBUG: Editing Flair");
+							if(images.background[args[2].toLowerCase()]){
+								sql = 'UPDATE '+profile_table+" SET background = '"+args[2].toLowerCase()+"' WHERE user_id = "+message.author.id;
+								con.query(sql, function(error, result, fields){
+									if(error) console.log(error);
+									message.reply("Your Character has been updated!");
+								})
+							}
+							else{
+								message.reply("That background does not exist. Use `~profile backgrounds` to see what you can set!");
+							}
+							console.log("[PROFILE] DEBUG: Done Editing Profile");
+						}
+						//Edits the character flair
+						else if(args[1].toLowerCase() === "flair"){
+							//console.log("[PROFILE] DEBUG: Editing Flair");
+							if(images.flair[args[2].toLowerCase()]){
+								sql = 'UPDATE '+profile_table+" SET pvp_rank = '"+args[2].toLowerCase()+"' WHERE user_id = "+message.author.id;
 								con.query(sql, function(error, result, fields){
 									if(error) console.log(error);
 									message.reply("Your Character has been updated!");
