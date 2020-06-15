@@ -238,7 +238,7 @@ module.exports = {
 				.setChannel(message.channel)
 				.setElementsPerPage(15)
 				.setPage(1)
-				.setPageInicator(true)
+				.setPageIndicator(true)
 				.formatField("Results", i => i)
 				.setDeleteOnTimeout(false);
 
@@ -268,9 +268,9 @@ module.exports = {
 						message.reply("You don't have a profile created! Create a profile first using `~profile create (Username)`**");
 					}else{
 						//Edits any unit
-						if(args[1].toLowerCase() === 'fire' || args[1].toLowerCase() === 'earth' || 
+						if((args[1].toLowerCase() === 'fire' || args[1].toLowerCase() === 'earth' || 
 							args[1].toLowerCase() === 'wind' || args[1].toLowerCase() === 'water' || 
-							args[1].toLowerCase() === 'light' || args[1].toLowerCase() === 'dark'){
+							args[1].toLowerCase() === 'light' || args[1].toLowerCase() === 'dark') && args.length >= 3){
 							var leftString = args[1].toLowerCase()+"_units";
 							var rightString = args[2].toLowerCase();
 							if(images[leftString][rightString]){
@@ -285,7 +285,7 @@ module.exports = {
 							}
 						}
 						//Edits the character flair
-						else if(args[1].toLowerCase() === "character"){
+						else if(args[1].toLowerCase() === "character" && args.length >= 3){
 							//console.log("[PROFILE] DEBUG: Editing Flair");
 							if(images.mystic[args[2].toLowerCase()]){
 								sql = 'UPDATE '+profile_table+" SET flair = '"+args[2].toLowerCase()+"' WHERE user_id = "+message.author.id;
@@ -300,13 +300,13 @@ module.exports = {
 							console.log("[PROFILE] DEBUG: Done Editing Profile");
 						}
 						//Edits the character flair
-						else if(args[1].toLowerCase() === "bg"){
+						else if(args[1].toLowerCase() === "bg" && args.length >= 3){
 							//console.log("[PROFILE] DEBUG: Editing Flair");
 							if(images.background[args[2].toLowerCase()]){
 								sql = 'UPDATE '+profile_table+" SET background = '"+args[2].toLowerCase()+"' WHERE user_id = "+message.author.id;
 								con.query(sql, function(error, result, fields){
 									if(error) console.log(error);
-									message.reply("Your Character has been updated!");
+									message.reply("Your Background has been updated!");
 								})
 							}
 							else{
@@ -315,13 +315,13 @@ module.exports = {
 							console.log("[PROFILE] DEBUG: Done Editing Profile");
 						}
 						//Edits the character flair
-						else if(args[1].toLowerCase() === "flair"){
+						else if(args[1].toLowerCase() === "flair" && args.length >= 3){
 							//console.log("[PROFILE] DEBUG: Editing Flair");
 							if(images.flair[args[2].toLowerCase()]){
 								sql = 'UPDATE '+profile_table+" SET pvp_rank = '"+args[2].toLowerCase()+"' WHERE user_id = "+message.author.id;
 								con.query(sql, function(error, result, fields){
 									if(error) console.log(error);
-									message.reply("Your Character has been updated!");
+									message.reply("Your Flair has been updated!");
 								})
 							}
 							else{
@@ -330,7 +330,7 @@ module.exports = {
 							console.log("[PROFILE] DEBUG: Done Editing Profile");
 						}
 						//Edits the profile name
-						else if(args[1].toLowerCase() === "name"){
+						else if(args[1].toLowerCase() === "name" && args.length >= 3){
 							//console.log("[PROFILE] DEBUG: Editing Profile Name");
 							sql = 'UPDATE '+profile_table+" SET profile_name = '"+args[2]+"' WHERE user_id = "+message.author.id;
 							con.query(sql, function(error, result, fields){
@@ -340,7 +340,7 @@ module.exports = {
 							console.log("[PROFILE] DEBUG: Done Editing Profile");
 						}
 						//Edits the profile id
-						else if(args[1].toLowerCase() === "id"){
+						else if(args[1].toLowerCase() === "id" && args.length >= 3){
 							//console.log("[PROFILE] DEBUG: Editing Profile ID");
 							sql = 'UPDATE '+profile_table+" SET profile_id = '"+args[2]+"' WHERE user_id = "+message.author.id;
 							con.query(sql, function(error, result, fields){
@@ -350,7 +350,7 @@ module.exports = {
 							console.log("[PROFILE] DEBUG: Done Editing Profile");
 						}
 						//Edits the profile guild
-						else if(args[1].toLowerCase() === "guild"){
+						else if(args[1].toLowerCase() === "guild" && args.length >= 3){
 							//console.log("[PROFILE] DEBUG: Editing Profile Guild");
 							var guildname = '';
 							for(i = 2; i < args.length; i++){
@@ -365,7 +365,7 @@ module.exports = {
 						}
 						//Edits the profile image to a user submitted image
 						//Needs to have an supported image type attached to the message otherwise will error
-						else if(args[1].toLowerCase() === "image"){
+						else if(args[1].toLowerCase() === "image" && args.length >= 3){
 							//console.log("[PROFILE] DEBUG: Editing Profile Image");
 							if(message.attachments.first()){
 								var fileCheck = message.attachments.first().name.split('.');
@@ -453,7 +453,7 @@ module.exports = {
 						create = true;
 						//console.log("[PROFILE] DEBUG: Creating Profile");
 						sql = "INSERT INTO "+profile_table+" (user_id, profile_name, profile_id, profile_guild, fire_unit, earth_unit, wind_unit, water_unit, "+
-								"light_unit, dark_unit, flair, profile_image) VALUES ("+message.author.id+", '"+args[1]+"', ";
+								"light_unit, dark_unit, flair, profile_image, background, pvp_rank, fire_asc, earth_asc, wind_asc, water_asc, light_asc, dark_asc) VALUES ("+message.author.id+", '"+args[1]+"', ";
 						if(args[2]){
 							sql += args[2];
 						}else{
@@ -478,8 +478,9 @@ module.exports = {
 				                return;
 				            }
 						}else{
-							sql += "NONE_SET')";
+							sql += "NONE_SET'";
 						}
+						sql += ", 'cosmos', 'crestoria', 0, 0, 0, 0, 0, 0)";
 						//Replaces special characters so SQL doesn't break
 						sql.replace("/[/g", "").replace("/]/g", "");
 						con.query(sql, function(error, result, fields){

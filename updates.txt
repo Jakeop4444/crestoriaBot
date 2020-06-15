@@ -1,4 +1,4 @@
-**Vision Orb v0.10.1 BETA**
+**Vision Orb v0.10.3 BETA**
 _Note: Vision Orb may shut down frequently during testing, please check the `~update` command to see when the bot is shutting down for updates_
 
 _What's new in this update:_
@@ -17,6 +17,7 @@ Also added, but currently disabled are;
 `~profile edit water_asc (number from 0 to 5)` - Edits the ascension level displayed on your water unit
 `~profile edit light_asc (number from 0 to 5)` - Edits the ascension level displayed on your light unit
 `~profile edit dark_asc (number from 0 to 5)` - Edits the ascension level displayed on your dark unit
+Text will be added soon to the profile image output.
 
 - `~gacha guild` and `~gacha friend` have been added to the gacha command.
 
