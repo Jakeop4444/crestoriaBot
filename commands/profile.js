@@ -284,6 +284,20 @@ module.exports = {
 								message.reply("That "+args[1].toLowerCase()+" unit does not exist. Use `~profile units "+args[1].toLowerCase()+"` to see what units exist");
 							}
 						}
+						//Edits the ascension level on units. Uncomment once game releases
+						/*else if((args[1].toLowerCase() === 'fire_asc' || args[1].toLowerCase() === 'earth_asc' || 
+								args[1].toLowerCase() === 'wind_asc' || args[1].toLowerCase() === 'water_asc' || 
+								args[1].toLowerCase() === 'light_asc' || args[1].toLowerCase() === 'dark_asc') && args.length >= 3){
+							if(args[2] < 0 || args[2] > 5){
+								message.reply("Please use a number from 0 to 5")
+							}else{
+								sql = "UPDATE "+profile_table+" SET "+args[1].toLowerCase()+" = "+args[2]+" WHERE user_id = "+message.author.id;
+								con.query(sql, function(error, result, fields){
+									if(error) console.log(error);
+									messge.reply("Your ascension information has been updated");
+								});
+							}
+						}*/
 						//Edits the character flair
 						else if(args[1].toLowerCase() === "character" && args.length >= 3){
 							//console.log("[PROFILE] DEBUG: Editing Flair");
@@ -299,7 +313,7 @@ module.exports = {
 							}
 							console.log("[PROFILE] DEBUG: Done Editing Profile");
 						}
-						//Edits the character flair
+						//Edits the background
 						else if(args[1].toLowerCase() === "bg" && args.length >= 3){
 							//console.log("[PROFILE] DEBUG: Editing Flair");
 							if(images.background[args[2].toLowerCase()]){
@@ -314,7 +328,7 @@ module.exports = {
 							}
 							console.log("[PROFILE] DEBUG: Done Editing Profile");
 						}
-						//Edits the character flair
+						//Edits the profile flair
 						else if(args[1].toLowerCase() === "flair" && args.length >= 3){
 							//console.log("[PROFILE] DEBUG: Editing Flair");
 							if(images.flair[args[2].toLowerCase()]){
