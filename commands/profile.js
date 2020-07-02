@@ -91,7 +91,6 @@ module.exports = {
 						//Will hang/error if the image does not exist in the context.
 						const background = await Canvas.loadImage(images.background[result[0].background]);
 						ctx.drawImage(background, 0, 0, canvas.width, canvas.height);
-						//console.log("[PROFILE] DEBUG: Setting Unit Images");
 						//If none of these images are set, do not draw image, otherwise draw
 						if(result[0].flair != "NONE_SET"){
 							const mystic = await Canvas.loadImage(images.mystic[result[0].flair]);
