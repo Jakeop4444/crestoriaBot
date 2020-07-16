@@ -1,9 +1,12 @@
 {
 	"general":{
+		"Name":"General",
+		"Rolls":10,
 		"Rates":{
 			"SSR":5,
 			"SR":20,
-			"R":75
+			"R":75,
+			"Bonus":true
 		},
 		"SSR":[
 			"[Teruyari of the Dark Night] Aegis",
@@ -43,12 +46,12 @@
 			"[Devoted Staff Striker] Leia",
 			"[A Witch's Beckoning] Magilou",
 			"[Speaks Without a Word] Malik",
-			"[Mistess of Bubbles] Norma",
+			"[Mistress of Bubbles] Norma",
 			"[Devoted Sage] Philia",
 			"[The Reticent Axe] Presea",
 			"[Keen Spearwoman] QQ",
 			"[Galiant Canine] Repede",
-			"[Rengetsu Practicioneer] Rokurou",
+			"[Rangetsu Practicioneer] Rokurou",
 			"[Bright-Eyed Merchant] Rose",
 			"[Timid Greatswordsman] Ruca",
 			"[Time is Money] Rutee",
@@ -59,12 +62,12 @@
 
 		"R":[
 			"[Shadowless Arte Caster] Agria",
-			"[Blakc-Hearted Sadist] Alice",
+			"[Black-Hearted Sadist] Alice",
 			"[Gun and Sword for Hire] Alvin",
 			"[Tranquil at Heart] Ange",
 			"[Bracing as Summer Rain] Annie",
 			"[Weilder of the Wilds] Arietta",
-			"[Red-Haired Swordsmane] Asch",
+			"[Red-Haired Swordsman] Asch",
 			"[Ingenue Archer] Chelsea",
 			"[Piercing Insight] Chester",
 			"[Headstrong and Hasty] Chloe",
@@ -150,18 +153,19 @@
 			"[Wind-Strewn Beauty] Zelos"
 		]
 	},
-	"arena":{
 
+	"arena":{
+		"Name":"Arena",
+		"Rolls":10,
 		"Rates":{
 			"SSR":3,
-			"SR":21,
-			"R":76
+			"SR":7,
+			"R":90,
+			"Bonus":false
 		},
-
 		"SSR":[
 			"[Power Past Comprehension] Chronos"
 		],
-
 		"SR":[
 			"[Precocious Puppeteer] Anise",
 			"[Sorceress Prodigy] Arche",
@@ -182,12 +186,12 @@
 			"[Devoted Staff Striker] Leia",
 			"[A Witch's Beckoning] Magilou",
 			"[Speaks Without a Word] Malik",
-			"[Mistess of Bubbles] Norma",
+			"[Mistress of Bubbles] Norma",
 			"[Devoted Sage] Philia",
 			"[The Reticent Axe] Presea",
 			"[Keen Spearwoman] QQ",
 			"[Galiant Canine] Repede",
-			"[Rengetsu Practicioneer] Rokurou",
+			"[Rangetsu Practicioneer] Rokurou",
 			"[Bright-Eyed Merchant] Rose",
 			"[Timid Greatswordsman] Ruca",
 			"[Time is Money] Rutee",
@@ -198,12 +202,12 @@
 
 		"R":[
 			"[Shadowless Arte Caster] Agria",
-			"[Blakc-Hearted Sadist] Alice",
+			"[Black-Hearted Sadist] Alice",
 			"[Gun and Sword for Hire] Alvin",
 			"[Tranquil at Heart] Ange",
 			"[Bracing as Summer Rain] Annie",
 			"[Weilder of the Wilds] Arietta",
-			"[Red-Haired Swordsmane] Asch",
+			"[Red-Haired Swordsman] Asch",
 			"[Ingenue Archer] Chelsea",
 			"[Piercing Insight] Chester",
 			"[Headstrong and Hasty] Chloe",
@@ -288,6 +292,258 @@
 			"[Black Ambitions] Wingul",
 			"[Wind-Strewn Beauty] Zelos"
 		]
+	},
+
+	"sr_ticket":{
+		"Name":"SR Ticket",
+		"Rolls":1,
+		"Rates":{
+			"SSR":5,
+			"SR":95,
+			"Bonus":false
+		},
+		"SSR":[
+			"[Teruyari of the Dark Night] Aegis",
+			"[Under an Azure Sky] Asbel",
+			"[A Moment's Peace] Cress",
+			"[Sword Shi Wearing a Sin] Kanata",
+			"[Greatsword Brandisher] Kanonno E.",
+			"[Defiant Heart] Leon",
+			"[Shaken in the Wagon] Luke",
+			"[Noble Hearted] Milla",
+			"[Fire Mercy Become Flower] Misella",
+			"[Serene Huntsman] Reid",
+			"[The Dawn's Guidance] Sorey",
+			"[Energetic Soul] Stahn",
+			"[Tainted by Vengance] Velvet",
+			"[Shooting Wild Dance] Vicious",
+			"[At Yesteryear's Window] Yuri"
+		],
+		"SR":[
+			"[Precocious Puppeteer] Anise",
+			"[Sorceress Prodigy] Arche",
+			"[Strapping Muscleman] Bruiser",
+			"[True-Hearted Beast] Caius",
+			"[Healing Hands] Cheria",
+			"[Peddler in the Wind] Dezel",
+			"[Diligent Spearwoman] Eleanor",
+			"[Never Apart] Elize",
+			"[Bearer of the Beast] Emil",
+			"[Upbeat Battler] Farah",
+			"[Unassailable Pride] Gaius",
+			"[Kendama Battler] Genis",
+			"[Perspicacious Colonel] Jade",
+			"[Fledgling Somatic] Kor",
+			"[Innocent Swordsman] Kyle",
+			"[Wrapped in Falme] Lailah",
+			"[Devoted Staff Striker] Leia",
+			"[A Witch's Beckoning] Magilou",
+			"[Speaks Without a Word] Malik",
+			"[Mistress of Bubbles] Norma",
+			"[Devoted Sage] Philia",
+			"[The Reticent Axe] Presea",
+			"[Keen Spearwoman] QQ",
+			"[Galiant Canine] Repede",
+			"[Rangetsu Practicioneer] Rokurou",
+			"[Bright-Eyed Merchant] Rose",
+			"[Timid Greatswordsman] Ruca",
+			"[Time is Money] Rutee",
+			"[Alliance Marine] Senel",
+			"[Virile Swordsman] Veigue",
+			"[Drifter in the Wind] Zaveid"
+		]
+	},
+
+	"ssr_ticket":{
+		"Name":"SSR Ticket",
+		"Rolls":1,
+		"Rates":{
+			"SSR":100,
+			"Bonus":false
+		},
+		"SSR":[
+			"[Teruyari of the Dark Night] Aegis",
+			"[Under an Azure Sky] Asbel",
+			"[A Moment's Peace] Cress",
+			"[Sword Shi Wearing a Sin] Kanata",
+			"[Greatsword Brandisher] Kanonno E.",
+			"[Defiant Heart] Leon",
+			"[Shaken in the Wagon] Luke",
+			"[Noble Hearted] Milla",
+			"[Fire Mercy Become Flower] Misella",
+			"[Serene Huntsman] Reid",
+			"[The Dawn's Guidance] Sorey",
+			"[Energetic Soul] Stahn",
+			"[Tainted by Vengance] Velvet",
+			"[Shooting Wild Dance] Vicious",
+			"[At Yesteryear's Window] Yuri"
+		]
+	},
+
+	"friend":{
+		"Name":"Friend Points",
+		"Rolls":10,
+		"Rates":{
+			"SSR":2,
+			"SR":23,
+			"R":75,
+			"Bonus":false
+		},
+		"SSR":[
+			"Rainbow Artes Tome III",
+			"Earth Artes Tome III",
+			"Wind Artes Tome III",
+			"Water Artes Tome III",
+			"Fire Artes Tome III",
+			"Light Artes Tome III",
+			"Dark Artes Tome III",
+			"Rainbow Refining Stone (L)",
+			"Earth Refining Stone (L)",
+			"Wind Refining Stone (L)",
+			"Water Refining Stone (L)",
+			"Fire Refining Stone (L)",
+			"Light Refining Stone (L)",
+			"Dark Refining Stone (L)",
+			"Rainbow Elixer (L)",
+			"Earth Elixer (L)",
+			"Wind Elixer (L)",
+			"Water Elixer (L)",
+			"Fire Elixer (L)",
+			"Light Elixer (L)",
+			"Dark Elixer (L)"
+		],
+		"SR":[
+			"Rainbow Artes Tome II",
+			"Earth Artes Tome II",
+			"Wind Artes Tome II",
+			"Water Artes Tome II",
+			"Fire Artes Tome II",
+			"Light Artes Tome II",
+			"Dark Artes Tome II",
+			"Rainbow Refining Stone (M)",
+			"Earth Refining Stone (M)",
+			"Wind Refining Stone (M)",
+			"Water Refining Stone (M)",
+			"Fire Refining Stone (M)",
+			"Light Refining Stone (M)",
+			"Dark Refining Stone (M)",
+			"Rainbow Elixer (M)",
+			"Earth Elixer (M)",
+			"Wind Elixer (M)",
+			"Water Elixer (M)",
+			"Fire Elixer (M)",
+			"Light Elixer (M)",
+			"Dark Elixer (M)"
+		],
+		"R":[
+			"Rainbow Artes Tome I",
+			"Earth Artes Tome I",
+			"Wind Artes Tome I",
+			"Water Artes Tome I",
+			"Fire Artes Tome I",
+			"Light Artes Tome I",
+			"Dark Artes Tome I",
+			"Rainbow Refining Stone (S)",
+			"Earth Refining Stone (S)",
+			"Wind Refining Stone (S)",
+			"Water Refining Stone (S)",
+			"Fire Refining Stone (S)",
+			"Light Refining Stone (S)",
+			"Dark Refining Stone (S)",
+			"Rainbow Elixer (S)",
+			"Earth Elixer (S)",
+			"Wind Elixer (S)",
+			"Water Elixer (S)",
+			"Fire Elixer (S)",
+			"Light Elixer (S)",
+			"Dark Elixer (S)",
+			"Gald"
+		]
+	},
+
+	"guild":{
+		"Name":"Guild Points",
+		"Rolls":10,
+		"Rates":{
+			"SSR":3,
+			"SR":17,
+			"R":80,
+			"Bonus":false
+		},
+		"SSR":[
+			"[The Gale That Cuts the Sky] Spada",
+			"Rainbow Artes Tome III",
+			"Earth Artes Tome III",
+			"Wind Artes Tome III",
+			"Water Artes Tome III",
+			"Fire Artes Tome III",
+			"Light Artes Tome III",
+			"Dark Artes Tome III",
+			"Rainbow Refining Stone (L)",
+			"Earth Refining Stone (L)",
+			"Wind Refining Stone (L)",
+			"Water Refining Stone (L)",
+			"Fire Refining Stone (L)",
+			"Light Refining Stone (L)",
+			"Dark Refining Stone (L)",
+			"Rainbow Elixer (L)",
+			"Earth Elixer (L)",
+			"Wind Elixer (L)",
+			"Water Elixer (L)",
+			"Fire Elixer (L)",
+			"Light Elixer (L)",
+			"Dark Elixer (L)"
+		],
+		"SR":[
+			"[Inspiring Courage] Karol",
+			"Rainbow Artes Tome II",
+			"Earth Artes Tome II",
+			"Wind Artes Tome II",
+			"Water Artes Tome II",
+			"Fire Artes Tome II",
+			"Light Artes Tome II",
+			"Dark Artes Tome II",
+			"Rainbow Refining Stone (M)",
+			"Earth Refining Stone (M)",
+			"Wind Refining Stone (M)",
+			"Water Refining Stone (M)",
+			"Fire Refining Stone (M)",
+			"Light Refining Stone (M)",
+			"Dark Refining Stone (M)",
+			"Rainbow Elixer (M)",
+			"Earth Elixer (M)",
+			"Wind Elixer (M)",
+			"Water Elixer (M)",
+			"Fire Elixer (M)",
+			"Light Elixer (M)",
+			"Dark Elixer (M)"
+		],
+		"R":[
+			"HP Stone",
+			"Attack Stone",
+			"Defense Stone",
+			"Awaken Stone (R)",
+			"Rainbow Artes Tome I",
+			"Earth Artes Tome I",
+			"Wind Artes Tome I",
+			"Water Artes Tome I",
+			"Fire Artes Tome I",
+			"Light Artes Tome I",
+			"Dark Artes Tome I",
+			"Rainbow Refining Stone (S)",
+			"Earth Refining Stone (S)",
+			"Wind Refining Stone (S)",
+			"Water Refining Stone (S)",
+			"Fire Refining Stone (S)",
+			"Light Refining Stone (S)",
+			"Dark Refining Stone (S)",
+			"Rainbow Elixer (S)",
+			"Earth Elixer (S)",
+			"Wind Elixer (S)",
+			"Water Elixer (S)",
+			"Fire Elixer (S)",
+			"Light Elixer (S)",
+			"Dark Elixer (S)"
+		]
 	}
-	
 }
