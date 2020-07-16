@@ -17,6 +17,12 @@ module.exports = {
 			'_Note: Some edit commands will not display if you provided a custom image_\n'+
 			'_You also don\'t need to use brackets when entering commands, those are just to show what you enter as the command user.\n'+
 			'`~profile edit (element) (character)` - Edits your support unit \n'+
+			'`~profile edit fire_asc (number from 0 to 5)` - Edits the ascension level displayed on your fire unit\n'+
+			'`~profile edit earth_asc (number from 0 to 5)` - Edits the ascension level displayed on your earth unit\n'+
+			'`~profile edit wind_asc (number from 0 to 5)` - Edits the ascension level displayed on your wind unit\n'+
+			'`~profile edit water_asc (number from 0 to 5)` - Edits the ascension level displayed on your water unit\n'+
+			'`~profile edit light_asc (number from 0 to 5)` - Edits the ascension level displayed on your light unit\n'+
+			'`~profile edit dark_asc (number from 0 to 5)` - Edits the ascension level displayed on your dark unit\n'+
 			'`~profile edit character (character)` - Edits the character to display on the side of your profile\n'+
 			'`~profile edit name (Username)` - Edits the username on your profile\n'+
 			'`~profile edit id (ID Number)` - Edits the ID number listed on your profile\n'+
@@ -284,7 +290,7 @@ module.exports = {
 							}
 						}
 						//Edits the ascension level on units. Uncomment once game releases
-						/*else if((args[1].toLowerCase() === 'fire_asc' || args[1].toLowerCase() === 'earth_asc' || 
+						else if((args[1].toLowerCase() === 'fire_asc' || args[1].toLowerCase() === 'earth_asc' || 
 								args[1].toLowerCase() === 'wind_asc' || args[1].toLowerCase() === 'water_asc' || 
 								args[1].toLowerCase() === 'light_asc' || args[1].toLowerCase() === 'dark_asc') && args.length >= 3){
 							if(args[2] < 0 || args[2] > 5){
@@ -296,7 +302,7 @@ module.exports = {
 									messge.reply("Your ascension information has been updated");
 								});
 							}
-						}*/
+						}
 						//Edits the character flair
 						else if(args[1].toLowerCase() === "character" && args.length >= 3){
 							//console.log("[PROFILE] DEBUG: Editing Flair");

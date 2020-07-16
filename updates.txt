@@ -1,24 +1,27 @@
-**Vision Orb v0.10.3 BETA**
+**Vision Orb v0.11.1 BETA**
 _Note: Vision Orb may shut down frequently during testing, please check the `~update` command to see when the bot is shutting down for updates_
 
 _What's new in this update:_
 
-- HUGE update and we really mean HUGE update to the `~profile` command. Not only did the profile cards get a new style, there are also new functions and customization options added! Now you can change the background, display your favorite Tales Title or PVP Ranking as Flair, and showcase the Ascension Level of all your support units on your support list!
+_The VisionOrb dev team are aware of the new units that have been added to the upcoming release of Crestoria that were not originally in the Open Beta Test, where most of our image data is from. We have decided to hold off on including these units in the profile customization until the official release of those units, as this will be the future process when new units are spoiled. The following units will be added to the profile customization soon:
+-Lloyd
+-Rita
+-Estelle
+-Kohaku
+-Jude
+-Ludger_
+
+- HYPE-DATE. The following commands have been added to the bot;
+`~vote (pvp|element) (unit) (score)` - Integrated into Misteltein#7777's unit database, you can vote for the community tier ranking with VisionOrb! The unit names follow the same names that are used for the `~profile` command!
+`~vote units` - displays a list of all characters you can vote for!
+Enabled the following commands for editing profiles;
 _Please remember that some of these commands will not affect your profile image if you supplied a custom one to use._
-New Profile Commands added are:
-`~profile edit bg (background_name)` - Edits the background image on your profile photo
-`~profile edit flair (flair_name)` - Edits the flair image on your profile photo.
-`~profile backgrounds` - Displays a list of all the names of background images you can use
-`~profile flair` - Displays a list of all the flair you can use. These range from PVP Ranks to Tales Titles
-Also added, but currently disabled are;
 `~profile edit fire_asc (number from 0 to 5)` - Edits the ascension level displayed on your fire unit
 `~profile edit earth_asc (number from 0 to 5)` - Edits the ascension level displayed on your earth unit
 `~profile edit wind_asc (number from 0 to 5)` - Edits the ascension level displayed on your wind unit
 `~profile edit water_asc (number from 0 to 5)` - Edits the ascension level displayed on your water unit
 `~profile edit light_asc (number from 0 to 5)` - Edits the ascension level displayed on your light unit
 `~profile edit dark_asc (number from 0 to 5)` - Edits the ascension level displayed on your dark unit
-Text will be added soon to the profile image output.
+_*Text will be added soon to the profile image output._
 
-- `~gacha guild` and `~gacha friend` have been added to the gacha command.
-
-- Pest Control had fun in this update. Bugs found and exterminated in the hardest to reach places
+- I'm running out of bug jokes, just be aware that more have been squished

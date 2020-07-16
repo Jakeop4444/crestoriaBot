@@ -14,7 +14,7 @@ module.exports = {
 			message.client.guilds.cache.forEach(s => mCount+=(s.members.cache.filter(m => !m.user.bot).size));
 
 			const embed = new MessageEmbed()
-			.setTitle("**Vision Orb v0.3.1 BETA**")
+			.setTitle("**Vision Orb v0.11.1 BETA**")
 			.setDescription("Currently running on **"+sCount+"** servers, with **"+mCount+"** users total");
 
 			message.channel.send(embed);
