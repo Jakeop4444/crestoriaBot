@@ -3,7 +3,7 @@ _Note: Vision Orb may shut down frequently during testing, please check the `~up
 
 _What's new in this update:_
 
-_The VisionOrb dev team are aware of the new units that have been added to the upcoming release of Crestoria that were not originally in the Open Beta Test, where most of our image data is from. We have decided to hold off on including these units in the profile customization until the official release of those units, as this will be the future process when new units are spoiled. The following units will be added to the profile customization soon:
+_The VisionOrb dev team are aware of the new units that have been added to the upcoming release of Crestoria that were not originally in the Open Beta Test, where most of our data is from. We have decided to hold off on including these units in the profile customization and the gacha commands until the official release of those units, as this will be the future process when new units are spoiled. The following units will be added to the profile customization and gacha soon:
 -Lloyd
 -Rita
 -Estelle
