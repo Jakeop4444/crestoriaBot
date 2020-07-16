@@ -12,6 +12,7 @@ module.exports = {
 			.setElementsPerPage(1)
 			.setPage(1)
 			.setPageIndicator(true)
+			.formatField('Units:', i => i.name)
 			.setDeleteOnTimeout(true);
 
 		FieldsEmbed.embed
