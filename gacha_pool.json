@@ -9,21 +9,26 @@
 			"Bonus":true
 		},
 		"SSR":[
-			"[Teruyari of the Dark Night] Aegis",
+			"[Lance that Lights the Way] Aegis",
 			"[Under an Azure Sky] Asbel",
 			"[A Moment's Peace] Cress",
-			"[Sword Shi Wearing a Sin] Kanata",
-			"[Greatsword Brandisher] Kanonno E.",
+			"[Blade Swathed in Sin] Kanata",
+			"[Greatsword Wielder] Kanonno E.",
 			"[Defiant Heart] Leon",
 			"[Shaken in the Wagon] Luke",
 			"[Noble Hearted] Milla",
-			"[Fire Mercy Become Flower] Misella",
+			"[The Blazing Bloom] Misella",
 			"[Serene Huntsman] Reid",
 			"[The Dawn's Guidance] Sorey",
 			"[Energetic Soul] Stahn",
 			"[Tainted by Vengance] Velvet",
-			"[Shooting Wild Dance] Vicious",
-			"[At Yesteryear's Window] Yuri"
+			"[Jig of Hot Lead] Vicious",
+			"[At Yesteryear's Window] Yuri",
+			"[Flash in the Twilight] Rita",
+			"[Twilight Training] Lloyd",
+			"[Reading in the Flowers] Estelle",
+			"[Sparkling in Battle] Kohaku",
+			"[Soul of Diligence] Jude"
 		],
 
 		"SR":[
@@ -31,7 +36,7 @@
 			"[Sorceress Prodigy] Arche",
 			"[Strapping Muscleman] Bruiser",
 			"[True-Hearted Beast] Caius",
-			"[Healing Hands] Cheria",
+			"[Battlefield Blossom] Cheria",
 			"[Peddler in the Wind] Dezel",
 			"[Diligent Spearwoman] Eleanor",
 			"[Never Apart] Elize",
@@ -57,7 +62,8 @@
 			"[Time is Money] Rutee",
 			"[Alliance Marine] Senel",
 			"[Virile Swordsman] Veigue",
-			"[Drifter in the Wind] Zaveid"
+			"[Drifter in the Wind] Zaveid",
+			"[Twin Bladeswoman] Rondoline"
 		],
 
 		"R":[
@@ -171,7 +177,7 @@
 			"[Sorceress Prodigy] Arche",
 			"[Strapping Muscleman] Bruiser",
 			"[True-Hearted Beast] Caius",
-			"[Healing Hands] Cheria",
+			"[Battlefield Blossom] Cheria",
 			"[Peddler in the Wind] Dezel",
 			"[Diligent Spearwoman] Eleanor",
 			"[Never Apart] Elize",
@@ -197,7 +203,8 @@
 			"[Time is Money] Rutee",
 			"[Alliance Marine] Senel",
 			"[Virile Swordsman] Veigue",
-			"[Drifter in the Wind] Zaveid"
+			"[Drifter in the Wind] Zaveid",
+			"[Twin Bladeswoman] Rondoline"
 		],
 
 		"R":[
@@ -303,28 +310,34 @@
 			"Bonus":false
 		},
 		"SSR":[
-			"[Teruyari of the Dark Night] Aegis",
+			"[Lance that Lights the Way] Aegis",
 			"[Under an Azure Sky] Asbel",
 			"[A Moment's Peace] Cress",
-			"[Sword Shi Wearing a Sin] Kanata",
-			"[Greatsword Brandisher] Kanonno E.",
+			"[Blade Swathed in Sin] Kanata",
+			"[Greatsword Wielder] Kanonno E.",
 			"[Defiant Heart] Leon",
 			"[Shaken in the Wagon] Luke",
 			"[Noble Hearted] Milla",
-			"[Fire Mercy Become Flower] Misella",
+			"[The Blazing Bloom] Misella",
 			"[Serene Huntsman] Reid",
 			"[The Dawn's Guidance] Sorey",
 			"[Energetic Soul] Stahn",
 			"[Tainted by Vengance] Velvet",
-			"[Shooting Wild Dance] Vicious",
-			"[At Yesteryear's Window] Yuri"
+			"[Jig of Hot Lead] Vicious",
+			"[At Yesteryear's Window] Yuri",
+			"[Flash in the Twilight] Rita",
+			"[Twilight Training] Lloyd",
+			"[Reading in the Flowers] Estelle",
+			"[Sparkling in Battle] Kohaku",
+			"[Soul of Diligence] Jude"
 		],
+
 		"SR":[
 			"[Precocious Puppeteer] Anise",
 			"[Sorceress Prodigy] Arche",
 			"[Strapping Muscleman] Bruiser",
 			"[True-Hearted Beast] Caius",
-			"[Healing Hands] Cheria",
+			"[Battlefield Blossom] Cheria",
 			"[Peddler in the Wind] Dezel",
 			"[Diligent Spearwoman] Eleanor",
 			"[Never Apart] Elize",
@@ -350,7 +363,8 @@
 			"[Time is Money] Rutee",
 			"[Alliance Marine] Senel",
 			"[Virile Swordsman] Veigue",
-			"[Drifter in the Wind] Zaveid"
+			"[Drifter in the Wind] Zaveid",
+			"[Twin Bladeswoman] Rondoline"
 		]
 	},
 
@@ -362,21 +376,26 @@
 			"Bonus":false
 		},
 		"SSR":[
-			"[Teruyari of the Dark Night] Aegis",
+			"[Lance that Lights the Way] Aegis",
 			"[Under an Azure Sky] Asbel",
 			"[A Moment's Peace] Cress",
-			"[Sword Shi Wearing a Sin] Kanata",
-			"[Greatsword Brandisher] Kanonno E.",
+			"[Blade Swathed in Sin] Kanata",
+			"[Greatsword Wielder] Kanonno E.",
 			"[Defiant Heart] Leon",
 			"[Shaken in the Wagon] Luke",
 			"[Noble Hearted] Milla",
-			"[Fire Mercy Become Flower] Misella",
+			"[The Blazing Bloom] Misella",
 			"[Serene Huntsman] Reid",
 			"[The Dawn's Guidance] Sorey",
 			"[Energetic Soul] Stahn",
 			"[Tainted by Vengance] Velvet",
-			"[Shooting Wild Dance] Vicious",
-			"[At Yesteryear's Window] Yuri"
+			"[Jig of Hot Lead] Vicious",
+			"[At Yesteryear's Window] Yuri",
+			"[Flash in the Twilight] Rita",
+			"[Twilight Training] Lloyd",
+			"[Reading in the Flowers] Estelle",
+			"[Sparkling in Battle] Kohaku",
+			"[Soul of Diligence] Jude"
 		]
 	},
 

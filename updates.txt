@@ -1,27 +1,24 @@
-**Vision Orb v0.11.1 BETA**
-_Note: Vision Orb may shut down frequently during testing, please check the `~update` command to see when the bot is shutting down for updates_
-
+**Vision Orb v1.0.1.3**
 _What's new in this update:_
 
-_The VisionOrb dev team are aware of the new units that have been added to the upcoming release of Crestoria that were not originally in the Open Beta Test, where most of our data is from. We have decided to hold off on including these units in the profile customization and the gacha commands until the official release of those units, as this will be the future process when new units are spoiled. The following units will be added to the profile customization and gacha soon:
--Lloyd
--Rita
--Estelle
--Kohaku
--Jude
--Ludger_
+VisionOrb is now officially released! If you want to keep up to date when updates are happening with VisionOrb as well as add it to your own server or offer suggestions, check out the official Discord!
+https://discord.gg/9CU8rZM
+Just ping HellFyre#0722 on the server to get access to the invite link!
 
-- HYPE-DATE. The following commands have been added to the bot;
-`~vote (pvp|element) (unit) (score)` - Integrated into Misteltein#7777's unit database, you can vote for the community tier ranking with VisionOrb! The unit names follow the same names that are used for the `~profile` command!
+Small tutorial in this update: Setting a profile unit!
+_When setting a profile unit, it's the character name plus the first letter of each part of their title, for example to set "[Boy Swaithed in Sin] Kanata" to your profile, his input name would be kanata_bsis_
+
+All of the new SSR/SR units have been added to the profile image commands! You can now have the following characters displayed on your profile!
+_Lloyd, Kohaku, Rita, Estelle, Ludger, Jude_
+
+__**There was a notice earlier that stated we would need to wipe the user input for the profiles. We are happy to say we have worked around the need for doing so! All the titles have also beed edited to match in game, so please take this into account when editing profiles!**__
+
+Chronos can currently be set as a Dark and a Light unit. His element was changed from the OBT to the current release and we are waiting a bit to see if that is permanent or a bug
+
+To match Crestoria's name limit, the Guild and Profile names now have a character limit of 12 characters. If you set either of these names past 12 characters, it will automatically be cut off on display and entry now.
+
+**New Commands:**
+`~vote (pvp|element) (unit) (score)` - Integrated into Misteltein#7777's unit database (https://www.tocdb.xyz/), you can vote for the community tier ranking with VisionOrb! The unit names follow the same names that are used for the `~profile` command!
+Example: `~vote fire kanonno_gb 10` gives the unit [Greatsword Wielder] Kanonno a score of 10 for Fire Raids
 `~vote units` - displays a list of all characters you can vote for!
-Enabled the following commands for editing profiles;
-_Please remember that some of these commands will not affect your profile image if you supplied a custom one to use._
-`~profile edit fire_asc (number from 0 to 5)` - Edits the ascension level displayed on your fire unit
-`~profile edit earth_asc (number from 0 to 5)` - Edits the ascension level displayed on your earth unit
-`~profile edit wind_asc (number from 0 to 5)` - Edits the ascension level displayed on your wind unit
-`~profile edit water_asc (number from 0 to 5)` - Edits the ascension level displayed on your water unit
-`~profile edit light_asc (number from 0 to 5)` - Edits the ascension level displayed on your light unit
-`~profile edit dark_asc (number from 0 to 5)` - Edits the ascension level displayed on your dark unit
-_*Text will be added soon to the profile image output._
-
-- I'm running out of bug jokes, just be aware that more have been squished
+`~profile clear (element)` - Will clear the support unit that you have set for that element. Not providing an element will clear all your set support units for the profile

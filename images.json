@@ -6,8 +6,8 @@
 		"gaius_up": "https://i.imgur.com/2z5v2Kc.png",
 		"lailah_wif": "https://i.imgur.com/ZNNAZ80.png",
 		"luke_sitw": "https://i.imgur.com/XNSBdd8.png",
-		"misella_ffh": "https://i.imgur.com/rmx1Gfe.png",
-		"misella_fmbf": "https://i.imgur.com/Pfk943T.png",
+		"misella_affh": "https://i.imgur.com/rmx1Gfe.png",
+		"misella_tbb": "https://i.imgur.com/Pfk943T.png",
 		"presea_tra": "https://i.imgur.com/koKrm1z.png",
 		"reid_sh": "https://i.imgur.com/arlBpxO.png",
 		"ruca_tg": "https://i.imgur.com/hbXoRyN.png",
@@ -17,10 +17,11 @@
 
 	"earth_units":{
 		"anise_pp": "https://i.imgur.com/6xX8i3I.png",
-		"cheria_hh": "https://i.imgur.com/t2q27Wk.png",
+		"cheria_bb": "https://i.imgur.com/t2q27Wk.png",
 		"cress_amp": "https://i.imgur.com/1sK7sG2.png",
 		"farah_ub": "https://i.imgur.com/HZklpd5.png",
 		"leia_dss": "https://i.imgur.com/QttwNBQ.png",
+		"lloyd_tt": "https://i.imgur.com/yswKRZ0.png",
 		"malik_swaw": "https://i.imgur.com/GcGOGCb.png",
 		"rokurou_rp": "https://i.imgur.com/RpWfPY6.png",
 		"rose_bm": "https://i.imgur.com/dTd3fXZ.png",
@@ -31,6 +32,7 @@
 		"dezel_pitw": "https://i.imgur.com/JvSjsqP.png",
 		"eleanor_ds": "https://i.imgur.com/dHyfD9H.png",
 		"jade_pc": "https://i.imgur.com/MFkFc6V.png",
+		"kohaku_sib": "https://i.imgur.com/tUvJDeh.png",
 		"kyle_is": "https://i.imgur.com/lO3jhyu.png",
 		"norma_mob": "https://i.imgur.com/VQVuVvN.png",
 		"qq_ks": "https://i.imgur.com/Rk5LDI1.png",
@@ -40,32 +42,38 @@
 	},
 
 	"water_units":{
-		"aegis_toftdn": "https://i.imgur.com/9EiWIYF.png",
+		"aegis_ltltw": "https://i.imgur.com/9EiWIYF.png",
 		"asbel_uaas": "https://i.imgur.com/Lec1OsS.png",
 		"caius_tb": "https://i.imgur.com/fOjju7z.png",
 		"genis_kb": "https://i.imgur.com/8qqlv09.png",
-		"kanonno_gb": "https://i.imgur.com/PxjKFMd.png",
+		"kanonno_gw": "https://i.imgur.com/PxjKFMd.png",
 		"magilou_awb": "https://i.imgur.com/s9H9AfD.png",
 		"repede_gc": "https://i.imgur.com/p6FPXSk.png",
+		"rita_fitt": "https://i.imgur.com/d5gYq8O.png",
+		"rondoline_tb": "https://i.imgur.com/zCZWUOA.png",
 		"rutee_tim": "https://i.imgur.com/8pPjQvM.png",
 		"veigue_vs": "https://i.imgur.com/lvMdQy8.png"
 	},
 
 	"light_units":{
 		"chronos_ppc": "https://i.imgur.com/8oEjpjU.png",
-		"kanata_bcas": "https://i.imgur.com/cGTyc63.png",
-		"kanata_sswas": "https://i.imgur.com/bdyQz5B.png",
+		"estelle_ritf": "https://i.imgur.com/95ebnSN.png",
+		"jude_sod": "https://i.imgur.com/Boxa9P7.png",
+		"kanata_bos": "https://i.imgur.com/cGTyc63.png",
+		"kanata_bsis": "https://i.imgur.com/bdyQz5B.png",
 		"kor_fs": "https://i.imgur.com/LTLrYXQ.png",
 		"milla_nh": "https://i.imgur.com/zBzxPGs.png",
 		"philia_ds": "https://i.imgur.com/mmJ88Mo.png"
 	},
 
 	"dark_units":{
+		"chronos_ppc": "https://i.imgur.com/K2rd1ri.png",
 		"elize_na": "https://i.imgur.com/pm0hKI6.png",
 		"emil_botb": "https://i.imgur.com/66HQWHp.png",
 		"leon_dh": "https://i.imgur.com/DHA53Fn.png",
-		"vicious_ap": "https://i.imgur.com/Xm0NdYt.png",
-		"vicious_swd": "https://i.imgur.com/Dg5IcKk.png"
+		"ludger_tm": "https://i.imgur.com/fo4OPSO.png",
+		"vicious_dp": "https://i.imgur.com/Xm0NdYt.png",
+		"vicious_johl": "https://i.imgur.com/Dg5IcKk.png"
 	},
 
     "mystic":{
@@ -73,14 +81,20 @@
         "asbel": "https://i.imgur.com/ZJ03EoV.png",
         "chronos": "https://i.imgur.com/Y3Z60T8.png",
         "cress": "https://i.imgur.com/hqkDW2o.png",
+        "estelle": "https://i.imgur.com/wpWPMmA.png",
+        "jude": "https://i.imgur.com/tAWQzsi.png",
         "kanata": "https://i.imgur.com/6lKzg4r.png",
         "kanonno": "https://i.imgur.com/j7YGnkd.png",
+        "kohaku": "https://i.imgur.com/Kg8dGSL.png",
         "leon": "https://i.imgur.com/UCs7UIM.png",
+        "lloyd": "https://i.imgur.com/irgTEcL.png",
+        "ludger": "https://i.imgur.com/hEPmui4.png",
         "luke": "https://i.imgur.com/g3U0fGb.png",
         "milla": "https://i.imgur.com/GatCokI.png",
         "misella": "https://i.imgur.com/0uY01dW.png",
         "orwin": "https://i.imgur.com/T8fTZtv.png",
         "reid": "https://i.imgur.com/ZAwRwKk.png",
+        "rita": "https://i.imgur.com/VbPNssT.png",
         "sorey": "https://i.imgur.com/KDrUhGE.png",
         "stahn": "https://i.imgur.com/8bAo41U.png",
         "velvet": "https://i.imgur.com/5lDO1IB.png",

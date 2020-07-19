@@ -25,7 +25,8 @@ client.on('message', message => {
 	var currentTime = new Date();
 	if (!message.content.startsWith(prefix) || message.author.bot) return;
 
-	const args = message.content.slice(prefix.length).split(/ +/);
+	new_message = message.content.replace(/[^a-zA-Z0-9!_ ]/g, "");
+	const args = new_message.slice(prefix.length).split(/ +/);
 	const commandName = args.shift().toLowerCase();
 
 	if (!client.commands.has(commandName)) return;
@@ -50,7 +51,7 @@ client.on('message', message => {
 		seconds = currentTime.getSeconds();
 	}
 
-	console.log("["+hours+":"+minutes+":"+seconds+"] [INDEX] DEBUG: Attempting to invoke Command: "+message.content);
+	console.log("["+hours+":"+minutes+":"+seconds+"] [INDEX] DEBUG: Attempting to invoke Command: "+new_message);
 	const command = client.commands.get(commandName);
 
 	if (command.args && !args.length) {
