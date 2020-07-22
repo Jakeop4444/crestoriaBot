@@ -63,7 +63,12 @@ module.exports = {
 					if(result[0].profile_image != "NONE_SET"){
 						var details = '';
 						if(result[0].profile_id != 'unknown'){
-							details += "ID: "+result[0].profile_id+"\n";
+							details += "ID: ";
+							if(result[0].profile_id.length < 9){
+								details+= "0"+result[0].profile_id+"\n";
+							}else{
+								details+= result[0].profile_id+"\n";
+							}
 						}
 						if(result[0].profile_guild != 'unknown'){
 							details += "Guild: "+result[0].profile_guild;
@@ -145,27 +150,27 @@ module.exports = {
 						const ascension_bg = await Canvas.loadImage(images["ascension_bg"]);
 						ctx.drawImage(ascension_bg, 0, 0, canvas.width, canvas.height);
 						if(result[0].fire_asc > 0){
-							const fire_asc = await Canvas.loadImage("./images/profile_card_images/fire_ascension/fire_asc_"+result[0].fire_asc+".png");
+							const fire_asc = await Canvas.loadImage(images.fire_asc[""+result[0].fire_asc.toString()]);
 							ctx.drawImage(fire_asc, 0, 0, canvas.width, canvas.height);
 						}
 						if(result[0].earth_asc > 0){
-							const earth_asc = await Canvas.loadImage("./images/profile_card_images/earth_ascension/earth_asc_"+result[0].earth_asc+".png");
+							const earth_asc = await Canvas.loadImage(images.earth_asc[""+result[0].earth_asc.toString()]);
 							ctx.drawImage(earth_asc, 0, 0, canvas.width, canvas.height);
 						}
 						if(result[0].wind_asc > 0){
-							const wind_asc = await Canvas.loadImage("./images/profile_card_images/wind_ascension/wind_asc_"+result[0].wind_asc+".png");
+							const wind_asc = await Canvas.loadImage(images.wind_asc[""+result[0].wind_asc.toString()]);
 							ctx.drawImage(wind_asc, 0, 0, canvas.width, canvas.height);
 						}
 						if(result[0].water_asc > 0){
-							const water_asc = await Canvas.loadImage("./images/profile_card_images/water_ascension/water_asc_"+result[0].water_asc+".png");
+							const water_asc = await Canvas.loadImage(images.water_asc[""+result[0].water_asc.toString()]);
 							ctx.drawImage(water_asc, 0, 0, canvas.width, canvas.height);
 						}
 						if(result[0].light_asc > 0){
-							const light_asc = await Canvas.loadImage("./images/profile_card_images/light_ascension/light_asc_"+result[0].light_asc+".png");
+							const light_asc = await Canvas.loadImage(images.light_asc[""+result[0].light_asc.toString()]);
 							ctx.drawImage(light_asc, 0, 0, canvas.width, canvas.height);
 						}
 						if(result[0].dark_asc > 0){
-							const dark_asc = await Canvas.loadImage("./images/profile_card_images/dark_ascension/dark_asc_"+result[0].dark_asc+".png");
+							const dark_asc = await Canvas.loadImage(images.dark_asc[""+result[0].dark_asc.toString()]);
 							ctx.drawImage(dark_asc, 0, 0, canvas.width, canvas.height);
 						}
 						//Load the rest of the elements to the canvas
@@ -383,8 +388,6 @@ module.exports = {
 				var sql = "SELECT Title, Name, Bot FROM characters ";
 				if(args[1]){
 					sql +=  "WHERE Element = '"+args[1]+"' ORDER BY Name ASC";
-				}else{
-					sql +=  "WHERE Element = * ORDER BY Name ASC";
 				}
 				con2.query(sql, function(error, result, fields){
 					if(error) console.log(error);
@@ -397,7 +400,7 @@ module.exports = {
 						.setElementsPerPage(10)
 						.setPage(1)
 						.setPageIndicator(true)
-						.formatField("Results", i => "["+i.Title+"] "+i.Name+" => **"+i.Bot+"**")
+						.formatField("Results", i => "["+i.Title+"] "+i.Name.replace(/_/g, " ")+" => **"+i.Bot+"**")
 						.setDeleteOnTimeout(false);
 
 						FieldsEmbed.embed
@@ -408,9 +411,9 @@ module.exports = {
 					}else{
 						message.reply("No Characters found with that element");
 						return;
-					}					
+					}	
+					con2.end();				
 				});
-				con2.end();
 			}
 			//Clears the units
 			else if(args[0].toLowerCase() == "clear"){
@@ -470,54 +473,106 @@ module.exports = {
 						//console.log("[PROFILE] DEBUG: Creating Profile");
 						sql = "INSERT INTO "+profile_table+" (user_id, profile_name, profile_id, profile_guild, fire_unit, earth_unit, wind_unit, water_unit, "+
 								"light_unit, dark_unit, flair, profile_image, background, pvp_rank, fire_asc, earth_asc, wind_asc, water_asc, light_asc, dark_asc) VALUES ("+message.author.id+", ";
-						if(args[1].length > 12){
-							sql += "'"+args[1].substring(0, 12)+"', ";
-						}else{
-							sql += "'"+args[1]+"', ";
-						}
-						if(args[2]){
-							sql += args[2];
-						}else{
-							sql += "'unknown'";
-						}
-						if(args[3]){
-							if(args[3].length > 12){
-							sql += ", '"+args[3].substring(0, 12)+"', ";
+						if(args[1]){
+							if(args[1].length > 12){
+								sql += "'"+args[1].substring(0, 12)+"', ";
 							}else{
-								sql += ", '"+args[1]+"', ";
+								sql += "'"+args[1]+"', ";
 							}
-						}else{
-							sql += ", 'unknown', '";
-						}
-						sql += "NONE_SET', 'NONE_SET', 'NONE_SET', 'NONE_SET', 'NONE_SET', 'NONE_SET', 'NONE_SET', '";
-						//Makes sure there is an image attached to the message, otherwise will just set the value to NONE_SET
-						if(message.attachments.first()){
-							var fileCheck = message.attachments.first().name.split('.');
-							if(fileCheck[1] === 'png'||fileCheck[1] === 'jpeg'||fileCheck[1] === 'jpg'){
-						       //	console.log('[PROFILE] DEBUG: Changing Image');
-						       	sql += message.attachments.first().url.replace(':', "CLN").replace("//", "DBLFWS")+"')";
-				            }else{
-				                message.reply("The file you attached is not a supported type. Please use a PNG, JPG, or JPEG.");
-				                con.end();
-								//console.log("[PROFILE] DEBUG: Unhooked from database");
-				                return;
-				            }
-						}else{
-							sql += "NONE_SET'";
-						}
-						sql += ", 'cosmos', 'crestoria', 0, 0, 0, 0, 0, 0)";
-						con.query(sql, function(error, result, fields){
-							if (error){
-								console.log(error);
-								message.reply("Error creating profile");
-								return;
+							if(args[2]){
+								sql += args[2];
+							}else{
+								sql += "'unknown'";
 							}
-							message.reply("Profile Create Successfully, check it out with **~profile**");
-						})
-						con.end();
+							if(args[3]){
+								if(args[3].length > 12){
+								sql += ", '"+args[3].substring(0, 12)+"', ";
+								}else{
+									sql += ", '"+args[1]+"', ";
+								}
+							}else{
+								sql += ", 'unknown', '";
+							}
+							sql += "NONE_SET', 'NONE_SET', 'NONE_SET', 'NONE_SET', 'NONE_SET', 'NONE_SET', 'NONE_SET', '";
+							//Makes sure there is an image attached to the message, otherwise will just set the value to NONE_SET
+							if(message.attachments.first()){
+								var fileCheck = message.attachments.first().name.split('.');
+								if(fileCheck[1] === 'png'||fileCheck[1] === 'jpeg'||fileCheck[1] === 'jpg'){
+							       //	console.log('[PROFILE] DEBUG: Changing Image');
+							       	sql += message.attachments.first().url.replace(':', "CLN").replace("//", "DBLFWS")+"')";
+					            }else{
+					                message.reply("The file you attached is not a supported type. Please use a PNG, JPG, or JPEG.");
+					                con.end();
+									//console.log("[PROFILE] DEBUG: Unhooked from database");
+					                return;
+					            }
+							}else{
+								sql += "NONE_SET'";
+							}
+							sql += ", 'cosmos', 'crestoria', 0, 0, 0, 0, 0, 0)";
+							con.query(sql, function(error, result, fields){
+								if (error){
+									console.log(error);
+									message.reply("Error creating profile");
+									return;
+								}
+								message.reply("Profile Create Successfully, check it out with **~profile**");
+							})
+							con.end();
+						}else{
+							message.reply("Invalid usage of command, use `~help profile` to see the proper usage");
+						}
+
+						
 						//console.log("[PROFILE] DEBUG: Unhooked from database");
 					}
 				})
+			}
+			else if(args[0].toLowerCase() === "characters"){
+				var names = '';
+				Object.keys(images.mystic).forEach(function(k){
+					names += k.charAt(0).toUpperCase()+k.slice(1)+", ";
+				});
+				const embed = new MessageEmbed()
+				.setColor(0x000000)
+				.setTitle("Here are all the available characters for your Character Option!")
+				.setDescription("Use `~profile edit character (name)` to add the character to your profile image!\n_Only usable if we make the image for you_\n\n"+names.substring(0, names.length-2));
+
+				message.channel.send(embed);
+
+				//images.forEach(data => console.log(data.mystic));
+			}else if(args[0].toLowerCase() === "flair"){
+				const FieldsEmbed = new Pagination.FieldsEmbed()
+				.setArray(Object.keys(images.flair))
+				.setAuthorizedUsers([message.author.id])
+				.setChannel(message.channel)
+				.setElementsPerPage(15)
+				.setPage(1)
+				.setPageIndicator(true)
+				.formatField("Results", i => i)
+				.setDeleteOnTimeout(false);
+
+				FieldsEmbed.embed
+				.setColor(0xFF00AE)
+				.setDescription("Here is a list of Flair you can assign to your profile.")
+
+				FieldsEmbed.build();
+			}else if(args[0].toLowerCase() === "backgrounds"){
+				const FieldsEmbed = new Pagination.FieldsEmbed()
+				.setArray(Object.keys(images.background))
+				.setAuthorizedUsers([message.author.id])
+				.setChannel(message.channel)
+				.setElementsPerPage(15)
+				.setPage(1)
+				.setPageIndicator(true)
+				.formatField("Results", i => i)
+				.setDeleteOnTimeout(false);
+
+				FieldsEmbed.embed
+				.setColor(0xFF00AE)
+				.setDescription("Here is a list of Backgrounds you can assign to your profile.")
+
+				FieldsEmbed.build();
 			}else{
 				message.reply("Invalid usage of `~profile` command");
 			}

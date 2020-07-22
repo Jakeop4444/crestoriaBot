@@ -1,0 +1,43 @@
+{
+
+	"list":{
+		"events":[
+			{
+				"name":"Premium Summons",
+				"start_period":"July 22nd, 2:00 AM EST",
+				"end_period":"July 31st, 12:59 AM EST",
+				"description":"Increased summon chance for the following units:\n[Midsummer Siesta] Veigue\n[Summer Holiday] Kanonno E"
+			},
+			{
+				"name":"Limited Quest: Lure of the Forest Fruit",
+				"start_period":"July 22nd, 2:00 AM EST",
+				"end_period":"August 3rd, 12:59 AM EST",
+				"description":"Collect Sylvangems and Event Points to get \n[Lure of the Forest Fruit] Farah and [Lure of the Forest Fruit] Reid Memoria Stones. \nThere’s a rare chance that the Memoria Stones could drop from the event’s Raid."
+			},
+			{
+				"name":"Summer Collection Limited Attachments 1st Wave",
+				"start_period":"July 23rd, 2:00 AM EST",
+				"end_period":"August 31st, 1:59 AM EST",
+				"description":"Complete Summer Missions to earn Attachment Exchange Ticket (Summer) that can be traded for limited-time Attachments! Items Include\n - Quickie Swim Ring\n - Watermelon Head\n - Snorkel\n - Super Water Gun"
+			},
+			{
+				"name":"Story Quests 1/2 AP",
+				"start_period":"July 23rd, 2:00 AM EST",
+				"end_period":"July 31st, 12:59 AM EST",
+				"description":"Enjoy Half-Off AP Costs on Story Quests"
+			},
+			{
+				"name":"Power-Up Quests 1/2 AP",
+				"start_period":"July 23rd, 2:00 AM EST",
+				"end_period":"July 31st, 1:59 AM EST",
+				"description":"Enjoy Half-Off AP Costs on Power-Up Quests"
+			},
+			{
+				"name":"Gald Quests 1.5x Gald",
+				"start_period":"July 23rd, 2:00 AM EST",
+				"end_period":"July 31st, 1:59 AM EST",
+				"description":"Enjoy a 1.5 Gald Boost on Gald Quests"
+			}
+		]
+	}
+}

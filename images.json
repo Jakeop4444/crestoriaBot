@@ -25,6 +25,7 @@
 		"malik_swaw": "https://i.imgur.com/GcGOGCb.png",
 		"rokurou_rp": "https://i.imgur.com/RpWfPY6.png",
 		"rose_bm": "https://i.imgur.com/dTd3fXZ.png",
+		"veigue_ms": "https://i.imgur.com/dcYMxGf.png",
 		"yuri_ayw": "https://i.imgur.com/GA6onBg.png"
 	},
 
@@ -32,6 +33,7 @@
 		"dezel_pitw": "https://i.imgur.com/JvSjsqP.png",
 		"eleanor_ds": "https://i.imgur.com/dHyfD9H.png",
 		"jade_pc": "https://i.imgur.com/MFkFc6V.png",
+		"kanonno_sh": "https://i.imgur.com/no2m5uy.png",
 		"kohaku_sib": "https://i.imgur.com/tUvJDeh.png",
 		"kyle_is": "https://i.imgur.com/lO3jhyu.png",
 		"norma_mob": "https://i.imgur.com/VQVuVvN.png",
@@ -43,6 +45,7 @@
 
 	"water_units":{
 		"aegis_ltltw": "https://i.imgur.com/9EiWIYF.png",
+		"aegis_hofc":"https://i.imgur.com/cCtmeCu.png",
 		"asbel_uaas": "https://i.imgur.com/Lec1OsS.png",
 		"caius_tb": "https://i.imgur.com/fOjju7z.png",
 		"genis_kb": "https://i.imgur.com/8qqlv09.png",
@@ -201,6 +204,50 @@
 		"ss":"https://i.imgur.com/2KuI1is.png",
 		"sss":"https://i.imgur.com/CMZLIQM.png"
 	},
+
+	"fire_asc":{
+		"1":"https://i.imgur.com/D4BG2UC.png",
+		"2":"https://i.imgur.com/GKCTkEY.png",
+		"3":"https://i.imgur.com/vxny0r4.png",
+		"4":"https://i.imgur.com/Ugam8gm.png",
+		"5":"https://i.imgur.com/NUAs6ux.png"
+	},
+	"earth_asc":{
+		"1":"https://i.imgur.com/9DTZCtb.png",
+		"2":"https://i.imgur.com/a0U3vvX.png",
+		"3":"https://i.imgur.com/SdBd23o.png",
+		"4":"https://i.imgur.com/mCjO1Ux.png",
+		"5":"https://i.imgur.com/XhuWNdS.png"
+	},
+	"wind_asc":{
+		"1":"https://i.imgur.com/egqEGJF.png",
+		"2":"https://i.imgur.com/vOqiksR.png",
+		"3":"https://i.imgur.com/1j0pCoS.png",
+		"4":"https://i.imgur.com/avcrZvD.png",
+		"5":"https://i.imgur.com/it8kVHI.png"
+	},
+	"water_asc":{
+		"1":"https://i.imgur.com/WcVd6ML.png",
+		"2":"https://i.imgur.com/rq4yIwN.png",
+		"3":"https://i.imgur.com/aeTgR2T.png",
+		"4":"https://i.imgur.com/LIKAv6F.png",
+		"5":"https://i.imgur.com/zL6dXtu.png"
+	},
+	"light_asc":{
+		"1":"https://i.imgur.com/GdVzL7R.png",
+		"2":"https://i.imgur.com/L8nRV2S.png",
+		"3":"https://i.imgur.com/RQihkQY.png",
+		"4":"https://i.imgur.com/CAieJop.png",
+		"5":"https://i.imgur.com/S2mlSLo.png"
+	},
+	"dark_asc":{
+		"1":"https://i.imgur.com/BavK87k.png",
+		"2":"https://i.imgur.com/Tac3xnC.png",
+		"3":"https://i.imgur.com/5RsBh2G.png",
+		"4":"https://i.imgur.com/V5VaJkJ.png",
+		"5":"https://i.imgur.com/NDSxqPd.png"
+	},
+	
 	"borders": "https://i.imgur.com/RBR3fIa.png",
 	"elements":"https://i.imgur.com/wPBtZcM.png",
 	"sr_background":"https://i.imgur.com/VlU5iia.png",

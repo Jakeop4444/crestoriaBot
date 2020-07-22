@@ -1,24 +1,18 @@
-**Vision Orb v1.0.1.3**
+**Vision Orb v1.0.2.1**
 _What's new in this update:_
 
-VisionOrb is now officially released! If you want to keep up to date when updates are happening with VisionOrb as well as add it to your own server or offer suggestions, check out the official Discord!
+- VisionOrb is now officially released! If you want to keep up to date when updates are happening with VisionOrb as well as add it to your own server or offer suggestions, check out the official Discord!
 https://discord.gg/9CU8rZM
 Just ping HellFyre#0722 on the server to get access to the invite link!
 
-Small tutorial in this update: Setting a profile unit!
-_When setting a profile unit, it's the character name plus the first letter of each part of their title, for example to set "[Boy Swaithed in Sin] Kanata" to your profile, his input name would be kanata_bsis_
+- Summer is ~~finally~~ here! *[Summer Holiday] Kanonno E.* and *[Midsummer Fiesta] Veigue* have been added to the profile options!
 
-All of the new SSR/SR units have been added to the profile image commands! You can now have the following characters displayed on your profile!
-_Lloyd, Kohaku, Rita, Estelle, Ludger, Jude_
+- Due to popular demand, you can now see a list of the upcomming events, check it out with the new `~events` command!
 
-__**There was a notice earlier that stated we would need to wipe the user input for the profiles. We are happy to say we have worked around the need for doing so! All the titles have also beed edited to match in game, so please take this into account when editing profiles!**__
+Bug Fixes:
+- If your Player ID began with a 0, it would not display, this has been fixed as of this update.
+- The SR Version of Aegis was neglected in the previous update, he has been included in this update.
 
-Chronos can currently be set as a Dark and a Light unit. His element was changed from the OBT to the current release and we are waiting a bit to see if that is permanent or a bug
-
-To match Crestoria's name limit, the Guild and Profile names now have a character limit of 12 characters. If you set either of these names past 12 characters, it will automatically be cut off on display and entry now.
-
-**New Commands:**
-`~vote (pvp|element) (unit) (score)` - Integrated into Misteltein#7777's unit database (https://www.tocdb.xyz/), you can vote for the community tier ranking with VisionOrb! The unit names follow the same names that are used for the `~profile` command!
-Example: `~vote fire kanonno_gb 10` gives the unit [Greatsword Wielder] Kanonno a score of 10 for Fire Raids
-`~vote units` - displays a list of all characters you can vote for!
-`~profile clear (element)` - Will clear the support unit that you have set for that element. Not providing an element will clear all your set support units for the profile
+Known Bugs:
+- The `~search` command has been a bit finicky when it comes to searching the new Summer units, this is currently being worked on. As a temporary work around, search those units by their Titles for the time being.
+- The current summer gacha has not been added to the gacha pool as of yet, we are currently finding a way to speed up the gacha process.

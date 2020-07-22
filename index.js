@@ -25,7 +25,7 @@ client.on('message', message => {
 	var currentTime = new Date();
 	if (!message.content.startsWith(prefix) || message.author.bot) return;
 
-	new_message = message.content.replace(/[^a-zA-Z0-9!_ ]/g, "");
+	new_message = message.content.replace(/[^a-zA-Z0-9!_~ ]/g, "");
 	const args = new_message.slice(prefix.length).split(/ +/);
 	const commandName = args.shift().toLowerCase();
 

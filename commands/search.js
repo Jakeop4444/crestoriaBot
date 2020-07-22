@@ -30,7 +30,7 @@ module.exports = {
 			return;
 		}else{
 			_tempSql1 += "Name LIKE '%";
-			_tempSql2 += "Name IN ('";
+			_tempSql2 += "Name IN ('%";
 			for(i = 0; i<args.length; i++){
 				if(i != args.length-1){
 					_tempSql1+=args[i]+" ";
@@ -41,7 +41,7 @@ module.exports = {
 				}
 			}
 			_tempSql1 += "%' UNION SELECT * FROM characters WHERE Title LIKE '%";
-			_tempSql2 += "')) UNION ALL(SELECT * FROM characters WHERE Title IN ('";
+			_tempSql2 += "%')) UNION ALL(SELECT * FROM characters WHERE Title IN ('%";
 			for(i = 0; i<args.length; i++){
 				if(i != args.length-1){
 					_tempSql1+=args[i]+" ";
@@ -52,7 +52,7 @@ module.exports = {
 				}
 			}
 			_tempSql1 += "%' UNION SELECT * FROM characters WHERE Element LIKE '%";
-			_tempSql2 += "')) UNION ALL(SELECT * FROM characters WHERE Element IN ('";
+			_tempSql2 += "%')) UNION ALL(SELECT * FROM characters WHERE Element IN ('%";
 			for(i = 0; i<args.length; i++){
 				if(i != args.length-1){
 					_tempSql1+=args[i]+" ";
@@ -63,7 +63,7 @@ module.exports = {
 				}
 			}
 			_tempSql1 += "%' UNION SELECT * FROM characters WHERE Type LIKE '%";
-			_tempSql2 += "')) UNION ALL(SELECT * FROM characters WHERE Type IN ('";
+			_tempSql2 += "%')) UNION ALL(SELECT * FROM characters WHERE Type IN ('%";
 			for(i = 0; i<args.length; i++){
 				if(i != args.length-1){
 					_tempSql1+=args[i]+" ";
@@ -74,7 +74,7 @@ module.exports = {
 				}
 			}
 			_tempSql1 += "%' UNION SELECT * FROM characters WHERE Rarity LIKE '%";
-			_tempSql2 += "')) UNION ALL(SELECT * FROM characters WHERE Rarity IN ('";
+			_tempSql2 += "%')) UNION ALL(SELECT * FROM characters WHERE Rarity IN ('%";
 			for(i = 0; i<args.length; i++){
 				if(i != args.length-1){
 					_tempSql1+=args[i]+" ";
@@ -86,7 +86,7 @@ module.exports = {
 			}
 		}
 		_tempSql1+="%'";
-		_tempSql2+="')))c GROUP BY Title HAVING COUNT(*) > 1";
+		_tempSql2+="%')))c GROUP BY Title HAVING COUNT(*) > 1";
 		
 		//console.log(sql);
 
@@ -119,7 +119,7 @@ module.exports = {
 						.setElementsPerPage(10)
 						.setPage(1)
 						.setPageIndicator(true)
-						.formatField('Query Results', i => emoji[i.Rarity] + " [[" + i.Title + "] " + i.Name.replace("_", " ") + "](https://www.tocdb.xyz/db/" + i.Rarity.toLowerCase() + "/" + i.Name + ")")
+						.formatField('Query Results', i => emoji[i.Rarity] + " [[" + i.Title + "] " + i.Name.replace(/_/g, " ") + "](https://www.tocdb.xyz/db/" + i.Rarity.toLowerCase() + "/" + i.Name + ")")
 						.setDeleteOnTimeout(false);
 
 					FieldsEmbed.embed
