@@ -1,18 +1,20 @@
-**Vision Orb v1.0.2.1**
+**Vision Orb v1.0.2.3**
 _What's new in this update:_
 
 - VisionOrb is now officially released! If you want to keep up to date when updates are happening with VisionOrb as well as add it to your own server or offer suggestions, check out the official Discord!
 https://discord.gg/9CU8rZM
 Just ping HellFyre#0722 on the server to get access to the invite link!
 
-- Summer is ~~finally~~ here! *[Summer Holiday] Kanonno E.* and *[Midsummer Fiesta] Veigue* have been added to the profile options!
+- The next part of summer here! *[Deals at the Beach] Rutee* and *[A Step Ahead of Summer] Yuri* have been added to the profile options!
 
+__**New Commands**__
 - Due to popular demand, you can now see a list of the upcomming events, check it out with the new `~events` command!
 
-Bug Fixes:
-- If your Player ID began with a 0, it would not display, this has been fixed as of this update.
-- The SR Version of Aegis was neglected in the previous update, he has been included in this update.
+__**Gacha:**__
+- **NEW** As of this update, the `summer1` gacha has been renamed to `event`, this decision was reached by vote on our Discord server, `~gacha event` will roll the current special gacha
 
-Known Bugs:
+__**Bug Fixes:**__
+- None yet
+
+__**Known Bugs:**__
 - The `~search` command has been a bit finicky when it comes to searching the new Summer units, this is currently being worked on. As a temporary work around, search those units by their Titles for the time being.
-- The current summer gacha has not been added to the gacha pool as of yet, we are currently finding a way to speed up the gacha process.

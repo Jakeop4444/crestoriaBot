@@ -207,7 +207,7 @@ module.exports = {
 						//console.log("[PROFILE] DEBUG: Message Sent");
 					}
 				}
-			})
+			});
 			con.end();
 		}
 		//Alters information about the profile
@@ -232,7 +232,8 @@ module.exports = {
 								con.query(sql, function(error, result, fields){
 									if(error) console.log(error);
 									message.reply("Your "+args[1].toLowerCase().charAt(0).toUpperCase()+args[1].slice(1).toLowerCase()+" Support has been updated!");
-								})
+									con.end();
+								});
 							}else{
 								message.reply("That "+args[1].toLowerCase()+" unit does not exist. Use `~profile units "+args[1].toLowerCase()+"` to see what units exist");
 							}
@@ -259,7 +260,8 @@ module.exports = {
 								con.query(sql, function(error, result, fields){
 									if(error) console.log(error);
 									message.reply("Your Character has been updated!");
-								})
+									con.end();
+								});
 							}
 							else{
 								message.reply("That character does not exist. Use `~profile characters` to see what you can set!");
@@ -274,7 +276,8 @@ module.exports = {
 								con.query(sql, function(error, result, fields){
 									if(error) console.log(error);
 									message.reply("Your Background has been updated!");
-								})
+									con.end();
+								});
 							}
 							else{
 								message.reply("That background does not exist. Use `~profile backgrounds` to see what you can set!");
@@ -289,7 +292,8 @@ module.exports = {
 								con.query(sql, function(error, result, fields){
 									if(error) console.log(error);
 									message.reply("Your Flair has been updated!");
-								})
+									con.end();
+								});
 							}
 							else{
 								message.reply("That character does not exist. Use `~profile characters` to see what you can set!");
@@ -307,7 +311,8 @@ module.exports = {
 							con.query(sql, function(error, result, fields){
 								if(error) console.log(error);
 								message.reply("Your Profile Name has been updated!");
-							})
+								con.end();
+							});
 							console.log("[PROFILE] DEBUG: Done Editing Profile");
 						}
 						//Edits the profile id
@@ -316,8 +321,9 @@ module.exports = {
 							sql = 'UPDATE '+profile_table+" SET profile_id = '"+args[2]+"' WHERE user_id = "+message.author.id;
 							con.query(sql, function(error, result, fields){
 								if(error) console.log(error);
+								con.end();
 								message.reply("Your Profile ID has been updated!");
-							})
+							});
 							console.log("[PROFILE] DEBUG: Done Editing Profile");
 						}
 						//Edits the profile guild
@@ -333,8 +339,9 @@ module.exports = {
 							sql = 'UPDATE '+profile_table+" SET profile_guild = '"+guildname+"' WHERE user_id = "+message.author.id;
 							con.query(sql, function(error, result, fields){
 								if(error) console.log(error);
+								con.end();
 								message.reply("Your Profile Guild has been updated!");
-							})
+							});
 							//console.log("[PROFILE] DEBUG: Done Editing Profile");
 						}
 						//Edits the profile image to a user submitted image
@@ -349,7 +356,8 @@ module.exports = {
 				                    con.query(sql, function(error, result, fields){
 										if(error) console.log(error);
 										message.reply("Your Profile Image has been changed!");
-									})
+										con.end();
+									});
 			                    }else{
 			                        message.reply("The file you attached is not a supported type. Please use a PNG, JPG, or JPEG.");
 			                    }
@@ -365,14 +373,15 @@ module.exports = {
 							con.query(sql, function(error, result, fields){
 								if(error) console.log(error);
 								message.reply("Your Profile Image has been cleared!");
-							})
+								con.end();
+							});
 							//console.log("[PROFILE] DEBUG: Done Clearing User Input Image");
 						}
 						else{
 							message.reply("Invalid use of command. Use `~help profile` to see how to use the command!");
 						}
 					}
-					con.end();
+					
 					//console.log("[PROFILE] DEBUG: Unhooked from database");
 				})
 			}

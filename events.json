@@ -4,9 +4,9 @@
 		"events":[
 			{
 				"name":"Premium Summons",
-				"start_period":"July 22nd, 2:00 AM EST",
-				"end_period":"July 31st, 12:59 AM EST",
-				"description":"Increased summon chance for the following units:\n[Midsummer Siesta] Veigue\n[Summer Holiday] Kanonno E"
+				"start_period":"July 31st, 2:00 AM EST",
+				"end_period":"August 17th, 12:59 AM EST",
+				"description":"Increased summon chance for the following units:\n**[One Step Ahead of Summer] Yuri**\n**[Deals at the Beach] Rutee**"
 			},
 			{
 				"name":"Limited Quest: Lure of the Forest Fruit",
@@ -29,13 +29,13 @@
 			{
 				"name":"Power-Up Quests 1/2 AP",
 				"start_period":"July 23rd, 2:00 AM EST",
-				"end_period":"July 31st, 1:59 AM EST",
+				"end_period":"August 7th, 1:59 AM EST",
 				"description":"Enjoy Half-Off AP Costs on Power-Up Quests"
 			},
 			{
 				"name":"Gald Quests 1.5x Gald",
-				"start_period":"July 23rd, 2:00 AM EST",
-				"end_period":"July 31st, 1:59 AM EST",
+				"start_period":"August 7th, 2:00 AM EST",
+				"end_period":"August 14th, 1:59 AM EST",
 				"description":"Enjoy a 1.5 Gald Boost on Gald Quests"
 			}
 		]
