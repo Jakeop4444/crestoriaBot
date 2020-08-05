@@ -30,55 +30,55 @@ module.exports = {
 			return;
 		}else{
 			_tempSql1 += "Name LIKE '%";
-			_tempSql2 += "Name IN ('%";
+			_tempSql2 += "Name LIKE '%";
 			for(i = 0; i<args.length; i++){
 				if(i != args.length-1){
 					_tempSql1+=args[i]+" ";
-					_tempSql2+=args[i]+"', '";
+					_tempSql2+=args[i]+"%' OR Name LIKE '%";
 				}else{
 					_tempSql1+=args[i];
 					_tempSql2+=args[i];
 				}
 			}
 			_tempSql1 += "%' UNION SELECT * FROM characters WHERE Title LIKE '%";
-			_tempSql2 += "%')) UNION ALL(SELECT * FROM characters WHERE Title IN ('%";
+			_tempSql2 += "%') UNION ALL(SELECT * FROM characters WHERE Title LIKE '%";
 			for(i = 0; i<args.length; i++){
 				if(i != args.length-1){
 					_tempSql1+=args[i]+" ";
-					_tempSql2+=args[i]+"', '";
+					_tempSql2+=args[i]+"%' OR Title LIKE '%";
 				}else{
 					_tempSql1+=args[i];
 					_tempSql2+=args[i];
 				}
 			}
 			_tempSql1 += "%' UNION SELECT * FROM characters WHERE Element LIKE '%";
-			_tempSql2 += "%')) UNION ALL(SELECT * FROM characters WHERE Element IN ('%";
+			_tempSql2 += "%') UNION ALL(SELECT * FROM characters WHERE Element LIKE '%";
 			for(i = 0; i<args.length; i++){
 				if(i != args.length-1){
 					_tempSql1+=args[i]+" ";
-					_tempSql2+=args[i]+"', '";
+					_tempSql2+=args[i]+"%' OR Element LIKE '%";
 				}else{
 					_tempSql1+=args[i];
 					_tempSql2+=args[i];
 				}
 			}
 			_tempSql1 += "%' UNION SELECT * FROM characters WHERE Type LIKE '%";
-			_tempSql2 += "%')) UNION ALL(SELECT * FROM characters WHERE Type IN ('%";
+			_tempSql2 += "%') UNION ALL(SELECT * FROM characters WHERE Type LIKE '%";
 			for(i = 0; i<args.length; i++){
 				if(i != args.length-1){
 					_tempSql1+=args[i]+" ";
-					_tempSql2+=args[i]+"', '";
+					_tempSql2+=args[i]+"%' OR Type LIKE '%";
 				}else{
 					_tempSql1+=args[i];
 					_tempSql2+=args[i];
 				}
 			}
 			_tempSql1 += "%' UNION SELECT * FROM characters WHERE Rarity LIKE '%";
-			_tempSql2 += "%')) UNION ALL(SELECT * FROM characters WHERE Rarity IN ('%";
+			_tempSql2 += "%') UNION ALL(SELECT * FROM characters WHERE Rarity LIKE '%";
 			for(i = 0; i<args.length; i++){
 				if(i != args.length-1){
 					_tempSql1+=args[i]+" ";
-					_tempSql2+=args[i]+"', '";
+					_tempSql2+=args[i]+"%' OR Rarity LIKE '%";
 				}else{
 					_tempSql1+=args[i];
 					_tempSql2+=args[i];
@@ -86,7 +86,7 @@ module.exports = {
 			}
 		}
 		_tempSql1+="%'";
-		_tempSql2+="%')))c GROUP BY Title HAVING COUNT(*) > 1";
+		_tempSql2+="%'))c GROUP BY Title HAVING COUNT(*) > 1";
 		
 		//console.log(sql);
 

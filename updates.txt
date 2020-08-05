@@ -1,20 +1,20 @@
-**Vision Orb v1.0.2.3**
+**Vision Orb v1.0.3.1**
 _What's new in this update:_
 
 - VisionOrb is now officially released! If you want to keep up to date when updates are happening with VisionOrb as well as add it to your own server or offer suggestions, check out the official Discord!
 https://discord.gg/9CU8rZM
 Just ping HellFyre#0722 on the server to get access to the invite link!
 
-- The next part of summer here! *[Deals at the Beach] Rutee* and *[A Step Ahead of Summer] Yuri* have been added to the profile options!
+- The next part of summer here! *[Deals at the Beach] Rutee* and *[A Step Ahead of Summer] Yuri* have been added to the profile options!, you can add Rutee with `~profile edit water rutee_datb` and Yuri with `~profile edit dark yuri_asaos`
 
 __**New Commands**__
 - Due to popular demand, you can now see a list of the upcomming events, check it out with the new `~events` command!
 
 __**Gacha:**__
-- **NEW** As of this update, the `summer1` gacha has been renamed to `event`, this decision was reached by vote on our Discord server, `~gacha event` will roll the current special gacha
+- **NEW** As of this update, the `summer1` gacha has been renamed to `event`, this decision was reached by vote on our Discord server, `~gacha event` will roll the current Premium Summons gacha. VisionOrb's gachas will also now rotate between what is available in the game.
 
 __**Bug Fixes:**__
-- None yet
+- `~search` now behaves as it should involving the summer units. You can now search up units as intended from the beginning.
 
 __**Known Bugs:**__
-- The `~search` command has been a bit finicky when it comes to searching the new Summer units, this is currently being worked on. As a temporary work around, search those units by their Titles for the time being.
+- Random downtime, unknown what exactly causes the downtime, currently looking into the issue.
