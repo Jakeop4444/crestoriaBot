@@ -232,6 +232,7 @@ module.exports = {
 								con.query(sql, function(error, result, fields){
 									if(error) console.log(error);
 									message.reply("Your "+args[1].toLowerCase().charAt(0).toUpperCase()+args[1].slice(1).toLowerCase()+" Support has been updated!");
+									con.end();
 								});
 							}else{
 								message.reply("That "+args[1].toLowerCase()+" unit does not exist. Use `~profile units "+args[1].toLowerCase()+"` to see what units exist");
@@ -248,6 +249,7 @@ module.exports = {
 								con.query(sql, function(error, result, fields){
 									if(error) console.log(error);
 									message.reply("Your ascension information has been updated");
+									con.end();
 								});
 							}
 						}
@@ -259,6 +261,7 @@ module.exports = {
 								con.query(sql, function(error, result, fields){
 									if(error) console.log(error);
 									message.reply("Your Character has been updated!");
+									con.end();
 								});
 							}
 							else{
@@ -274,6 +277,7 @@ module.exports = {
 								con.query(sql, function(error, result, fields){
 									if(error) console.log(error);
 									message.reply("Your Background has been updated!");
+									con.end();
 								});
 							}
 							else{
@@ -289,6 +293,7 @@ module.exports = {
 								con.query(sql, function(error, result, fields){
 									if(error) console.log(error);
 									message.reply("Your Flair has been updated!");
+									con.end();
 								});
 							}
 							else{
@@ -307,6 +312,7 @@ module.exports = {
 							con.query(sql, function(error, result, fields){
 								if(error) console.log(error);
 								message.reply("Your Profile Name has been updated!");
+								con.end();
 							});
 							console.log("[PROFILE] DEBUG: Done Editing Profile");
 						}
@@ -316,6 +322,7 @@ module.exports = {
 							sql = 'UPDATE '+profile_table+" SET profile_id = '"+args[2]+"' WHERE user_id = "+message.author.id;
 							con.query(sql, function(error, result, fields){
 								if(error) console.log(error);
+								con.end();
 								message.reply("Your Profile ID has been updated!");
 							});
 							console.log("[PROFILE] DEBUG: Done Editing Profile");
@@ -333,6 +340,7 @@ module.exports = {
 							sql = 'UPDATE '+profile_table+" SET profile_guild = '"+guildname+"' WHERE user_id = "+message.author.id;
 							con.query(sql, function(error, result, fields){
 								if(error) console.log(error);
+								con.end();
 								message.reply("Your Profile Guild has been updated!");
 							});
 							//console.log("[PROFILE] DEBUG: Done Editing Profile");
@@ -349,6 +357,7 @@ module.exports = {
 				                    con.query(sql, function(error, result, fields){
 										if(error) console.log(error);
 										message.reply("Your Profile Image has been changed!");
+										con.end();
 									});
 			                    }else{
 			                        message.reply("The file you attached is not a supported type. Please use a PNG, JPG, or JPEG.");
@@ -365,6 +374,7 @@ module.exports = {
 							con.query(sql, function(error, result, fields){
 								if(error) console.log(error);
 								message.reply("Your Profile Image has been cleared!");
+								con.end();
 							});
 							//console.log("[PROFILE] DEBUG: Done Clearing User Input Image");
 						}
@@ -374,11 +384,11 @@ module.exports = {
 					}
 					
 					//console.log("[PROFILE] DEBUG: Unhooked from database");
-				});
-				con.end();
+				})
 			}
 			//Edits the units
 			else if(args[0].toLowerCase() == "units"){
+				con.end();
 				var con2 = mysql.createConnection({
 					host: db_host,
 					user: db_user,
@@ -411,9 +421,9 @@ module.exports = {
 					}else{
 						message.reply("No Characters found with that element");
 						return;
-					}			
+					}	
+					con2.end();				
 				});
-				con2.end();
 			}
 			//Clears the units
 			else if(args[0].toLowerCase() == "clear"){
@@ -451,8 +461,8 @@ module.exports = {
 							message.reply("Your profile has been updated!");
 						})
 					}
-				});
-				con.end();
+					con.end();
+				})
 			}
 			//Create a profile
 			else if(args[0].toLowerCase() == "create"){
@@ -517,7 +527,7 @@ module.exports = {
 									return;
 								}
 								message.reply("Profile Create Successfully, check it out with **~profile**");
-							});
+							})
 							con.end();
 						}else{
 							message.reply("Invalid usage of command, use `~help profile` to see the proper usage");
@@ -526,7 +536,7 @@ module.exports = {
 						
 						//console.log("[PROFILE] DEBUG: Unhooked from database");
 					}
-				});
+				})
 			}
 			else if(args[0].toLowerCase() === "characters"){
 				var names = '';
