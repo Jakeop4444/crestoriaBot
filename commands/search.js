@@ -1,8 +1,11 @@
 const { MessageEmbed } = require('discord.js');
-const mysql = require('mysql');
-const { db_host, db_user, db_password, db_name, db_table } = require('../config.json');
-const emoji = require('../emoji.json');
+const Discord = require('discord.js');
+const sqlManager = require('../sqlManager.js');
+const fs = require ('fs');
+const images = require('../images.json');
+const Canvas = require('canvas');
 const Pagination = require('discord-paginationembed');
+const emoji = require('../emoji.json');
 
 module.exports = {
 	name: 'search',
@@ -10,17 +13,6 @@ module.exports = {
 	description: 'Search the database for a Unit. _Stone Lookup is TBD_',
 	usage: '\n\n`~search (what to search)` - Type what you\'re looking for',
 	execute(message, args) {
-		
-		var connec = mysql.createConnection({
-			host: db_host,
-			user: db_user,
-			password: db_password,
-			database: db_name,
-			multipleStatements: true
-		});
-
-		//console.log("[SEARCH] DEBUG: Bot has connected to database.");
-
 		var _tempSql1 = "SELECT * FROM characters WHERE ";
 		var _tempSql2 = "SELECT * FROM ((SELECT * FROM characters WHERE ";
 
@@ -90,16 +82,10 @@ module.exports = {
 		
 		//console.log(sql);
 
-		_tempSql1 += " ORDER BY Name ASC"
-		_tempSql2 += " ORDER BY Name ASC"
+		_tempSql1 += " ORDER BY Name ASC";
+		_tempSql2 += " ORDER BY Name ASC";
 
-		//console.log("[SEARCH] DEBUG: Query assembled.");
-
-		doubleQuery(connec, _tempSql1, _tempSql2).then(function(result){
-			//console.log("[DEBUG] Displaying Results");
-			//if (error) console.log(error);
-
-			//Check for result array length
+		sqlManager.doubleQuery(_tempSql1, _tempSql2, message.author.id).then(async function(result){
 			if (result.length > 1){
 				//Length > 1, means we found more than one unit following the user's guidelines
 					/*for (var i = 0; i < result.length; i++){
@@ -179,34 +165,8 @@ module.exports = {
 				//console.log("[SEARCH] DEBUG: Single-Embed created. Sending...");
 				message.channel.send(embed_single);
 				//console.log("[SEARCH] DEBUG: Embed sent!");
-
 			}
-			connec.end();
-		})
-		//Staying connected to the database auto-kicks the connection which shuts down the bot.
-		console.log("[SEARCH] DEBUG: Unhooked from database.");
+			sqlManager.endConnection(message.author.id);
+		});
 	},
 };
-
-function doubleQuery(connection, sqlQuery1, sqlQuery2){
-	return new Promise(function(resolve, reject){
-		connection.query(sqlQuery1, function(error, result, fields){
-			//console.log("[DEBUG] Invoking Query 1");
-			if(error){
-				return reject(error);
-			}
-			if(result.length === 0){
-				//console.log(sqlQuery2);
-				//console.log("[DEBUG] No Results Found. Invoking Query 2");
-				connection.query(sqlQuery2, function(error, result, fields){
-					if(error){
-						return reject(error);
-					}
-					resolve(result);
-				});
-			}else{
-				resolve(result);
-			}
-		});
-	});
-}

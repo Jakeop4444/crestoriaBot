@@ -1,20 +1,18 @@
-**Vision Orb v1.0.3.1**
+**Vision Orb v1.0.6.1**
 _What's new in this update:_
 
 - VisionOrb is now officially released! If you want to keep up to date when updates are happening with VisionOrb as well as add it to your own server or offer suggestions, check out the official Discord!
 https://discord.gg/9CU8rZM
 Just ping HellFyre#0722 on the server to get access to the invite link!
 
-- The next part of summer here! *[Deals at the Beach] Rutee* and *[A Step Ahead of Summer] Yuri* have been added to the profile options!, you can add Rutee with `~profile edit water rutee_datb` and Yuri with `~profile edit dark yuri_asaos`
-
-__**New Commands**__
-- Due to popular demand, you can now see a list of the upcomming events, check it out with the new `~events` command!
+- **[Enchantant Journaliste] Yuna** can be set as a profile image now.
+- **[Kitty Cat Waitress] Rita** and **[At a Tea Party] Kohaku** are here! You may now call upon their services to your profile image now!
 
 __**Gacha:**__
-- **NEW** As of this update, the `summer1` gacha has been renamed to `event`, this decision was reached by vote on our Discord server, `~gacha event` will roll the current Premium Summons gacha. VisionOrb's gachas will also now rotate between what is available in the game.
+- **[Kitty Cat Waitress] Rita** and **[At a Tea Party] Kohaku** gacha is now available!
 
 __**Bug Fixes:**__
-- `~search` now behaves as it should involving the summer units. You can now search up units as intended from the beginning.
+- Fixed issue when providing 3 arguments to profile creation
 
 __**Known Bugs:**__
-- Random downtime, unknown what exactly causes the downtime, currently looking into the issue.
+- Not all units are displaying through the `~profile units` commmand. If a unit exists and it is not listed there, to use that unit, its the character name plus the first letter of each word in their title. For example; `[Strands of Conflict] Yuna` is listed as `yuna_soc`

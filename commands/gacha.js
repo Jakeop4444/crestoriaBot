@@ -17,7 +17,9 @@ module.exports = {
 		if(args.length > 0 && args[0].toLowerCase() === "list"){
 			var names = "";
 			Object.keys(gacha_pool).forEach(function(k){
-				names += "**"+gacha_pool[k].Name+"** => "+k+"\n";
+				if(gacha_pool[k].Can_Roll){
+					names += "**"+gacha_pool[k].Name+"** => "+k+"\n";
+				}
 			});
 			const embed = new MessageEmbed()
 			.setTitle("Here is a list of gacha you can pull from. Use the name after the => in the results")
@@ -26,36 +28,28 @@ module.exports = {
 			message.reply(embed);
 		}else{
 			if(args.length === 0){
-				gacha = "general";
+				gacha = "premium";
 			}else{
 				gacha = args[0].toLowerCase();
 			}
-			if(gacha_pool[gacha]){
-				if(gacha === "general"){
+			if(gacha_pool[gacha] && gacha_pool[gacha].Can_Roll){
+				if(gacha_pool[gacha].SSR){
 					gacha_pool[gacha].SSR.forEach(e => ssr_pool.push(e));
+				}
+				if(gacha_pool[gacha].Use_SSR){
+					gacha_pool["pool"].SSR.forEach(e => ssr_pool.push(e));
+				}
+				if(gacha_pool[gacha].SR){
 					gacha_pool[gacha].SR.forEach(e => sr_pool.push(e));
+				}
+				if(gacha_pool[gacha].Use_SR){
+					gacha_pool["pool"].SR.forEach(e => sr_pool.push(e));
+				}
+				if(gacha_pool[gacha].R){
 					gacha_pool[gacha].R.forEach(e => r_pool.push(e));
-				}else{
-					if(gacha_pool[gacha].SSR){
-						gacha_pool[gacha].SSR.forEach(e => ssr_pool.push(e));
-					}
-					if(gacha_pool[gacha].Use_SSR){
-						gacha_pool["general"].SSR.forEach(e => ssr_pool.push(e));
-					}
-
-					if(gacha_pool[gacha].SR){
-						gacha_pool[gacha].SR.forEach(e => sr_pool.push(e));
-					}
-					if(gacha_pool[gacha].Use_SR){
-						gacha_pool["general"].SR.forEach(e => sr_pool.push(e));
-					}
-
-					if(gacha_pool[gacha].R){
-						gacha_pool[gacha].R.forEach(e => r_pool.push(e));
-					}
-					if(gacha_pool[gacha].Use_R){
-						gacha_pool["general"].R.forEach(e => r_pool.push(e));
-					}
+				}
+				if(gacha_pool[gacha].Use_R){
+					gacha_pool["pool"].R.forEach(e => r_pool.push(e));
 				}
 
 				for(i = 0; i<gacha_pool[gacha].Rolls; i++){

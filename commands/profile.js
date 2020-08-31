@@ -1,11 +1,11 @@
 const { MessageEmbed } = require('discord.js');
 const Discord = require('discord.js');
-const mysql = require('mysql');
 const fs = require ('fs');
 const images = require('../images.json');
 const Canvas = require('canvas');
-const { db_host, profile_user, profile_password, profile_db, profile_table, db_user, db_password, db_name, db_table} = require('../config.json');
 const Pagination = require('discord-paginationembed');
+const sqlManager = require('../sqlManager.js');
+const { profile_table } = require('../config.json');
 
 module.exports = {
 	name: 'profile',
@@ -41,19 +41,10 @@ module.exports = {
 			'`~profile create (Username) (ID Number) (Guild Name)` - Creates a profile with the bot. Entering the ID and Guild Name is optional.\n'+
 			'You can also attach an image to this command and set your own custom image.',
 	execute(message, args) {
-		var con = mysql.createConnection({
-			host: db_host,
-			user: profile_user,
-			password: profile_password,
-			database: profile_db,
-			multipleStatements: true
-		});
-
-		//Display the profile
 		if(args.length === 0){
 			//console.log("[PROFILE] DEBUG: Displaying Profile");
 			
-			createProfileCard(con, message.author.id).then(async function(result){
+			sqlManager.createProfileCard(message.author.id).then(async function(result){
 
 				if(result.length === 0){
 					message.reply("You don't have a profile created! Create a profile first using `~profile create (Username)`");
@@ -176,15 +167,9 @@ module.exports = {
 						//Load the rest of the elements to the canvas
 						//console.log("[PROFILE] DEBUG: Units Set");
 						// Image loads as follows:
-						// Background
-						// Mystic (flair)
-						// Flair (pvp_rank)
-						// SR Background
-						// Units
-						// Elements
-						// Name Bar
-						// Ascension BG
-						// Unit Ascension
+						// Background, Mystic (flair), Flair (pvp_rank)
+						// SR Background, Units, Elements
+						// Name Bar, Ascension BG, Unit Ascension
 						// Borders
 						const border = await Canvas.loadImage(images["borders"]);
 						ctx.drawImage(border, 0, 0, canvas.width, canvas.height);
@@ -203,24 +188,21 @@ module.exports = {
 						.setDescription(details)
 						.setImage("attachment://profile_image.png");
 						//console.log("[PROFILE] DEBUG: Sending Message");
-						message.channel.send({embed: _embed, files: [new Discord.MessageAttachment(canvas.toBuffer(), 'profile_image.png')]});
+						message.channel.send({embed: _embed, files: [new Discord.MessageAttachment(canvas.toBuffer(), 'profile_image.png')]}).then(sqlManager.endConnection(message.author.id));
 						//console.log("[PROFILE] DEBUG: Message Sent");
 					}
 				}
+				
 			});
-			con.end();
 		}
-		//Alters information about the profile
 		else if(args.length >= 1){
-			//Edit the profile
 			if(args[0].toLowerCase() == 'edit'){
 				var sql = "SELECT * FROM "+profile_table+" WHERE user_id = "+message.author.id;
-				con.query(sql, function(error, result, fields){
-					if(error) console.log(error);
-					if(result.length === 0){
+				var runQuery = true;
+				sqlManager.queryProfileCard(sql, message.author.id).then(async function(result){
+					if(result.length = 0){
 						message.reply("You don't have a profile created! Create a profile first using `~profile create (Username)`**");
 					}else{
-						//Edits any unit
 						if((args[1].toLowerCase() === 'fire' || args[1].toLowerCase() === 'earth' || 
 							args[1].toLowerCase() === 'wind' || args[1].toLowerCase() === 'water' || 
 							args[1].toLowerCase() === 'light' || args[1].toLowerCase() === 'dark') && args.length >= 3){
@@ -229,12 +211,8 @@ module.exports = {
 							if(images[leftString][rightString]){
 								//console.log("[PROFILE] DEBUG: Editing "+args[1].toLowerCase().charAt(0).toUpperCase()+args[1].slice(1).toLowerCase()+" Unit");
 								sql = 'UPDATE '+profile_table+" SET "+args[1].toLowerCase()+"_unit = '"+args[2].toLowerCase()+"' WHERE user_id = "+message.author.id;
-								con.query(sql, function(error, result, fields){
-									if(error) console.log(error);
-									message.reply("Your "+args[1].toLowerCase().charAt(0).toUpperCase()+args[1].slice(1).toLowerCase()+" Support has been updated!");
-									con.end();
-								});
 							}else{
+								runQuery = false;
 								message.reply("That "+args[1].toLowerCase()+" unit does not exist. Use `~profile units "+args[1].toLowerCase()+"` to see what units exist");
 							}
 						}
@@ -243,14 +221,10 @@ module.exports = {
 								args[1].toLowerCase() === 'wind_asc' || args[1].toLowerCase() === 'water_asc' || 
 								args[1].toLowerCase() === 'light_asc' || args[1].toLowerCase() === 'dark_asc') && args.length >= 3){
 							if(args[2] < 0 || args[2] > 5){
+								runQuery = false;
 								message.reply("Please use a number from 0 to 5")
 							}else{
 								sql = "UPDATE "+profile_table+" SET "+args[1].toLowerCase()+" = "+args[2]+" WHERE user_id = "+message.author.id;
-								con.query(sql, function(error, result, fields){
-									if(error) console.log(error);
-									message.reply("Your ascension information has been updated");
-									con.end();
-								});
 							}
 						}
 						//Edits the character flair
@@ -258,48 +232,33 @@ module.exports = {
 							//console.log("[PROFILE] DEBUG: Editing Flair");
 							if(images.mystic[args[2].toLowerCase()]){
 								sql = 'UPDATE '+profile_table+" SET flair = '"+args[2].toLowerCase()+"' WHERE user_id = "+message.author.id;
-								con.query(sql, function(error, result, fields){
-									if(error) console.log(error);
-									message.reply("Your Character has been updated!");
-									con.end();
-								});
 							}
 							else{
+								runQuery = false;
 								message.reply("That character does not exist. Use `~profile characters` to see what you can set!");
 							}
-							console.log("[PROFILE] DEBUG: Done Editing Profile");
 						}
 						//Edits the background
 						else if(args[1].toLowerCase() === "bg" && args.length >= 3){
 							//console.log("[PROFILE] DEBUG: Editing Flair");
 							if(images.background[args[2].toLowerCase()]){
 								sql = 'UPDATE '+profile_table+" SET background = '"+args[2].toLowerCase()+"' WHERE user_id = "+message.author.id;
-								con.query(sql, function(error, result, fields){
-									if(error) console.log(error);
-									message.reply("Your Background has been updated!");
-									con.end();
-								});
 							}
 							else{
+								runQuery = false;
 								message.reply("That background does not exist. Use `~profile backgrounds` to see what you can set!");
 							}
-							console.log("[PROFILE] DEBUG: Done Editing Profile");
 						}
 						//Edits the profile flair
 						else if(args[1].toLowerCase() === "flair" && args.length >= 3){
 							//console.log("[PROFILE] DEBUG: Editing Flair");
 							if(images.flair[args[2].toLowerCase()]){
 								sql = 'UPDATE '+profile_table+" SET pvp_rank = '"+args[2].toLowerCase()+"' WHERE user_id = "+message.author.id;
-								con.query(sql, function(error, result, fields){
-									if(error) console.log(error);
-									message.reply("Your Flair has been updated!");
-									con.end();
-								});
 							}
 							else{
+								runQuery = false;
 								message.reply("That character does not exist. Use `~profile characters` to see what you can set!");
 							}
-							console.log("[PROFILE] DEBUG: Done Editing Profile");
 						}
 						//Edits the profile name
 						else if(args[1].toLowerCase() === "name" && args.length >= 3){
@@ -309,23 +268,11 @@ module.exports = {
 								name = name.substring(0, 12);
 							}
 							sql = 'UPDATE '+profile_table+" SET profile_name = '"+name+"' WHERE user_id = "+message.author.id;
-							con.query(sql, function(error, result, fields){
-								if(error) console.log(error);
-								message.reply("Your Profile Name has been updated!");
-								con.end();
-							});
-							console.log("[PROFILE] DEBUG: Done Editing Profile");
 						}
 						//Edits the profile id
 						else if(args[1].toLowerCase() === "id" && args.length >= 3){
 							//console.log("[PROFILE] DEBUG: Editing Profile ID");
 							sql = 'UPDATE '+profile_table+" SET profile_id = '"+args[2]+"' WHERE user_id = "+message.author.id;
-							con.query(sql, function(error, result, fields){
-								if(error) console.log(error);
-								con.end();
-								message.reply("Your Profile ID has been updated!");
-							});
-							console.log("[PROFILE] DEBUG: Done Editing Profile");
 						}
 						//Edits the profile guild
 						else if(args[1].toLowerCase() === "guild" && args.length >= 3){
@@ -338,11 +285,6 @@ module.exports = {
 								guildname = guildname.substring(0, 12);
 							}
 							sql = 'UPDATE '+profile_table+" SET profile_guild = '"+guildname+"' WHERE user_id = "+message.author.id;
-							con.query(sql, function(error, result, fields){
-								if(error) console.log(error);
-								con.end();
-								message.reply("Your Profile Guild has been updated!");
-							});
 							//console.log("[PROFILE] DEBUG: Done Editing Profile");
 						}
 						//Edits the profile image to a user submitted image
@@ -354,12 +296,8 @@ module.exports = {
 								if(fileCheck[1] === 'png'||fileCheck[1] === 'jpeg'||fileCheck[1] === 'jpg'){
 				                	//console.log('[PROFILE] DEBUG: Changing Image');
 				                	sql = 'UPDATE '+profile_table+" SET profile_image = '"+message.attachments.first().url.replace(':', "CLN").replace("//", "DBLFWS")+"' WHERE user_id = "+message.author.id;
-				                    con.query(sql, function(error, result, fields){
-										if(error) console.log(error);
-										message.reply("Your Profile Image has been changed!");
-										con.end();
-									});
 			                    }else{
+			                    	runQuery = false;
 			                        message.reply("The file you attached is not a supported type. Please use a PNG, JPG, or JPEG.");
 			                    }
 			                    //console.log("[PROFILE] DEBUG: Done Changing Profile Image to User Input");
@@ -371,36 +309,27 @@ module.exports = {
 						else if(args[1].toLowerCase() === "clrimg"){
 							//console.log("[PROFILE] DEBUG: Clearing Image");
 							sql = 'UPDATE '+profile_table+" SET profile_image = 'NONE_SET' WHERE user_id = "+message.author.id;
-							con.query(sql, function(error, result, fields){
-								if(error) console.log(error);
-								message.reply("Your Profile Image has been cleared!");
-								con.end();
-							});
 							//console.log("[PROFILE] DEBUG: Done Clearing User Input Image");
 						}
 						else{
 							message.reply("Invalid use of command. Use `~help profile` to see how to use the command!");
+							runQuery = false;
 						}
 					}
-					
-					//console.log("[PROFILE] DEBUG: Unhooked from database");
-				})
-			}
-			//Edits the units
-			else if(args[0].toLowerCase() == "units"){
-				con.end();
-				var con2 = mysql.createConnection({
-					host: db_host,
-					user: db_user,
-					password: db_password,
-					database: db_name
+					if(runQuery){
+						sqlManager.queryProfileCard(sql, message.author.id).then(async function(result){
+							message.reply("Your profile has been updated!");
+						});
+					}
+					sqlManager.endConnection(message.author.id);
 				});
+			}
+			else if(args[0].toLowerCase() == 'units'){
 				var sql = "SELECT Title, Name, Bot FROM characters ";
 				if(args[1]){
 					sql +=  "WHERE Element = '"+args[1]+"' ORDER BY Name ASC";
 				}
-				con2.query(sql, function(error, result, fields){
-					if(error) console.log(error);
+				sqlManager.singleQuery(sql, message.author.id).then(async function(result){
 					if(result.length >= 1){
 						//result.forEach(p => console.log(p.Title));
 						const FieldsEmbed = new Pagination.FieldsEmbed()
@@ -421,15 +350,13 @@ module.exports = {
 					}else{
 						message.reply("No Characters found with that element");
 						return;
-					}	
-					con2.end();				
+					}
+					sqlManager.endConnection(message.author.id);
 				});
 			}
-			//Clears the units
-			else if(args[0].toLowerCase() == "clear"){
+			else if(args[0].toLowerCase() == 'clear'){
 				var sql = "SELECT * FROM "+profile_table+" WHERE user_id = "+message.author.id;
-				con.query(sql, function(error, result, fields){
-					if(error) console.log(error);
+				sqlManager.queryProfileCard(sql, message.author.id).then(async function(result){
 					if(result.length === 0){
 						message.reply("You don't have a profile created! Create a profile first using `~profile create (Username)`**");
 					}else{
@@ -455,32 +382,20 @@ module.exports = {
 							sql = 'UPDATE '+profile_table+" SET fire_unit = 'NONE_SET', earth_unit = 'NONE_SET', wind_unit = 'NONE_SET', "+
 							"water_unit = 'NONE_SET', light_unit = 'NONE_SET', dark_unit = 'NONE_SET' WHERE user_id = "+message.author.id;
 						}
-						
-						con.query(sql, function(error, result, fields){
-							if(error) console.log(error);
-							message.reply("Your profile has been updated!");
-						})
+						sqlManager.queryProfileCard(sql).then(async function(result){
+							message.reply("Unit cleared!");
+						});
 					}
-					con.end();
-				})
+					sqlManager.endConnection(message.author.id);
+				});
 			}
-			//Create a profile
-			else if(args[0].toLowerCase() == "create"){
+			else if(args[0].toLowerCase() == 'create'){
 				var sql = "SELECT * FROM "+profile_table+" WHERE user_id = "+message.author.id;
-				var create = false;
-				con.query(sql, function(error, result, fields){
-					if(error) console.log(error);
-					//Denies the creation of multiple profiles
+				sqlManager.queryProfileCard(sql, message.author.id).then(async function(result){
 					if(result.length === 1){
 						message.reply("You already have a profile! Use the `~edit` commands to edit your information!");
-						con.end();
-						//console.log("[PROFILE] DEBUG: Unhooked from database");
-						return;
 					}
-					//Creates a profile if one doesn't exist
 					else{
-						create = true;
-						//console.log("[PROFILE] DEBUG: Creating Profile");
 						sql = "INSERT INTO "+profile_table+" (user_id, profile_name, profile_id, profile_guild, fire_unit, earth_unit, wind_unit, water_unit, "+
 								"light_unit, dark_unit, flair, profile_image, background, pvp_rank, fire_asc, earth_asc, wind_asc, water_asc, light_asc, dark_asc) VALUES ("+message.author.id+", ";
 						if(args[1]){
@@ -496,9 +411,9 @@ module.exports = {
 							}
 							if(args[3]){
 								if(args[3].length > 12){
-								sql += ", '"+args[3].substring(0, 12)+"', ";
+								sql += ", '"+args[3].substring(0, 12)+"', '";
 								}else{
-									sql += ", '"+args[1]+"', ";
+									sql += ", '"+args[3]+"', '";
 								}
 							}else{
 								sql += ", 'unknown', '";
@@ -520,25 +435,17 @@ module.exports = {
 								sql += "NONE_SET'";
 							}
 							sql += ", 'cosmos', 'crestoria', 0, 0, 0, 0, 0, 0)";
-							con.query(sql, function(error, result, fields){
-								if (error){
-									console.log(error);
-									message.reply("Error creating profile");
-									return;
-								}
+							sqlManager.queryProfileCard(sql, message.author.id).then(async function(result){
 								message.reply("Profile Create Successfully, check it out with **~profile**");
 							})
-							con.end();
 						}else{
 							message.reply("Invalid usage of command, use `~help profile` to see the proper usage");
 						}
-
-						
-						//console.log("[PROFILE] DEBUG: Unhooked from database");
 					}
-				})
+					sqlManager.endConnection(message.author.id);
+				});
 			}
-			else if(args[0].toLowerCase() === "characters"){
+			else if(args[0].toLowerCase() == 'characters'){
 				var names = '';
 				Object.keys(images.mystic).forEach(function(k){
 					names += k.charAt(0).toUpperCase()+k.slice(1)+", ";
@@ -549,9 +456,8 @@ module.exports = {
 				.setDescription("Use `~profile edit character (name)` to add the character to your profile image!\n_Only usable if we make the image for you_\n\n"+names.substring(0, names.length-2));
 
 				message.channel.send(embed);
-
-				//images.forEach(data => console.log(data.mystic));
-			}else if(args[0].toLowerCase() === "flair"){
+			}
+			else if(args[0].toLowerCase() == 'flair'){
 				const FieldsEmbed = new Pagination.FieldsEmbed()
 				.setArray(Object.keys(images.flair))
 				.setAuthorizedUsers([message.author.id])
@@ -567,7 +473,8 @@ module.exports = {
 				.setDescription("Here is a list of Flair you can assign to your profile.")
 
 				FieldsEmbed.build();
-			}else if(args[0].toLowerCase() === "backgrounds"){
+			}
+			else if(args[0].toLowerCase() == 'backgrounds'){
 				const FieldsEmbed = new Pagination.FieldsEmbed()
 				.setArray(Object.keys(images.background))
 				.setAuthorizedUsers([message.author.id])
@@ -583,21 +490,10 @@ module.exports = {
 				.setDescription("Here is a list of Backgrounds you can assign to your profile.")
 
 				FieldsEmbed.build();
-			}else{
+			}
+			else{
 				message.reply("Invalid usage of `~profile` command");
 			}
 		}
 	},
-};
-
-function createProfileCard(connection, authorID){
-	return new Promise(function(resolve, reject){
-		var sql = "SELECT * FROM "+profile_table+" WHERE user_id = "+authorID;
-		connection.query(sql, function(error, result, fields){
-			if(error){
-				return reject(error);
-			}
-			resolve(result);
-		});
-	});
 }

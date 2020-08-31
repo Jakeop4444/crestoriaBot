@@ -4,6 +4,7 @@
 		"arche_sp": "https://i.imgur.com/UKLbcYt.png",
 		"bruiser_sm": "https://i.imgur.com/Dhfad8L.png",
 		"gaius_up": "https://i.imgur.com/2z5v2Kc.png",
+		"kohaku_aatp":"https://i.imgur.com/2xP1XVr.png",
 		"lailah_wif": "https://i.imgur.com/ZNNAZ80.png",
 		"luke_sitw": "https://i.imgur.com/XNSBdd8.png",
 		"misella_affh": "https://i.imgur.com/rmx1Gfe.png",
@@ -23,6 +24,7 @@
 		"leia_dss": "https://i.imgur.com/QttwNBQ.png",
 		"lloyd_tt": "https://i.imgur.com/yswKRZ0.png",
 		"malik_swaw": "https://i.imgur.com/GcGOGCb.png",
+		"rita_kcw":"https://i.imgur.com/HC5Ivy6.png",
 		"rokurou_rp": "https://i.imgur.com/RpWfPY6.png",
 		"rose_bm": "https://i.imgur.com/dTd3fXZ.png",
 		"veigue_ms": "https://i.imgur.com/dcYMxGf.png",
@@ -40,7 +42,10 @@
 		"qq_ks": "https://i.imgur.com/Rk5LDI1.png",
 		"sorey_tdg": "https://i.imgur.com/Vv3C7yT.png",
 		"velvet_tbv": "https://i.imgur.com/LRLBNZn.png",
-		"zaveid_ditw": "https://i.imgur.com/Cy1s6cZ.png"
+		"yuna_ej":"https://i.imgur.com/hcypdrR.png",
+		"yuna_soc":"https://i.imgur.com/lkIw2ID.png",
+		"zaveid_ditw": "https://i.imgur.com/Cy1s6cZ.png",
+		"zelos_swar":"https://i.imgur.com/me8XhzY.png"
 	},
 
 	"water_units":{
@@ -56,11 +61,12 @@
 		"rondoline_tb": "https://i.imgur.com/zCZWUOA.png",
 		"rutee_datb":"https://i.imgur.com/5uKfprm.png",
 		"rutee_tim": "https://i.imgur.com/8pPjQvM.png",
+		"sophie_bby":"https://i.imgur.com/5TTz5OE.png",
 		"veigue_vs": "https://i.imgur.com/lvMdQy8.png"
 	},
 
 	"light_units":{
-		"chronos_ppc": "https://i.imgur.com/8oEjpjU.png",
+		"dhaos_dg":"https://i.imgur.com/ygk3WGN.png",
 		"estelle_ritf": "https://i.imgur.com/95ebnSN.png",
 		"jude_sod": "https://i.imgur.com/Boxa9P7.png",
 		"kanata_bos": "https://i.imgur.com/cGTyc63.png",
@@ -71,7 +77,7 @@
 	},
 
 	"dark_units":{
-		"chronos_ppc": "https://i.imgur.com/K2rd1ri.png",
+		"chronos_ppp": "https://i.imgur.com/K2rd1ri.png",
 		"elize_na": "https://i.imgur.com/pm0hKI6.png",
 		"emil_botb": "https://i.imgur.com/66HQWHp.png",
 		"leon_dh": "https://i.imgur.com/DHA53Fn.png",
@@ -86,6 +92,7 @@
         "asbel": "https://i.imgur.com/ZJ03EoV.png",
         "chronos": "https://i.imgur.com/Y3Z60T8.png",
         "cress": "https://i.imgur.com/hqkDW2o.png",
+        "dhaos":"https://i.imgur.com/I6e2RZQ.png",
         "estelle": "https://i.imgur.com/wpWPMmA.png",
         "jude": "https://i.imgur.com/tAWQzsi.png",
         "kanata": "https://i.imgur.com/6lKzg4r.png",
@@ -101,13 +108,15 @@
         "reid": "https://i.imgur.com/ZAwRwKk.png",
         "rutee": "https://i.imgur.com/5lDoHPp.png",
         "rita": "https://i.imgur.com/VbPNssT.png",
+        "sophie": "https://i.imgur.com/iPOY3Vn.png",
         "sorey": "https://i.imgur.com/KDrUhGE.png",
         "stahn": "https://i.imgur.com/8bAo41U.png",
         "veigue": "https://i.imgur.com/QnEsVud.png",
         "velvet": "https://i.imgur.com/5lDO1IB.png",
         "vicious": "https://i.imgur.com/lCFsR5H.png",
         "yuna": "https://i.imgur.com/wejN3wZ.png",
-        "yuri": "https://i.imgur.com/NmKCuGR.png"
+        "yuri": "https://i.imgur.com/NmKCuGR.png",
+        "zelos": "https://i.imgur.com/rAnJ2Ww.png"
     },
 
 	"background":{
