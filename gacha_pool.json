@@ -30,7 +30,13 @@
 			"[Summoned With a Rose] Zelos",
 			"[Strands of Conflict] Yuna",
 			"[Kitty Cat Waitress] Rita",
-			"[At a Garden Party] Kohaku"
+			"[At a Garden Party] Kohaku",
+			"[By a Murmoring Brook] Mikleo",
+			"[This One Is...] Colette",
+			"[Halloween Witch] Estelle",
+			"[Count Asbela] Asbel",
+			"[Looking to the Dawn] Edna",
+			"[Twilight Incantations] Kongwai"
 		],
 		"SR":[
 			"[Precocious Puppeteer] Anise",
@@ -237,7 +243,7 @@
 		]
 	},
 	"premium":{
-		"Name":"Premium Summons: [Kitty Cat Waitress] Rita & [At a Garden Party] Kohaku",
+		"Name":"Premium Summons: [Looking to the Dawn] Edna and [Twilight Incantations] Kongwai",
 		"Can_Roll":true,
 		"Rolls":10,
 		"Rates":{
@@ -250,24 +256,30 @@
 		"Use_SR":true,
 		"Use_R":true,
 		"SSR":[
-			"[Kitty Cat Waitress] Rita",
-			"[Kitty Cat Waitress] Rita",
-			"[Kitty Cat Waitress] Rita",
-			"[Kitty Cat Waitress] Rita",
-			"[Kitty Cat Waitress] Rita",
-			"[Kitty Cat Waitress] Rita",
-			"[Kitty Cat Waitress] Rita",
-			"[At a Garden Party] Kohaku",
-			"[At a Garden Party] Kohaku",
-			"[At a Garden Party] Kohaku",
-			"[At a Garden Party] Kohaku",
-			"[At a Garden Party] Kohaku",
-			"[At a Garden Party] Kohaku",
-			"[At a Garden Party] Kohaku"
+			"[Looking to the Dawn] Edna",
+			"[Looking to the Dawn] Edna",
+			"[Looking to the Dawn] Edna",
+			"[Looking to the Dawn] Edna",
+			"[Looking to the Dawn] Edna",
+			"[Looking to the Dawn] Edna",
+			"[Looking to the Dawn] Edna",
+			"[Looking to the Dawn] Edna",
+			"[Looking to the Dawn] Edna",
+			"[Looking to the Dawn] Edna",
+			"[Twilight Incantations] Kongwai",
+			"[Twilight Incantations] Kongwai",
+			"[Twilight Incantations] Kongwai",
+			"[Twilight Incantations] Kongwai",
+			"[Twilight Incantations] Kongwai",
+			"[Twilight Incantations] Kongwai",
+			"[Twilight Incantations] Kongwai",
+			"[Twilight Incantations] Kongwai",
+			"[Twilight Incantations] Kongwai",
+			"[Twilight Incantations] Kongwai"
 		]
 	},
 	"rate_up":{
-		"Name":"Character Rate Up (Velvet)",
+		"Name":"Character Rate Up (Summer Kanonno E.)",
 		"Can_Roll":true,
 		"Rolls":10,
 		"Rates":{
@@ -280,14 +292,16 @@
 		"Use_SR":true,
 		"Use_R":true,
 		"SSR":[
-			"[Tainted by Vengeance] Velvet",
-			"[Tainted by Vengeance] Velvet",
-			"[Tainted by Vengeance] Velvet",
-			"[Tainted by Vengeance] Velvet",
-			"[Tainted by Vengeance] Velvet",
-			"[Tainted by Vengeance] Velvet",
-			"[Tainted by Vengeance] Velvet",
-			"[Tainted by Vengeance] Velvet"
+			"[Sparkling in Battle] Kohaku",
+			"[Sparkling in Battle] Kohaku",	
+			"[Sparkling in Battle] Kohaku",
+			"[Sparkling in Battle] Kohaku",	
+			"[Sparkling in Battle] Kohaku",
+			"[Sparkling in Battle] Kohaku",	
+			"[Sparkling in Battle] Kohaku",
+			"[Sparkling in Battle] Kohaku",	
+			"[Sparkling in Battle] Kohaku",
+			"[Sparkling in Battle] Kohaku"	
 		]
 	},
 	"ssr_ticket":{
